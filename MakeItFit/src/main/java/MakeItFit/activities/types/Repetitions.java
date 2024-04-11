@@ -1,4 +1,41 @@
 package MakeItFit.activities.types;
 
-public class Repetitions {
+import MakeItFit.activities.Activity;
+
+public abstract class Repetitions extends Activity {
+    private int repetitions;
+    private int series;
+
+    public Repetitions(int repetitions, int series) {
+        this.repetitions = repetitions;
+        this.series = series;
+    }
+
+    public Repetitions(){
+        this.repetitions = 0;
+        this.series = 0;
+    }
+
+    public Repetitions(Repetitions r){
+        this.repetitions = r.getRepetitions();
+        this.series = r.getSeries();
+    }
+
+    public int getRepetitions() {
+        return repetitions;
+    }
+
+    public int getSeries() {
+        return series;
+    }
+
+    public void setRepetitions(int repetitions) {
+        this.repetitions = repetitions;
+    }
+
+    public void setSeries(int series) {
+        this.series = series;
+    }
+
+    public abstract int calculateCaloricWaste();
 }
