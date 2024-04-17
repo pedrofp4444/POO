@@ -1,34 +1,31 @@
 package MakeItFit.activities;
 
 public abstract class Activity implements ActivityInterface {
-    private int duration;
     private int expectedDuration;
     private String designation;
+
+    private int duration;
     private int caloricWaste;
 
-    public Activity(int duration, int expectedDuration, String designation, int caloricWaste) {
-        this.duration = duration;
+    public Activity(int expectedDuration, String designation) {
         this.expectedDuration = expectedDuration;
         this.designation = designation;
-        this.caloricWaste = caloricWaste;
+        this.duration = 0;
+        this.caloricWaste = 0;
     }
 
     public Activity(){
-        this.duration = 0;
         this.expectedDuration = 0;
-        this.designation = "";
+        this.designation = "Empty Activity";
+        this.duration = 0;
         this.caloricWaste = 0;
     }
 
     public Activity(Activity a){
-        this.duration = a.getDuration();
         this.expectedDuration = a.getExpectedDuration();
         this.designation = a.getDesignation();
+        this.duration = a.getDuration();
         this.caloricWaste = a.getCaloricWaste();
-    }
-
-    public int getDuration() {
-        return duration;
     }
 
     public int getExpectedDuration() {
@@ -39,12 +36,12 @@ public abstract class Activity implements ActivityInterface {
         return designation;
     }
 
-    public int getCaloricWaste() {
-        return caloricWaste;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public int getCaloricWaste() {
+        return caloricWaste;
     }
 
     public void setExpectedDuration(int expectedDuration) {
@@ -55,9 +52,20 @@ public abstract class Activity implements ActivityInterface {
         this.designation = designation;
     }
 
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
     public void setCaloricWaste(int caloricWaste) {
         this.caloricWaste = caloricWaste;
     }
 
     public abstract int calculateCaloricWaste();
+
+    public boolean equals(Object o){
+        if (o == this) return true;
+        if (!(o instanceof Activity)) return false;
+        Activity a = (Activity) o;
+        return (this.expectedDuration == a.expectedDuration && this.designation.equals(a.designation));
+    }
 }

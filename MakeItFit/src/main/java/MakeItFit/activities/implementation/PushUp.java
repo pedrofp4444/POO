@@ -3,8 +3,8 @@ package MakeItFit.activities.implementation;
 import MakeItFit.activities.types.Repetitions;
 
 public class PushUp extends Repetitions {
-    public PushUp(int repetitions, int series) {
-        super(repetitions, series);
+    public PushUp(int expectedDuration, String designation, int repetitions, int series) {
+        super(expectedDuration, designation, repetitions, series);
     }
 
     public PushUp(){

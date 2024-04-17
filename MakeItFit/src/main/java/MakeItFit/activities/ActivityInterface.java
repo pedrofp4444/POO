@@ -17,4 +17,6 @@ public interface ActivityInterface {
     void setDesignation(String designation);
 
     String toString();
+
+    public boolean equals(Object o);
 }

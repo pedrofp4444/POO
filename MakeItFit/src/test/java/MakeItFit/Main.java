@@ -2,6 +2,6 @@ package MakeItFit;
 
 public class Main {
     public static void main(String args[]){
-        System.out.println("Teste da main");
+        System.out.println("=== TESTING MODE ===");
     }
 }

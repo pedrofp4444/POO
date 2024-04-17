@@ -3,8 +3,8 @@ package MakeItFit.activities.types;
 public abstract class RepetitionsWithWeights extends Repetitions{
     private double weight;
 
-    public RepetitionsWithWeights(int repetitions, int series, double weight) {
-        super(repetitions, series);
+    public RepetitionsWithWeights(int expectedDuration, String designation, int repetitions, int series, double weight) {
+        super(expectedDuration, designation, repetitions, series);
         this.weight = weight;
     }
 

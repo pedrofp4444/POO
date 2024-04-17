@@ -10,8 +10,8 @@ public class Trail extends DistanceWithAltimetry {
 
     private int trailType;
 
-    public Trail(int duration, int expectedDuration, String designation, int caloricWaste, double distance, double elevationGain, double elevationLoss, int trailType) {
-        super(duration, expectedDuration, designation, caloricWaste, distance, elevationGain, elevationLoss);
+    public Trail(int expectedDuration, String designation, double distance, double elevationGain, double elevationLoss, int trailType) {
+        super(expectedDuration, designation, distance, elevationGain, elevationLoss);
         this.trailType = trailType;
     }
 
@@ -36,7 +36,8 @@ public class Trail extends DistanceWithAltimetry {
     }
 
     public int calculateCaloricWaste(){
-        return (int) (getDistance() * getElevationGain() * getElevationLoss());
+        return (int) (
+                getDistance() * getElevationGain() * getElevationLoss());
     }
 
     public String toString(){
@@ -45,7 +46,8 @@ public class Trail extends DistanceWithAltimetry {
 
     public boolean equals(Object o){
         if (o == this) return true;
-        if (!(o instanceof Trail t)) return false;
-        return super.equals(t) && trailType == t.getTrailType();
+        if (!(o instanceof Trail)) return false;
+        Trail t = (Trail) o;
+        return super.equals(t) && this.trailType == t.getTrailType();
     }
 }

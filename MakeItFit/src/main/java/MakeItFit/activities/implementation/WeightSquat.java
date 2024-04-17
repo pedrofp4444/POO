@@ -3,8 +3,8 @@ package MakeItFit.activities.implementation;
 import MakeItFit.activities.types.RepetitionsWithWeights;
 
 public class WeightSquat extends RepetitionsWithWeights {
-    public WeightSquat(int repetitions, int series, double weight) {
-        super(repetitions, series, weight);
+    public WeightSquat(int expectedDuration, String designation, int repetitions, int series, double weight) {
+        super(expectedDuration, designation, repetitions, series, weight);
     }
 
     public WeightSquat(){

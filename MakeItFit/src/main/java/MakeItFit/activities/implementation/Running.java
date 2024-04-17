@@ -5,8 +5,8 @@ import MakeItFit.activities.types.Distance;
 public class Running extends Distance {
     private double averageSpeed;
 
-    public Running(int duration, int expectedDuration, String designation, int caloricWaste, double distance, double speed) {
-        super(duration, expectedDuration, designation, caloricWaste, distance);
+    public Running(int expectedDuration, String designation, double distance, double speed) {
+        super(expectedDuration, designation, distance);
         this.averageSpeed = speed;
     }
 

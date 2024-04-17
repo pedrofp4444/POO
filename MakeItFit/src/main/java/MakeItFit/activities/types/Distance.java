@@ -5,8 +5,8 @@ import MakeItFit.activities.Activity;
 public abstract class Distance extends Activity {
     private double distance;
 
-    public Distance(int duration, int expectedDuration, String designation, int caloricWaste, double distance) {
-        super(duration, expectedDuration, designation, caloricWaste);
+    public Distance(int expectedDuration, String designation, double distance) {
+        super(expectedDuration, designation);
         this.distance = distance;
     }
 
@@ -32,6 +32,12 @@ public abstract class Distance extends Activity {
         this.distance = distance;
     }
 
-
     public abstract int calculateCaloricWaste();
+
+    public boolean equals(Object o){
+        if (o == this) return true;
+        if (!(o instanceof Distance)) return false;
+        Distance d = (Distance) o;
+        return (super.equals(d) && this.distance == d.distance);
+    }
 }

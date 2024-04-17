@@ -6,8 +6,8 @@ public abstract class DistanceWithAltimetry extends Distance {
     private double elevationGain;
     private double elevationLoss;
 
-    public DistanceWithAltimetry(int duration, int expectedDuration, String designation, int caloricWaste, double distance, double elevationGain, double elevationLoss) {
-        super(duration, expectedDuration, designation, caloricWaste, distance);
+    public DistanceWithAltimetry(int expectedDuration, String designation, double distance, double elevationGain, double elevationLoss) {
+        super(expectedDuration, designation, distance);
         this.elevationGain = elevationGain;
         this.elevationLoss = elevationLoss;
     }
@@ -41,4 +41,11 @@ public abstract class DistanceWithAltimetry extends Distance {
     }
 
     public abstract int calculateCaloricWaste();
+
+    public boolean equals(Object o){
+        if (o == this) return true;
+        if (!(o instanceof DistanceWithAltimetry)) return false;
+        DistanceWithAltimetry d = (DistanceWithAltimetry) o;
+        return (super.equals(d) && this.elevationGain == d.elevationGain && this.elevationLoss == d.elevationLoss);
+    }
 }
