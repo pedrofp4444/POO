@@ -5,23 +5,14 @@ import MakeItFit.activities.Activity;
 public abstract class Distance extends Activity {
     private double distance;
 
-    public Distance(int expectedDuration, String designation, double distance) {
-        super(expectedDuration, designation);
+    public Distance(int userCode, int code, int expectedDuration, String designation, double distance) {
+        super(userCode, code, expectedDuration, designation);
         this.distance = distance;
     }
 
-    public Distance(double distance) {
-        super();
-        this.distance = distance;
-    }
-
-    public Distance(){
-        super();
-        this.distance = 0;
-    }
-
-    public Distance(Distance a){
-        this.distance = a.getDistance();
+    public Distance(Distance d){
+        super(d);
+        this.distance = d.getDistance();
     }
 
     public double getDistance() {
@@ -34,10 +25,13 @@ public abstract class Distance extends Activity {
 
     public abstract int calculateCaloricWaste();
 
+    public abstract Activity clone();
+
     public boolean equals(Object o){
         if (o == this) return true;
         if (!(o instanceof Distance)) return false;
         Distance d = (Distance) o;
         return (super.equals(d) && this.distance == d.distance);
     }
+
 }

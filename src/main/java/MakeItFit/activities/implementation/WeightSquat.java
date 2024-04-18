@@ -1,14 +1,11 @@
 package MakeItFit.activities.implementation;
 
+import MakeItFit.activities.Activity;
 import MakeItFit.activities.types.RepetitionsWithWeights;
 
 public class WeightSquat extends RepetitionsWithWeights {
-    public WeightSquat(int expectedDuration, String designation, int repetitions, int series, double weight) {
-        super(expectedDuration, designation, repetitions, series, weight);
-    }
-
-    public WeightSquat(){
-        super();
+    public WeightSquat(int userCode, int code, int expectedDuration, String designation, int repetitions, int series, double weight) {
+        super(userCode, code, expectedDuration, designation, repetitions, series, weight);
     }
 
     public WeightSquat(WeightSquat w){
@@ -28,5 +25,9 @@ public class WeightSquat extends RepetitionsWithWeights {
         if (!(o instanceof WeightSquat)) return false;
         WeightSquat w = (WeightSquat) o;
         return super.equals(w);
+    }
+
+    public Activity clone(){
+        return new WeightSquat(this);
     }
 }

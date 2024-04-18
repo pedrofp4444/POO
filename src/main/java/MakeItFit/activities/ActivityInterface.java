@@ -4,11 +4,19 @@ public interface ActivityInterface {
 
     int calculateCaloricWaste();
 
-    int getDuration();
+    int getUserCode();
+
+    int getCode();
 
     int getExpectedDuration();
 
+    int getDuration();
+
     String getDesignation();
+
+    void setUserCode(int userCode);
+
+    void setCode(int code);
 
     void setDuration(int duration);
 

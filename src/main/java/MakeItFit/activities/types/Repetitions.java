@@ -6,16 +6,10 @@ public abstract class Repetitions extends Activity {
     private int repetitions;
     private int series;
 
-    public Repetitions(int expectedDuration, String designation, int repetitions, int series) {
-        super(expectedDuration, designation);
+    public Repetitions(int userCode, int code, int expectedDuration, String designation, int repetitions, int series) {
+        super(userCode, code, expectedDuration, designation);
         this.repetitions = repetitions;
         this.series = series;
-    }
-
-    public Repetitions(){
-        super();
-        this.repetitions = 0;
-        this.series = 0;
     }
 
     public Repetitions(Repetitions r){
@@ -41,6 +35,8 @@ public abstract class Repetitions extends Activity {
     }
 
     public abstract int calculateCaloricWaste();
+
+    public abstract Activity clone();
 
     public boolean equals(Object o){
         if (o == this) return true;

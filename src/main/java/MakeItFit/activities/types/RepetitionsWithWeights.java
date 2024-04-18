@@ -1,16 +1,13 @@
 package MakeItFit.activities.types;
 
+import MakeItFit.activities.Activity;
+
 public abstract class RepetitionsWithWeights extends Repetitions{
     private double weight;
 
-    public RepetitionsWithWeights(int expectedDuration, String designation, int repetitions, int series, double weight) {
-        super(expectedDuration, designation, repetitions, series);
+    public RepetitionsWithWeights(int userCode, int code, int expectedDuration, String designation, int repetitions, int series, double weight) {
+        super(userCode, code, expectedDuration, designation, repetitions, series);
         this.weight = weight;
-    }
-
-    public RepetitionsWithWeights(){
-        super();
-        this.weight = 0;
     }
 
     public RepetitionsWithWeights(RepetitionsWithWeights r){
@@ -32,11 +29,12 @@ public abstract class RepetitionsWithWeights extends Repetitions{
         return super.toString() + "Weight: " + weight + "\n";
     }
 
+    public abstract Activity clone();
+
     public boolean equals(Object o){
         if (o == this) return true;
         if (!(o instanceof RepetitionsWithWeights)) return false;
         RepetitionsWithWeights r = (RepetitionsWithWeights) o;
         return super.equals(r) && weight == r.getWeight();
     }
-
 }

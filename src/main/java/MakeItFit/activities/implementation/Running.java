@@ -1,18 +1,14 @@
 package MakeItFit.activities.implementation;
 
+import MakeItFit.activities.Activity;
 import MakeItFit.activities.types.Distance;
 
 public class Running extends Distance {
     private double averageSpeed;
 
-    public Running(int expectedDuration, String designation, double distance, double speed) {
-        super(expectedDuration, designation, distance);
+    public Running(int userCode, int code, int expectedDuration, String designation, double distance, double speed) {
+        super(userCode, code, expectedDuration, designation, distance);
         this.averageSpeed = speed;
-    }
-
-    public Running(){
-        super();
-        this.averageSpeed = 0;
     }
 
     public Running(Running r){
@@ -42,5 +38,10 @@ public class Running extends Distance {
         Running r = (Running) o;
         return super.equals(r) && averageSpeed == r.getSpeed();
     }
+
+    public Activity clone(){
+        return new Running(this);
+    }
+
 
 }
