@@ -20,7 +20,7 @@ public interface UserInterface {
 
         Gender getGender();
 
-        int getWeight();
+        float getWeight();
 
         int getHeight();
 
@@ -41,7 +41,7 @@ public interface UserInterface {
 
         void setGender(Gender gender);
 
-        void setWeight(int weight);
+        void setWeight(float weight);
 
         void setHeight(int height);
 

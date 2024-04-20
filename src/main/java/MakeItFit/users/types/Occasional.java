@@ -4,7 +4,7 @@ import MakeItFit.users.Gender;
 import MakeItFit.users.User;
 
 /**
- * The Occasional class to define a subclasse of the User class.
+ * The Occasional class defines a subclass of the User class, representing an occasional user.
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
  * @version (a version number or a date)
@@ -13,40 +13,63 @@ public class Occasional extends User {
     private int frequency;
 
     /**
-     * The parameterized constructor for Occasional.
+     * Constructs an Occasional user with the specified parameters.
+     *
+     * @param name      the name of the user
+     * @param age       the age of the user
+     * @param gender    the gender of the user
+     * @param weight    the weight of the user
+     * @param height    the height of the user
+     * @param bpm       the BPM of the user
+     * @param level     the level of the user
+     * @param address   the address of the user
+     * @param phone     the phone number of the user
+     * @param email     the email address of the user
+     * @param frequency the frequency of the user's visits, must be a non-negative integer
      */
-    public Occasional(String name, int age, Gender gender, int weight, int height, int bpm, int level, String address, String phone, String email, int frequency) {
+    public Occasional(String name, int age, Gender gender, float weight, int height, int bpm, int level, String address, String phone, String email, int frequency) {
         super(name, age, gender, weight, height, bpm, level, address, phone, email);
-        this.frequency = frequency;
+        setFrequency(frequency);
     }
 
     /**
-     * The copy constructor for Occasional.
+     * Constructs a copy of an Occasional user.
+     *
+     * @param o the Occasional user to copy
      */
-    public Occasional(Occasional o){
+    public Occasional(Occasional o) {
         super(o);
         this.frequency = o.getFrequency();
     }
 
     /**
-     * The method getFrequency for Occasional.
+     * Returns the frequency of the user's visits.
+     *
+     * @return the frequency of the user's visits
      */
     public int getFrequency() {
         return frequency;
     }
 
     /**
-     * The method setFrequency for Occasional.
+     * Sets the frequency of the user's visits.
+     *
+     * @param frequency the frequency to set, must be a non-negative integer
      */
     public void setFrequency(int frequency) {
+        if (frequency < 0) {
+            throw new IllegalArgumentException("Frequency must be a non-negative integer");
+        }
         this.frequency = frequency;
     }
 
     /**
-     * The method clone for Occasional.
+     * Creates and returns a copy of this Occasional user.
+     *
+     * @return a clone of this Occasional user
      */
+    @Override
     public Occasional clone() {
-        Occasional newUser = new Occasional(this);
-        return newUser;
+        return new Occasional(this);
     }
 }

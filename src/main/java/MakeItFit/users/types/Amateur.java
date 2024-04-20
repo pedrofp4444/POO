@@ -4,7 +4,7 @@ import MakeItFit.users.Gender;
 import MakeItFit.users.User;
 
 /**
- * The Amateur class to define a subclasse of the User class.
+ * A class that represents an amateur user, extending the User class.
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
  * @version (a version number or a date)
@@ -12,24 +12,39 @@ import MakeItFit.users.User;
 public class Amateur extends User {
 
     /**
-     * The parameterized constructor for Amateur.
+     * Constructs an Amateur user with the specified details.
+     *
+     * @param name The name of the amateur user.
+     * @param age The age of the amateur user.
+     * @param gender The gender of the amateur user.
+     * @param weight The weight of the amateur user.
+     * @param height The height of the amateur user.
+     * @param bpm The beats per minute of the amateur user.
+     * @param level The level of the amateur user.
+     * @param address The address of the amateur user.
+     * @param phone The phone number of the amateur user.
+     * @param email The email of the amateur user.
      */
-    public Amateur(String name, int age, Gender gender, int weight, int height, int bpm,int level,  String address, String phone, String email) {
-        super(name, age, gender, weight, height, bpm,level ,address, phone, email);
+    public Amateur(String name, int age, Gender gender, float weight, int height, int bpm, int level, String address, String phone, String email) {
+        super(name, age, gender, weight, height, bpm, level, address, phone, email);
     }
 
     /**
-     * The copy constructor for Amateur.
+     * Copy constructor that creates a new Amateur user by copying the attributes of another.
+     *
+     * @param amateur The amateur user to copy.
      */
-    public Amateur(Amateur a){
-        super(a);
+    public Amateur(Amateur amateur) {
+        super(amateur);
     }
 
     /**
-     * The clone method for Amateur.
+     * Clones this Amateur user, creating a new instance with the same attributes.
+     *
+     * @return A new Amateur user with the same attributes as this one.
      */
+    @Override
     public Amateur clone() {
-        Amateur newUser = new Amateur(this);
-        return newUser;
+        return new Amateur(this);
     }
 }

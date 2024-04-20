@@ -11,6 +11,16 @@ import org.junit.jupiter.api.Test;
  * @version (a version number or a date)
  */
 public class PushUpTest {
+    /**
+     * Tests the PushUp class constructors.
+     */
+    @Test
+        public void testConstructors() {
+            PushUp pushUp1 = new PushUp(0, 1, MakeItFitDate.of(2024, 4, 4), 30, "Daily try", 10, 10);
+            assertNotNull(pushUp1);
+            PushUp pushUp2 = new PushUp(pushUp1);
+            assertNotNull(pushUp2);
+        }
 
     /**
      * Tests the creation of PushUp instances using different constructors.

@@ -1,12 +1,11 @@
 package MakeItFit.users;
 
 import MakeItFit.activities.Activity;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * The implementation for the UserInterface class.
+ * Represents a user in the system, with personal details and a list of activities.
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
  * @version (a version number or a date)
@@ -17,19 +16,30 @@ public abstract class User implements UserInterface {
     private String name;
     private int age;
     private Gender gender;
-    private int weight;
+    private float weight;
     private int height;
     private int bpm;
-    private int level; // TODO: Check usage in our context
+    private int level; // Experience level (usage in context to be verified)
     private String address;
     private String phone;
     private String email;
     private List<Activity> activities;
 
     /**
-     * Parameterized constructor of the class User.
+     * Constructs a new user with the specified details.
+     *
+     * @param name The user's name.
+     * @param age The user's age.
+     * @param gender The user's gender.
+     * @param weight The user's weight.
+     * @param height The user's height.
+     * @param bpm The user's beats per minute (heart rate).
+     * @param level The user's experience level (usage in context to be verified).
+     * @param address The user's address.
+     * @param phone The user's phone number.
+     * @param email The user's email address.
      */
-    public User(String name, int age, Gender gender, int weight, int height, int bpm , int level, String address, String phone, String email) {
+    public User(String name, int age, Gender gender, float weight, int height, int bpm, int level, String address, String phone, String email) {
         this.code = UUID.randomUUID();
         this.name = name;
         this.age = age;
@@ -37,15 +47,17 @@ public abstract class User implements UserInterface {
         this.weight = weight;
         this.height = height;
         this.bpm = bpm;
-        this.level = level; // TODO: Check usage in our context
+        this.level = level;
         this.address = address;
         this.phone = phone;
         this.email = email;
-        this.activities = new ArrayList<Activity>();
+        this.activities = new ArrayList<>();
     }
 
     /**
-     * Copy constructor of the class User.
+     * Constructs a new user by copying the details from another user.
+     *
+     * @param u The user to copy details from.
      */
     public User(User u) {
         this.code = u.getCode();
@@ -55,7 +67,7 @@ public abstract class User implements UserInterface {
         this.weight = u.getWeight();
         this.height = u.getHeight();
         this.bpm = u.getBpm();
-        this.level = u.level; // TODO: Check usage in our context
+        this.level = u.getLevel();
         this.address = u.getAddress();
         this.phone = u.getPhone();
         this.email = u.getEmail();
@@ -63,169 +75,218 @@ public abstract class User implements UserInterface {
     }
 
     /**
-     * Get the code of the User.
+     * Gets the unique code of the user.
+     *
+     * @return The UUID code of the user.
      */
     public UUID getCode() {
         return this.code;
     }
 
     /**
-     * Get the name of the User.
+     * Gets the name of the user.
+     *
+     * @return The name of the user.
      */
     public String getName() {
         return this.name;
     }
 
     /**
-     * Get the age of the user.
+     * Gets the age of the user.
+     *
+     * @return The age of the user.
      */
     public int getAge() {
         return this.age;
     }
 
     /**
-     * Get the gender of the user.
+     * Gets the gender of the user.
+     *
+     * @return The gender of the user.
      */
-    public Gender getGender(){
+    public Gender getGender() {
         return this.gender;
     }
 
     /**
-     * Get the weight of the user.
+     * Gets the weight of the user.
+     *
+     * @return The weight of the user.
      */
-    public int getWeight() {
+    public float getWeight() {
         return this.weight;
     }
 
     /**
-     * Get the height of the user.
+     * Gets the height of the user.
+     *
+     * @return The height of the user.
      */
     public int getHeight() {
         return this.height;
     }
 
     /**
-     * Get the bpm(beats per minute) of the user.
+     * Gets the beats per minute (heart rate) of the user.
+     *
+     * @return The bpm (beats per minute) of the user.
      */
     public int getBpm() {
         return this.bpm;
     }
 
     /**
-     * Get the level of the user.
+     * Gets the experience level of the user.
+     *
+     * @return The level of the user.
      */
     public int getLevel() {
         return this.level;
-    } // TODO: Check usage in our context
-    
+    } // Check usage in our context
+
     /**
-     * Get the address of the user.
+     * Gets the address of the user.
+     *
+     * @return The address of the user.
      */
     public String getAddress() {
         return this.address;
     }
 
     /**
-     * Get the phone of the user.
+     * Gets the phone number of the user.
+     *
+     * @return The phone number of the user.
      */
     public String getPhone() {
         return this.phone;
     }
 
     /**
-     * Get the email of the user.
+     * Gets the email address of the user.
+     *
+     * @return The email address of the user.
      */
     public String getEmail() {
         return this.email;
     }
 
     /**
-     * Get the activities of the user.
+     * Gets the list of activities of the user.
+     *
+     * @return A list of activities of the user, cloned to avoid modifications to the original list.
      */
-    public List<Activity> getListActivities(){
+    public List<Activity> getListActivities() {
         return this.activities.stream().map(Activity::clone).collect(Collectors.toList());
     }
 
     /**
-     * Set the name of the user.
+     * Sets the name of the user.
+     *
+     * @param name The new name of the user.
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * Set the age of the user.
+     * Sets the age of the user.
+     *
+     * @param age The new age of the user.
      */
     public void setAge(int age) {
         this.age = age;
     }
 
     /**
-     * Set the gender of the name.
+     * Sets the gender of the user.
+     *
+     * @param gender The new gender of the user.
      */
-    public void setGender(Gender gender){
-        this.gender=gender;
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     /**
-     * Set the weight of the user.
+     * Sets the weight of the user.
+     *
+     * @param weight The new weight of the user.
      */
-    public void setWeight(int weight) {
+    public void setWeight(float weight) {
         this.weight = weight;
     }
 
     /**
-     * Set the height of the user.
+     * Sets the height of the user.
+     *
+     * @param height The new height of the user.
      */
     public void setHeight(int height) {
         this.height = height;
     }
 
     /**
-     * Set the bpm(beats per minute) of the user.
+     * Sets the bpm (beats per minute) of the user.
+     *
+     * @param bpm The new bpm of the user.
      */
     public void setBpm(int bpm) {
         this.bpm = bpm;
     }
 
     /**
-     * Set the level of the user.
+     * Sets the experience level of the user.
+     *
+     * @param level The new level of the user.
      */
     public void setLevel(int level) {
         this.level = level;
-    } // TODO: Check usage in our context
+    }
 
     /**
-     * Set the address of the user.
+     * Sets the address of the user.
+     *
+     * @param address The new address of the user.
      */
     public void setAddress(String address) {
         this.address = address;
     }
 
     /**
-     * Set the phone of the user.
+     * Sets the phone number of the user.
+     *
+     * @param phone The new phone number of the user.
      */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
     /**
-     * Set the email of the user.
+     * Sets the email address of the user.
+     *
+     * @param email The new email address of the user.
      */
     public void setEmail(String email) {
         this.email = email;
     }
 
     /**
-     * Set the activities for the user.
+     * Adds an activity to the user's list of activities.
+     *
+     * @param activity The activity to add.
      */
-    public void addActivity(Activity activity){
+    public void addActivity(Activity activity) {
         this.activities.add(activity.clone());
     }
 
     /**
-     * Default method toString for the user.
+     * Returns a string representation of the user.
+     *
+     * @return A string containing the details of the user.
      */
+    @Override
     public String toString() {
         return "User Code: " + this.code + "\n" +
                 "Name: " + this.name + "\n" +
@@ -234,15 +295,17 @@ public abstract class User implements UserInterface {
                 "Weight: " + this.weight + "\n" +
                 "Height: " + this.height + "\n" +
                 "Bpm: " + this.bpm + "\n" +
-                "Level: " + this.level + "\n" + // TODO: Check usage in our context
+                "Level: " + this.level + "\n" + // Check usage in our context
                 "Address: " + this.address + "\n" +
                 "Phone: " + this.phone + "\n" +
                 "Email: " + this.email + "\n" +
-                "Activities: " + this.activities ;
+                "Activities: " + this.activities;
     }
 
     /**
-     * The method clone for user.
+     * Abstract method for cloning a user. Must be implemented by subclasses.
+     *
+     * @return A clone of the user.
      */
     public abstract User clone();
 }
