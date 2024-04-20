@@ -1,12 +1,12 @@
 package MakeItFit.activities.types;
 import MakeItFit.activities.Activity;
-import MakeItFit.utils.makeItFitDate;
+import MakeItFit.utils.MakeItFitDate;
 
 public abstract class DistanceWithAltimetry extends Distance {
     private double elevationGain;
     private double elevationLoss;
 
-    public DistanceWithAltimetry(int userCode, int code, makeItFitDate realizationDate, int expectedDuration, String designation, double distance, double elevationGain, double elevationLoss) {
+    public DistanceWithAltimetry(int userCode, int code, MakeItFitDate realizationDate, int expectedDuration, String designation, double distance, double elevationGain, double elevationLoss) {
         super(userCode, code, realizationDate, expectedDuration, designation, distance);
         this.elevationGain = elevationGain;
         this.elevationLoss = elevationLoss;

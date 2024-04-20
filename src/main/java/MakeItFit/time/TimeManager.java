@@ -1,18 +1,18 @@
 package MakeItFit.time;
 
-import MakeItFit.utils.makeItFitDate;
+import MakeItFit.utils.MakeItFitDate;
 public class TimeManager {
-    private makeItFitDate currentDate;
+    private MakeItFitDate currentDate;
 
-    public TimeManager(makeItFitDate currentDate) {
+    public TimeManager(MakeItFitDate currentDate) {
         this.currentDate = currentDate;
     }
 
-    public makeItFitDate getCurrentDate() {
+    public MakeItFitDate getCurrentDate() {
         return this.currentDate;
     }
 
-    public makeItFitDate advanceTime(int days){
+    public MakeItFitDate advanceTime(int days){
         return this.currentDate = this.currentDate.plusDays(days);
     }
 }

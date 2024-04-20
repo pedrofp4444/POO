@@ -1,19 +1,19 @@
 package MakeItFit.activities;
 
-import MakeItFit.utils.makeItFitDate;
+import MakeItFit.utils.MakeItFitDate;
 
 public abstract class Activity implements ActivityInterface {
     private int userCode;
 
     private int code;
-    private makeItFitDate realizationDate;
+    private MakeItFitDate realizationDate;
     private int expectedDuration;
     private String designation;
 
     private int duration;
     private int caloricWaste;
 
-    public Activity(int userCode, int code, makeItFitDate realizationDate, int expectedDuration, String designation) {
+    public Activity(int userCode, int code, MakeItFitDate realizationDate, int expectedDuration, String designation) {
         this.userCode = userCode;
         this.code = code;
         this.realizationDate = realizationDate;
@@ -37,7 +37,7 @@ public abstract class Activity implements ActivityInterface {
 
     public int getCode(){ return this.code;}
 
-    public makeItFitDate getRealizationDate(){
+    public MakeItFitDate getRealizationDate(){
         return this.realizationDate;
     }
 

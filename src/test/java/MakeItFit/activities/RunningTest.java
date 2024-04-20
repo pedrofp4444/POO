@@ -1,11 +1,13 @@
 import static org.junit.jupiter.api.Assertions.*;
 
-import MakeItFit.activities.implementation.PushUp;
 import MakeItFit.activities.implementation.Running;
+import MakeItFit.utils.MakeItFitDate;
 import org.junit.jupiter.api.Test;
 
 /**
  * The tests for the Running class.
+ *
+ * These tests verify the functionality of the Running class, which represents a running activity in the application.
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
  * @version (a version number or a date)
@@ -16,53 +18,51 @@ public class RunningTest {
      */
     @Test
     public void testConstructors() {
-        Running run1 = new Running();
+        Running run1 = new Running(0, 2, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
         assertNotNull(run1);
-        assertEquals(run1.getSpeed(), 0);
-        Running run2 = new Running(45, "Braga em Movimento", 2300, 14.5);
-        assertNotNull(run2);
-        assertEquals(run2.getSpeed(), 14.5);
+        assertEquals(14.5, run1.getSpeed());
         Running run3 = new Running(run1);
         assertNotNull(run3);
-        assertEquals(run3.getSpeed(), 0);
+        assertEquals(14.5, run3.getSpeed());
     }
 
     /**
-     * Tests the Running class method getSpeed.
+     * Tests the getSpeed method of the Running class.
      */
     @Test
     public void testGetSpeed() {
-        Running run1 = new Running();
-        assertEquals(run1.getSpeed(), 0);
+        Running run1 = new Running(0, 2, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
+        assertEquals(14.5, run1.getSpeed());
     }
 
     /**
-     * Tests the Running class method setSpeed.
+     * Tests the setSpeed method of the Running class.
      */
     @Test
     public void testSetSpeed() {
-        Running run1 = new Running();
-        run1.setSpeed(12);
-        assertEquals(run1.getSpeed(), 12);
+        Running run1 = new Running(0, 2, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
+        run1.setSpeed(12.0);
+        assertEquals(12.0, run1.getSpeed());
     }
 
     /**
-     * Tests the Running class method calculateCaloricWaste.
+     * Tests the calculateCaloricWaste method of the Running class.
      */
     @Test
     public void testCalculateCaloricWaste() {
-        Running run1 = new Running(45, "Braga em Movimento", 2300, 14.5);
-        assertEquals(run1.calculateCaloricWaste(), 33350);
+        Running run1 = new Running(0, 2, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
+        int expectedCaloricWaste = 33350;
+        assertEquals(expectedCaloricWaste, run1.calculateCaloricWaste());
     }
 
     /**
-     * Tests the Running class method equals.
+     * Tests the equals method of the Running class.
      */
     @Test
-    public void testEquals(){
-        Running run1 = new Running(45, "Braga em Movimento", 2300, 14.5);
+    public void testEquals() {
+        Running run1 = new Running(0, 2, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
+        Running run2 = new Running(0, 2, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
         assertFalse(run1.equals(null));
-        Running run2 = new Running(45, "Braga em Movimento", 2300, 14.5);
         assertTrue(run1.equals(run2));
     }
 }
