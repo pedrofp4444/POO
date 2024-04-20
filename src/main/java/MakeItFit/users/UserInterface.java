@@ -2,11 +2,17 @@ package MakeItFit.users;
 
 import MakeItFit.activities.Activity;
 
-import java.util.List;
+import java.util.*;
 
+/**
+ * The UserInterface interface to restrict the implementations connected to users.
+ *
+ * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
+ * @version (a version number or a date)
+ */
 public interface UserInterface {
 
-        int getCode();
+        UUID getCode();
 
         String getName();
 
@@ -28,8 +34,6 @@ public interface UserInterface {
 
         List<Activity> getListActivities();
 
-
-        void setCode(int code);
 
         void setName(String name);
 

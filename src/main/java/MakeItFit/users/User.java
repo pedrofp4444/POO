@@ -1,11 +1,9 @@
 package MakeItFit.users;
 
-import java.util.stream.Collectors;
-
 import MakeItFit.activities.Activity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * The implementation for the UserInterface class.
@@ -15,7 +13,7 @@ import java.util.List;
  */
 public abstract class User implements UserInterface {
 
-    private int code;
+    private final UUID code;
     private String name;
     private int age;
     private Gender gender;
@@ -31,8 +29,8 @@ public abstract class User implements UserInterface {
     /**
      * Parameterized constructor of the class User.
      */
-    public User(int code, String name, int age, Gender gender, int weight, int height,int bpm , int level, String address, String phone, String email) {
-        this.code = code;
+    public User(String name, int age, Gender gender, int weight, int height, int bpm , int level, String address, String phone, String email) {
+        this.code = UUID.randomUUID();
         this.name = name;
         this.age = age;
         this.gender = gender;
@@ -67,7 +65,7 @@ public abstract class User implements UserInterface {
     /**
      * Get the code of the User.
      */
-    public int getCode() {
+    public UUID getCode() {
         return this.code;
     }
 
@@ -146,13 +144,6 @@ public abstract class User implements UserInterface {
      */
     public List<Activity> getListActivities(){
         return this.activities.stream().map(Activity::clone).collect(Collectors.toList());
-    }
-
-    /**
-     * Set the code of the user.
-     */
-    public void setCode(int code) {
-        this.code = code;
     }
 
     /**
@@ -249,4 +240,9 @@ public abstract class User implements UserInterface {
                 "Email: " + this.email + "\n" +
                 "Activities: " + this.activities ;
     }
+
+    /**
+     * The method clone for user.
+     */
+    public abstract User clone();
 }

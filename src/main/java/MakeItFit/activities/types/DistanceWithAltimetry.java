@@ -1,7 +1,5 @@
 package MakeItFit.activities.types;
 
-import MakeItFit.activities.Activity;
-
 public abstract class DistanceWithAltimetry extends Distance {
     private double elevationGain;
     private double elevationLoss;
@@ -36,12 +34,12 @@ public abstract class DistanceWithAltimetry extends Distance {
 
     public abstract int calculateCaloricWaste();
 
-    public abstract Activity clone();
-
     public boolean equals(Object o){
         if (o == this) return true;
         if (!(o instanceof DistanceWithAltimetry)) return false;
         DistanceWithAltimetry d = (DistanceWithAltimetry) o;
         return (super.equals(d) && this.elevationGain == d.elevationGain && this.elevationLoss == d.elevationLoss);
     }
+
+    public abstract DistanceWithAltimetry clone();
 }

@@ -1,6 +1,5 @@
 package MakeItFit.activities.implementation;
 
-import MakeItFit.activities.Activity;
 import MakeItFit.activities.types.Distance;
 
 public class Running extends Distance {
@@ -39,9 +38,8 @@ public class Running extends Distance {
         return super.equals(r) && averageSpeed == r.getSpeed();
     }
 
-    public Activity clone(){
-        return new Running(this);
+    public Running clone(){
+        Running newRun = new Running(this);
+        return newRun;
     }
-
-
 }

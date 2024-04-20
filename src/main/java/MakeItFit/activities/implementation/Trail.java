@@ -47,8 +47,8 @@ public class Trail extends DistanceWithAltimetry {
         return super.equals(t) && this.trailType == t.getTrailType();
     }
 
-    public Activity clone(){
-        return new Trail(this);
+    public Trail clone(){
+        Trail newTrail = new Trail(this);
+        return newTrail;
     }
-
 }

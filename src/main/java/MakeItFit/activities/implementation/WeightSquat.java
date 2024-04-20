@@ -1,6 +1,5 @@
 package MakeItFit.activities.implementation;
 
-import MakeItFit.activities.Activity;
 import MakeItFit.activities.types.RepetitionsWithWeights;
 
 public class WeightSquat extends RepetitionsWithWeights {
@@ -27,7 +26,8 @@ public class WeightSquat extends RepetitionsWithWeights {
         return super.equals(w);
     }
 
-    public Activity clone(){
-        return new WeightSquat(this);
+    public WeightSquat clone(){
+        WeightSquat newSquat = new WeightSquat(this);
+        return newSquat;
     }
 }

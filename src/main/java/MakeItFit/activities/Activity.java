@@ -70,8 +70,6 @@ public abstract class Activity implements ActivityInterface {
 
     public abstract int calculateCaloricWaste();
 
-    public abstract Activity clone();
-
     public boolean equals(Object o){
         if (o == this) return true;
         if (!(o instanceof Activity)) return false;
@@ -79,4 +77,5 @@ public abstract class Activity implements ActivityInterface {
         return (this.expectedDuration == a.expectedDuration && this.designation.equals(a.designation));
     }
 
+    public abstract Activity clone();
 }

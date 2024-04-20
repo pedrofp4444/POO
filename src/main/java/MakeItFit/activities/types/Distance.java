@@ -25,8 +25,6 @@ public abstract class Distance extends Activity {
 
     public abstract int calculateCaloricWaste();
 
-    public abstract Activity clone();
-
     public boolean equals(Object o){
         if (o == this) return true;
         if (!(o instanceof Distance)) return false;
@@ -34,4 +32,5 @@ public abstract class Distance extends Activity {
         return (super.equals(d) && this.distance == d.distance);
     }
 
+    public abstract Distance clone();
 }

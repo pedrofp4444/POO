@@ -36,12 +36,12 @@ public abstract class Repetitions extends Activity {
 
     public abstract int calculateCaloricWaste();
 
-    public abstract Activity clone();
-
     public boolean equals(Object o){
         if (o == this) return true;
         if (!(o instanceof Repetitions)) return false;
         Repetitions r = (Repetitions) o;
         return (super.equals(r) && this.repetitions == r.repetitions && this.series == r.series);
     }
+
+    public abstract Repetitions clone();
 }

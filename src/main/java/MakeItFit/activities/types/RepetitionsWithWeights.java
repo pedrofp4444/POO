@@ -1,7 +1,5 @@
 package MakeItFit.activities.types;
 
-import MakeItFit.activities.Activity;
-
 public abstract class RepetitionsWithWeights extends Repetitions{
     private double weight;
 
@@ -29,12 +27,12 @@ public abstract class RepetitionsWithWeights extends Repetitions{
         return super.toString() + "Weight: " + weight + "\n";
     }
 
-    public abstract Activity clone();
-
     public boolean equals(Object o){
         if (o == this) return true;
         if (!(o instanceof RepetitionsWithWeights)) return false;
         RepetitionsWithWeights r = (RepetitionsWithWeights) o;
         return super.equals(r) && weight == r.getWeight();
     }
+
+    public abstract RepetitionsWithWeights clone();
 }

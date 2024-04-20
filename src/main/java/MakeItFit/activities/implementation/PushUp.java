@@ -1,6 +1,5 @@
 package MakeItFit.activities.implementation;
 
-import MakeItFit.activities.Activity;
 import MakeItFit.activities.types.Repetitions;
 
 public class PushUp extends Repetitions {
@@ -27,7 +26,8 @@ public class PushUp extends Repetitions {
         return super.equals(p);
     }
 
-    public Activity clone(){
-        return new PushUp(this);
+    public PushUp clone(){
+        PushUp newPushUp = new PushUp(this);
+        return newPushUp;
     }
 }
