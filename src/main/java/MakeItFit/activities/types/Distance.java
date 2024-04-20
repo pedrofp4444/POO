@@ -1,12 +1,13 @@
 package MakeItFit.activities.types;
 
 import MakeItFit.activities.Activity;
+import MakeItFit.utils.makeItFitDate;
 
 public abstract class Distance extends Activity {
     private double distance;
 
-    public Distance(int userCode, int code, int expectedDuration, String designation, double distance) {
-        super(userCode, code, expectedDuration, designation);
+    public Distance(int userCode, int code, makeItFitDate realizationDate, int expectedDuration, String designation, double distance) {
+        super(userCode, code, realizationDate, expectedDuration, designation);
         this.distance = distance;
     }
 

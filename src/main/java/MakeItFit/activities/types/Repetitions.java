@@ -1,13 +1,14 @@
 package MakeItFit.activities.types;
 
 import MakeItFit.activities.Activity;
+import MakeItFit.utils.makeItFitDate;
 
 public abstract class Repetitions extends Activity {
     private int repetitions;
     private int series;
 
-    public Repetitions(int userCode, int code, int expectedDuration, String designation, int repetitions, int series) {
-        super(userCode, code, expectedDuration, designation);
+    public Repetitions(int userCode, int code, makeItFitDate realizationDate, int expectedDuration, String designation, int repetitions, int series) {
+        super(userCode, code, realizationDate, expectedDuration, designation);
         this.repetitions = repetitions;
         this.series = series;
     }

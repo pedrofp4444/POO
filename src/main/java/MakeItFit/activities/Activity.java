@@ -1,18 +1,22 @@
 package MakeItFit.activities;
 
+import MakeItFit.utils.makeItFitDate;
+
 public abstract class Activity implements ActivityInterface {
     private int userCode;
 
     private int code;
+    private makeItFitDate realizationDate;
     private int expectedDuration;
     private String designation;
 
     private int duration;
     private int caloricWaste;
 
-    public Activity(int userCode, int code, int expectedDuration, String designation) {
+    public Activity(int userCode, int code, makeItFitDate realizationDate, int expectedDuration, String designation) {
         this.userCode = userCode;
         this.code = code;
+        this.realizationDate = realizationDate;
         this.expectedDuration = expectedDuration;
         this.designation = designation;
         this.duration = 0;
@@ -22,6 +26,7 @@ public abstract class Activity implements ActivityInterface {
     public Activity(Activity a){
         this.userCode = a.getUserCode();
         this.code = a.getCode();
+        this.realizationDate = a.getRealizationDate();
         this.expectedDuration = a.getExpectedDuration();
         this.designation = a.getDesignation();
         this.duration = a.getDuration();
@@ -31,6 +36,10 @@ public abstract class Activity implements ActivityInterface {
     public int getUserCode(){ return this.userCode; }
 
     public int getCode(){ return this.code;}
+
+    public makeItFitDate getRealizationDate(){
+        return this.realizationDate;
+    }
 
     public int getExpectedDuration() {
         return this.expectedDuration;

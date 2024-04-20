@@ -2,6 +2,7 @@ package MakeItFit.activities.implementation;
 
 import MakeItFit.activities.Activity;
 import MakeItFit.activities.types.DistanceWithAltimetry;
+import MakeItFit.utils.makeItFitDate;
 
 public class Trail extends DistanceWithAltimetry {
 
@@ -11,8 +12,8 @@ public class Trail extends DistanceWithAltimetry {
 
     private int trailType;
 
-    public Trail(int userCode, int code, int expectedDuration, String designation, double distance, double elevationGain, double elevationLoss, int trailType) {
-        super(userCode, code, expectedDuration, designation, distance, elevationGain, elevationLoss);
+    public Trail(int userCode, int code, makeItFitDate realizationDate, int expectedDuration, String designation, double distance, double elevationGain, double elevationLoss, int trailType) {
+        super(userCode, code, realizationDate, expectedDuration, designation, distance, elevationGain, elevationLoss);
         this.trailType = trailType;
     }
 

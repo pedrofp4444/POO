@@ -1,10 +1,12 @@
 package MakeItFit.activities.types;
+import MakeItFit.activities.Activity;
+import MakeItFit.utils.makeItFitDate;
 
 public abstract class RepetitionsWithWeights extends Repetitions{
     private double weight;
 
-    public RepetitionsWithWeights(int userCode, int code, int expectedDuration, String designation, int repetitions, int series, double weight) {
-        super(userCode, code, expectedDuration, designation, repetitions, series);
+    public RepetitionsWithWeights(int userCode, int code, makeItFitDate realizationDate, int expectedDuration, String designation, int repetitions, int series, double weight) {
+        super(userCode, code, realizationDate, expectedDuration, designation, repetitions, series);
         this.weight = weight;
     }
 
