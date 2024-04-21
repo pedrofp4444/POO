@@ -93,7 +93,7 @@ public class UserManager {
      */
     public void removeUserByEmail(String email) throws EntityDoesNotExistException {
 
-        if (!this.usersByCode.containsKey(email)) {
+        if (!this.usersByEmail.containsKey(email)) {
             throw new EntityDoesNotExistException("User with code " + email + " does not exist.");
         }
 
