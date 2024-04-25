@@ -38,7 +38,7 @@ public class UserManager {
      * @return the created user
      * @throws IllegalArgumentException if any argument is null or invalid
      */
-    public User createUser(String name, int age, Gender gender, int weight, int height, int bpm, int level, String address, String phone, String email) throws IllegalArgumentException {
+    public User createUser(String name, int age, Gender gender, float weight, int height, int bpm, int level, String address, String phone, String email) throws IllegalArgumentException {
 
         if (name == null || address == null || phone == null || email == null) {
             throw new IllegalArgumentException("Invalid input: name, address, phone, or email cannot be null.");

@@ -288,18 +288,36 @@ public abstract class User implements UserInterface {
      */
     @Override
     public String toString() {
-        return "User Code: " + this.code + "\n" +
-                "Name: " + this.name + "\n" +
-                "Age: " + this.age + "\n" +
-                "Gender: " + this.gender + "\n" +
-                "Weight: " + this.weight + "\n" +
-                "Height: " + this.height + "\n" +
-                "Bpm: " + this.bpm + "\n" +
-                "Level: " + this.level + "\n" + // Check usage in our context
-                "Address: " + this.address + "\n" +
-                "Phone: " + this.phone + "\n" +
-                "Email: " + this.email + "\n" +
-                "Activities: " + this.activities;
+        return String.format(
+                """
+                        == (User details) ==
+                        Code: %s
+                        Name: %s
+                        Age: %d
+                        Gender: %s
+                        Weight: %.2f kg
+                        Height: %d cm
+                        Bpm: %d
+                        Level: %s
+                        Address: %s
+                        Phone: %s
+                        Email: %s
+                        Activities: %s
+                        ====================
+                """,
+                this.code,
+                this.name,
+                this.age,
+                this.gender,
+                this.weight,
+                this.height,
+                this.bpm,
+                this.level,
+                this.address,
+                this.phone,
+                this.email,
+                this.activities
+        );
     }
 
     /**
