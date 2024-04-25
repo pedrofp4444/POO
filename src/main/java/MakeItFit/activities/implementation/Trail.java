@@ -1,5 +1,6 @@
 package MakeItFit.activities.implementation;
 
+import MakeItFit.activities.HardInterface;
 import MakeItFit.activities.types.DistanceWithAltimetry;
 import MakeItFit.utils.MakeItFitDate;
 
@@ -10,7 +11,7 @@ import MakeItFit.utils.MakeItFitDate;
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
  * @version (a version number or a date)
  */
-public class Trail extends DistanceWithAltimetry {
+public class Trail extends DistanceWithAltimetry implements HardInterface {
 
     // Constants representing the different types of trail difficulty
     public static final int TRAIL_TYPE_EASY = 0;
@@ -63,7 +64,6 @@ public class Trail extends DistanceWithAltimetry {
      * @param trailType The trail type to set (easy, medium, or hard).
      */
     public void setTrailType(int trailType) {
-        // Ensure the trail type is within the valid range of trail types
         if (trailType < TRAIL_TYPE_EASY) {
             this.trailType = TRAIL_TYPE_EASY;
         } else if (trailType > TRAIL_TYPE_HARD) {
@@ -79,7 +79,7 @@ public class Trail extends DistanceWithAltimetry {
      * @return The calculated caloric waste as an integer.
      */
     public int calculateCaloricWaste() {
-        return (int) (getDistance() * getElevationGain() * getElevationLoss());
+        return (int) (getDistance() * getElevationGain() * getElevationLoss() * HARD_FACTOR);
     }
 
     /**
