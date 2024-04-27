@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * The class TrainingPlanManager represents a manager of training plans.
  *
- * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
+ * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
 public class TrainingPlanManager {
@@ -28,7 +28,7 @@ public class TrainingPlanManager {
      * @return the planing train created
      * @throws IllegalArgumentException if any argument is null
      */
-    public TrainingPlan createTrainingPlan(UUID userCode, UUID code, MakeItFitDate startDate) {
+    public TrainingPlan createTrainingPlan(UUID userCode, UUID code, MakeItFitDate startDate) throws IllegalArgumentException {
 
         if (userCode == null || startDate == null || code == null) {
             throw new IllegalArgumentException("Invalid input: userCode, code, startDate.");
@@ -102,7 +102,6 @@ public class TrainingPlanManager {
      *
      * @return a list of all training plans
      */
-
     public List<TrainingPlan> getAllTrainingPlans(){
         return new ArrayList<>(this.trainingPlans.values());
     }

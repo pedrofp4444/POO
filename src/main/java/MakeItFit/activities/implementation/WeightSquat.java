@@ -7,7 +7,7 @@ import MakeItFit.utils.MakeItFitDate;
  * The WeightSquat class represents an activity of performing squats with weights as part of a fitness routine.
  * It extends the RepetitionsWithWeights class to include specific functionality related to squats with weights.
  *
- * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
+ * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
 public class WeightSquat extends RepetitionsWithWeights {

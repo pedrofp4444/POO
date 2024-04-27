@@ -6,7 +6,7 @@ import MakeItFit.users.User;
 /**
  * A class that represents an amateur user, extending the User class.
  *
- * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
+ * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
 public class Amateur extends User {

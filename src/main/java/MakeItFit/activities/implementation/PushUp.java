@@ -7,7 +7,7 @@ import MakeItFit.utils.MakeItFitDate;
  * The PushUp class represents an exercise activity of push-ups.
  * It extends the Repetitions class, providing additional context specific to the push-up exercise.
  *
- * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
+ * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
 public class PushUp extends Repetitions {

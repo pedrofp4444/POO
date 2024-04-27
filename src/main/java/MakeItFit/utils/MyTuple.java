@@ -6,7 +6,7 @@ package MakeItFit.utils;
  * @param <T1> The first element of the tuple
  * @param <T2> The second element of the tuple
  *
- * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
+ * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
 public class MyTuple<T1, T2> {

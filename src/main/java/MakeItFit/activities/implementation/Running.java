@@ -7,7 +7,7 @@ import MakeItFit.utils.MakeItFitDate;
  * The Running class represents a running activity in the application.
  * It extends the Distance class, providing additional properties and methods related to running activities.
  *
- * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
+ * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
 public class Running extends Distance {

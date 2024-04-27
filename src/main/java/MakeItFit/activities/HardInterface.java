@@ -3,7 +3,7 @@ package MakeItFit.activities;
 /**
  * The HardInterface interface provides a constant factor to multiply the caloric waste of a hard activity by.
  *
- * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
+ * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
 public interface HardInterface {

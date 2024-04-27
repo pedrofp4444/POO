@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
  * This class contains tests for the constructors, methods, and operations of the WeightSquat class,
  * including tests for construction, calculating caloric waste, and object equality.
  *
- * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
+ * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
 public class WeightSquatTest {

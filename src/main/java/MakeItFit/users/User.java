@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 /**
  * Represents a user in the system, with personal details and a list of activities.
  *
- * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
+ * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
 public abstract class User implements UserInterface {

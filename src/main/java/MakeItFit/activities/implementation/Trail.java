@@ -8,7 +8,7 @@ import MakeItFit.utils.MakeItFitDate;
  * The Trail class represents a trail activity that includes distance and altimetry information.
  * It extends the DistanceWithAltimetry class and includes a trail type (easy, medium, or hard).
  *
- * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
+ * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
 public class Trail extends DistanceWithAltimetry implements HardInterface {
