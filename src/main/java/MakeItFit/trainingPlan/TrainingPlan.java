@@ -102,4 +102,18 @@ public class TrainingPlan {
             }
         }
     }
+
+
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof TrainingPlan)) {
+            return false;
+        }
+        TrainingPlan trainingPlan = (TrainingPlan) o;
+        return this.userCode.equals(trainingPlan.getUserCode()) && this.code.equals(trainingPlan.getCode()) && this.startDate.equals(trainingPlan.getStartDate()) && this.activities.equals(trainingPlan.getActivities());
+    }
 }
+
+

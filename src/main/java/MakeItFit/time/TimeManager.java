@@ -15,4 +15,5 @@ public class TimeManager {
     public MakeItFitDate advanceTime(int days){
         return this.currentDate = this.currentDate.plusDays(days);
     }
+
 }
