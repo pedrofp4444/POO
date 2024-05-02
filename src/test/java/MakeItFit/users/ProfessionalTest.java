@@ -17,7 +17,7 @@ public class ProfessionalTest {
      */
     @Test
     public void testConstructor() {
-        Professional user = new Professional("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", Professional.Specialization.Distance, 2);
+        Professional user = new Professional("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 2);
         assertNotNull(user);
         assertEquals("José Fernandes", user.getName());
         assertEquals(45, user.getAge());
@@ -29,7 +29,7 @@ public class ProfessionalTest {
         assertEquals("Braga", user.getAddress());
         assertEquals("990 000 000", user.getPhone());
         assertEquals("josefernandes@mail.com", user.getEmail());
-        assertEquals(Professional.Specialization.Distance, user.getSpecialization());
+        assertEquals("No specialization", user.getSpecialization());
         assertEquals(2, user.getFrequency());
     }
 
@@ -38,7 +38,7 @@ public class ProfessionalTest {
      */
     @Test
     public void testCopyConstructor() {
-        Professional user1 = new Professional("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", Professional.Specialization.Distance, 2);
+        Professional user1 = new Professional("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 2);
         Professional user2 = new Professional(user1);
         assertNotNull(user2);
         assertEquals(user1.getName(), user2.getName());
@@ -60,9 +60,9 @@ public class ProfessionalTest {
      */
     @Test
     public void testGetSpecialization() {
-        Professional user = new Professional("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", Professional.Specialization.Distance, 2);
-        Professional.Specialization specialization = user.getSpecialization();
-        assertEquals(Professional.Specialization.Distance, specialization);
+        Professional user = new Professional("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 2);
+        String specialization = user.getSpecialization();
+        assertEquals("No specialization", specialization);
     }
 
     /**
@@ -70,9 +70,9 @@ public class ProfessionalTest {
      */
     @Test
     public void testSetSpecialization() {
-        Professional user = new Professional("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", Professional.Specialization.Distance, 2);
-        user.setSpecialization(Professional.Specialization.Repetitions);
-        assertEquals(Professional.Specialization.Repetitions, user.getSpecialization());
+        Professional user = new Professional("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 2);
+        user.setSpecialization("Running");
+        assertEquals("Running", user.getSpecialization());
     }
 
     /**
@@ -80,7 +80,7 @@ public class ProfessionalTest {
      */
     @Test
     public void testGetFrequency() {
-        Professional user = new Professional("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", Professional.Specialization.Distance, 2);
+        Professional user = new Professional("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 2);
         int frequency = user.getFrequency();
         assertEquals(2, frequency);
     }
@@ -90,7 +90,7 @@ public class ProfessionalTest {
      */
     @Test
     public void testSetFrequency() {
-        Professional user = new Professional("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", Professional.Specialization.Distance, 2);
+        Professional user = new Professional("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 2);
         user.setFrequency(4);
         assertEquals(4, user.getFrequency());
     }
@@ -100,7 +100,7 @@ public class ProfessionalTest {
      */
     @Test
     public void testClone() {
-        Professional user = new Professional("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", Professional.Specialization.Distance, 2);
+        Professional user = new Professional("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 2);
         Professional clone = user.clone();
 
         assertNotNull(clone);

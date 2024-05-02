@@ -25,6 +25,7 @@ public class PushUp extends Repetitions {
      */
     public PushUp(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, int repetitions, int series) {
         super(userCode, realizationDate, expectedDuration, designation, repetitions, series);
+        setSpecialization(this.getClass().getSimpleName());
     }
 
     /**

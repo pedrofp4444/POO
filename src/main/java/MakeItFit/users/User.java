@@ -285,6 +285,15 @@ public abstract class User implements UserInterface {
     }
 
     /**
+     * Removes an activity from the user's list of activities.
+     *
+     * @param activity The activity to remove.
+     */
+    public void removeActivity(Activity activity) {
+        this.activities.remove(activity);
+    }
+
+    /**
      * Returns a string representation of the user.
      *
      * @return A string containing the details of the user.

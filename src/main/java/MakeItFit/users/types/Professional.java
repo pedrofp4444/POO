@@ -1,7 +1,10 @@
 package MakeItFit.users.types;
 
+import MakeItFit.activities.Activity;
 import MakeItFit.users.User;
 import MakeItFit.users.Gender;
+
+import java.util.*;
 
 /**
  * The Professional class defines a subclass of the User class representing a professional athlete.
@@ -13,13 +16,8 @@ public class Professional extends User {
     /**
      * The specialization options for a professional athlete.
      */
-    public enum Specialization {
-        Distance,
-        Repetitions,
-        DistanceRepetitions
-    }
+    private String specialization;
 
-    private Specialization specialization;
     private int frequency;
 
     /**
@@ -36,12 +34,11 @@ public class Professional extends User {
      * @param address      the address of the professional
      * @param phone        the phone number of the professional
      * @param email        the email of the professional
-     * @param specialization the specialization of the professional
      * @param frequency    the training frequency of the professional
      */
-    public Professional(String name, int age, Gender gender, float weight, int height, int bpm, int level, String address, String phone, String email, Specialization specialization, int frequency) {
+    public Professional(String name, int age, Gender gender, float weight, int height, int bpm, int level, String address, String phone, String email, int frequency) {
         super(name, age, gender, weight, height, bpm, level, address, phone, email);
-        this.specialization = specialization;
+        this.specialization = "No specialization";
         this.frequency = frequency;
     }
 
@@ -62,7 +59,7 @@ public class Professional extends User {
      *
      * @return the specialization of the professional
      */
-    public Specialization getSpecialization() {
+    public String getSpecialization() {
         return specialization;
     }
 
@@ -71,7 +68,7 @@ public class Professional extends User {
      *
      * @param specialization the new specialization to set
      */
-    public void setSpecialization(Specialization specialization) {
+    public void setSpecialization(String specialization) {
         this.specialization = specialization;
     }
 
@@ -91,6 +88,21 @@ public class Professional extends User {
      */
     public void setFrequency(int frequency) {
         this.frequency = frequency;
+    }
+
+    public void updateSpecialization() {
+        if(!this.getListActivities().isEmpty()) {
+            Map<String, Integer> activityCount = new HashMap<>();
+
+            for (Activity activity : this.getListActivities()) {
+                String activityType = activity.getClass().getSimpleName();
+                activityCount.put(activityType, activityCount.getOrDefault(activityType, 0) + 1);
+            }
+
+            String mostFrequentActivity = Collections.max(activityCount.entrySet(), Map.Entry.comparingByValue()).getKey();
+
+            this.setSpecialization(mostFrequentActivity);
+        }
     }
 
     /**

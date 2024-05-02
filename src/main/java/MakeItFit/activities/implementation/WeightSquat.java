@@ -27,6 +27,7 @@ public class WeightSquat extends RepetitionsWithWeights {
      */
     public WeightSquat(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, int repetitions, int series, double weight) {
         super(userCode, realizationDate, expectedDuration, designation, repetitions, series, weight);
+        setSpecialization(this.getClass().getSimpleName());
     }
 
     /**

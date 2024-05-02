@@ -37,6 +37,7 @@ public class Trail extends DistanceWithAltimetry implements HardInterface {
      */
     public Trail(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, double distance, double elevationGain, double elevationLoss, int trailType) {
         super(userCode, realizationDate, expectedDuration, designation, distance, elevationGain, elevationLoss);
+        setSpecialization(this.getClass().getSimpleName());
         this.trailType = trailType;
     }
 

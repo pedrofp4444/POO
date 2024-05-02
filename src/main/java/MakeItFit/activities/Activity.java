@@ -6,12 +6,12 @@ import java.util.UUID;
 
 public abstract class Activity implements ActivityInterface {
     private UUID userCode;
-
     private UUID code;
     private MakeItFitDate realizationDate;
     private int expectedDuration;
     private String designation;
 
+    private String specialization;
     private int duration;
     private int caloricWaste;
 
@@ -73,6 +73,10 @@ public abstract class Activity implements ActivityInterface {
 
     public void setCaloricWaste(int caloricWaste) {
         this.caloricWaste = caloricWaste;
+    }
+
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
     }
 
     public abstract int calculateCaloricWaste();

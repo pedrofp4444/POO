@@ -4,6 +4,8 @@ import MakeItFit.activities.implementation.Running;
 import MakeItFit.utils.MakeItFitDate;
 import org.junit.jupiter.api.Test;
 
+import java.util.UUID;
+
 /**
  * The tests for the Running class.
  *
@@ -18,7 +20,8 @@ public class RunningTest {
      */
     @Test
     public void testConstructors() {
-        Running run1 = new Running(0, 2, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
+        UUID UUID = java.util.UUID.randomUUID();
+        Running run1 = new Running(UUID, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
         assertNotNull(run1);
         assertEquals(14.5, run1.getSpeed());
         Running run3 = new Running(run1);
@@ -31,7 +34,8 @@ public class RunningTest {
      */
     @Test
     public void testGetSpeed() {
-        Running run1 = new Running(0, 2, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
+        UUID UUID = java.util.UUID.randomUUID();
+        Running run1 = new Running(UUID, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
         assertEquals(14.5, run1.getSpeed());
     }
 
@@ -40,7 +44,8 @@ public class RunningTest {
      */
     @Test
     public void testSetSpeed() {
-        Running run1 = new Running(0, 2, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
+        UUID UUID = java.util.UUID.randomUUID();
+        Running run1 = new Running(UUID, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
         run1.setSpeed(12.0);
         assertEquals(12.0, run1.getSpeed());
     }
@@ -50,7 +55,8 @@ public class RunningTest {
      */
     @Test
     public void testCalculateCaloricWaste() {
-        Running run1 = new Running(0, 2, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
+        UUID UUID = java.util.UUID.randomUUID();
+        Running run1 = new Running(UUID, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
         int expectedCaloricWaste = 33350;
         assertEquals(expectedCaloricWaste, run1.calculateCaloricWaste());
     }
@@ -60,8 +66,10 @@ public class RunningTest {
      */
     @Test
     public void testEquals() {
-        Running run1 = new Running(0, 2, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
-        Running run2 = new Running(0, 2, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
+        UUID UUID = java.util.UUID.randomUUID();
+        UUID UUID2 = java.util.UUID.randomUUID();
+        Running run1 = new Running(UUID, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
+        Running run2 = new Running(UUID2, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
         assertFalse(run1.equals(null));
         assertTrue(run1.equals(run2));
     }

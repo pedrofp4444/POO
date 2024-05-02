@@ -27,6 +27,7 @@ public class Running extends Distance {
      */
     public Running(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, double distance, double speed) {
         super(userCode, realizationDate, expectedDuration, designation, distance);
+        setSpecialization(this.getClass().getSimpleName());
         this.averageSpeed = speed;
     }
 
