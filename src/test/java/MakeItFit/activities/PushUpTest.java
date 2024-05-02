@@ -47,12 +47,14 @@ public class PushUpTest {
         UUID UUID = java.util.UUID.randomUUID();
         PushUp pushUp1 = new PushUp(UUID, MakeItFitDate.of(2024, 4, 4), 30, "Daily try", 10, 10);
         int expectedWaste1 = 50;
-        assertEquals(expectedWaste1, pushUp1.calculateCaloricWaste(), "Caloric waste should match the expected value.");
+        pushUp1.calculateCaloricWaste(MakeItFitDate.of(2024, 5, 5));
+        assertEquals(expectedWaste1, pushUp1.getCaloricWaste(), "Caloric waste should match the expected value.");
 
         UUID UUID2 = java.util.UUID.randomUUID();
         PushUp pushUp2 = new PushUp(UUID2, MakeItFitDate.of(2024, 4, 4), 30, "Daily try", 5, 25);
         int expectedWaste2 = 62;
-        assertEquals(expectedWaste2, pushUp2.calculateCaloricWaste(), "Caloric waste should match the expected value.");
+        pushUp2.calculateCaloricWaste(MakeItFitDate.of(2024, 5, 5));
+        assertEquals(expectedWaste2, pushUp2.getCaloricWaste(), "Caloric waste should match the expected value.");
     }
 
     /**

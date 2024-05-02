@@ -64,9 +64,11 @@ public class Running extends Distance {
      *
      * @return the estimated caloric waste as an integer value
      */
-    public int calculateCaloricWaste() {
-        // Current formula for caloric waste calculation
-        return (int) (getDistance() * averageSpeed);
+    public void calculateCaloricWaste(MakeItFitDate currentDate) {
+        if (currentDate.isAfter(this.getRealizationDate())) {
+            int caloricWaste = (int) (averageSpeed * getDistance() * 0.5);
+            setCaloricWaste(caloricWaste);
+        }
     }
 
     /**

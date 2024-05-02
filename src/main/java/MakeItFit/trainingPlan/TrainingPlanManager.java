@@ -104,4 +104,15 @@ public class TrainingPlanManager {
     public List<TrainingPlan> getAllTrainingPlans(){
         return new ArrayList<>(this.trainingPlans.values());
     }
+
+    /**
+     * Updates the system.
+     *
+     * @param currentDate the current date
+     */
+    public void updateSystem(MakeItFitDate currentDate){
+        for(TrainingPlan trainingPlan : this.trainingPlans.values()){
+            trainingPlan.updateActivities(currentDate);
+        }
+    }
 }

@@ -290,4 +290,17 @@ public class MakeItFit {
     public List<TrainingPlan> getAllTrainingPlans() {
         return this.trainingPlanManager.getAllTrainingPlans();
     }
+
+
+    // TODO: SEPARATION BETWEEN USER AND TRAINING PLAN
+
+    /**
+     * Updates the system current date.
+     *
+     * @param currentDate The current date of the system.
+     */
+    public void updateSystem(MakeItFitDate currentDate){
+        this.userManager.updateSystem(currentDate);
+        this.trainingPlanManager.updateSystem(currentDate);
+    }
 }

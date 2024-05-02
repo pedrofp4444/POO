@@ -111,6 +111,11 @@ public class TrainingPlan {
         }
     }
 
+    /**
+     * Returns a string representation of the training plan.
+     *
+     * @return a string representation of the training plan
+     */
     public boolean equals(Object o) {
         if (o == this) {
             return true;
@@ -120,6 +125,17 @@ public class TrainingPlan {
         }
         TrainingPlan trainingPlan = (TrainingPlan) o;
         return this.userCode.equals(trainingPlan.getUserCode()) && this.code.equals(trainingPlan.getCode()) && this.startDate.equals(trainingPlan.getStartDate()) && this.activities.equals(trainingPlan.getActivities());
+    }
+
+    /**
+     * Updates the activities of the training plan.
+     *
+     * @param currentDate the current date
+     */
+    public void updateActivities(MakeItFitDate currentDate) {
+        for (MyTuple<Integer, Activity> tuple : this.activities) {
+            tuple.getItem2().updateActivity(currentDate);
+        }
     }
 }
 

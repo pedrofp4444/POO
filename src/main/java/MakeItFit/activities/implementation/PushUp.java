@@ -42,8 +42,11 @@ public class PushUp extends Repetitions {
      *
      * @return The total caloric waste calculated based on the number of repetitions and series.
      */
-    public int calculateCaloricWaste() {
-        return (int) (getRepetitions() * getSeries() * 0.5);
+    public void calculateCaloricWaste(MakeItFitDate currentDate) {
+        if (currentDate.isAfter(this.getRealizationDate())) {
+            int caloricWaste = (int) (getRepetitions() * getSeries() * 2);
+            setCaloricWaste(caloricWaste);
+        }
     }
 
     /**

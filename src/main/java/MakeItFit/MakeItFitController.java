@@ -3,6 +3,7 @@ package MakeItFit;
 import MakeItFit.activities.Activity;
 import MakeItFit.exceptions.ExistingEntityConflictException;
 import MakeItFit.exceptions.InvalidTypeException;
+import MakeItFit.time.TimeManager;
 import MakeItFit.users.Gender;
 import MakeItFit.utils.MakeItFitDate;
 
@@ -13,11 +14,13 @@ public class MakeItFitController {
     private MakeItFit makeItFit;
     private String email;
     private String name;
+    private TimeManager timeManager;
 
     public MakeItFitController() {
         this.makeItFit = new MakeItFit();
         this.email = "NO EMAIL";
         this.name = "NO NAME";
+        this.timeManager = new TimeManager();
     }
 
     /**
@@ -190,6 +193,16 @@ public class MakeItFitController {
      */
     public List<Activity> getActivities() {
         return this.makeItFit.getActivitiesFromUser(this.email);
+    }
+
+    /**
+     * Updates the system current date.
+     *
+     * @param days The number of days to advance the system date.
+     */
+    public void updateSystemDate(int days) throws IllegalArgumentException {
+        this.timeManager.advanceTime(days);
+        this.makeItFit.updateSystem(this.timeManager.getCurrentDate());
     }
 
     /**

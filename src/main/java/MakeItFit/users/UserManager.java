@@ -4,6 +4,8 @@ import MakeItFit.activities.Activity;
 import MakeItFit.exceptions.ExistingEntityConflictException;
 import MakeItFit.exceptions.EntityDoesNotExistException;
 import MakeItFit.users.types.Amateur;
+import MakeItFit.users.types.Professional;
+import MakeItFit.utils.MakeItFitDate;
 
 import java.util.*;
 
@@ -198,5 +200,19 @@ public class UserManager {
      */
     public void addActivityToUser(String email, Activity activity) {
         usersByEmail.get(email).addActivity(activity);
+    }
+
+    /**
+     * Updates the system.
+     *
+     * @param currentDate the current date
+     */
+    public void updateSystem(MakeItFitDate currentDate) {
+        for (User user : usersByCode.values()) {
+            user.updateActivities(currentDate);
+            if(user instanceof Professional) {
+                ((Professional) user).updateSpecialization();
+            }
+        }
     }
 }

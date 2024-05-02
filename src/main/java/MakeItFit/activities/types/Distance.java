@@ -8,26 +8,60 @@ import java.util.UUID;
 public abstract class Distance extends Activity {
     private double distance;
 
+    /**
+     * Constructs a new Distance instance with the specified parameters.
+     *
+     * @param userCode the user code
+     * @param realizationDate the realization date of the activity
+     * @param expectedDuration the expected duration of the activity
+     * @param designation the designation of the activity
+     * @param distance the distance covered during the activity
+     */
     public Distance(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, double distance) {
         super(userCode, realizationDate, expectedDuration, designation);
         this.distance = distance;
     }
 
+    /**
+     * Constructs a new Distance instance as a copy of another Distance instance.
+     *
+     * @param d the Distance instance to copy
+     */
     public Distance(Distance d){
         super(d);
         this.distance = d.getDistance();
     }
 
+    /**
+     * Gets the distance covered during the activity.
+     *
+     * @return the distance covered
+     */
     public double getDistance() {
         return distance;
     }
 
+    /**
+     * Sets the distance covered during the activity.
+     *
+     * @param distance the distance covered
+     */
     public void setDistance(double distance) {
         this.distance = distance;
     }
 
-    public abstract int calculateCaloricWaste();
+    /**
+     * Calculates the caloric waste of the activity.
+     *
+     * @param currentDate the current date
+     */
+    public abstract void calculateCaloricWaste(MakeItFitDate currentDate);
 
+    /**
+     * Returns a string representation of the Distance instance.
+     *
+     * @return the string representation of the Distance instance
+     */
     public boolean equals(Object o){
         if (o == this) return true;
         if (!(o instanceof Distance)) return false;
@@ -35,8 +69,18 @@ public abstract class Distance extends Activity {
         return (super.equals(d) && this.distance == d.distance);
     }
 
+    /**
+     * Clones the Distance instance.
+     *
+     * @return the cloned Distance instance
+     */
     public abstract Distance clone();
 
+    /**
+     * Returns a string representation of the Distance instance.
+     *
+     * @return the string representation of the Distance instance
+     */
     @Override
     public String toString(){
         return super.toString() + "Distance: " + this.distance + ", ";

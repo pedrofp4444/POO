@@ -42,10 +42,13 @@ public class WeightSquat extends RepetitionsWithWeights {
     /**
      * Calculates the caloric waste for the WeightSquat activity based on the repetitions, series, and weight.
      *
-     * @return The calculated caloric waste as an integer.
+     * @param currentDate The date the activity was performed.
      */
-    public int calculateCaloricWaste() {
-        return (int) (getRepetitions() * getSeries() * getWeight() * 0.5);
+    public void calculateCaloricWaste(MakeItFitDate currentDate) {
+        if(currentDate.isAfter(this.getRealizationDate())) {
+            int caloricWaste = (int) (getRepetitions() * getSeries() * getWeight() * 0.5);
+            setCaloricWaste(caloricWaste);
+        }
     }
 
     /**

@@ -37,7 +37,8 @@ public class WeightSquatTest {
     public void testCalculateCaloricWaste() {
         UUID UUID = java.util.UUID.randomUUID();
         WeightSquat squat1 = new WeightSquat(UUID, MakeItFitDate.of(2024, 4, 4), 30, "Weekly try", 20, 3, 50);
-        assertEquals(1500, squat1.calculateCaloricWaste(), "Calculated caloric waste should match the expected value.");
+        squat1.calculateCaloricWaste(MakeItFitDate.of(2024, 5, 5));
+        assertEquals(1500, squat1.getCaloricWaste(), "Calculated caloric waste should match the expected value.");
     }
 
     /**

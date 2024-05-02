@@ -11,7 +11,14 @@ import java.time.LocalDate;
 public class MakeItFitDate implements Comparable<MakeItFitDate>{
 
     private final LocalDate date;
-    
+
+    /**
+     * Default constructor of the class MakeItFitDate.
+     */
+    public MakeItFitDate () {
+        this.date = LocalDate.now();
+    }
+
     /**
      * Parameterized constructor of the class MakeItFitDate.
      */

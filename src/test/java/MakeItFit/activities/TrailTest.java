@@ -57,7 +57,8 @@ public class TrailTest {
     public void testCalculateCaloricWaste() {
         UUID UUID = java.util.UUID.randomUUID();
         Trail trail1 = new Trail(UUID, MakeItFitDate.of(2024, 4, 4), 40, "Serra da Estrela", 900.6, 700.8, 200.3, Trail.TRAIL_TYPE_MEDIUM);
-        assertEquals(trail1.calculateCaloricWaste(), 141587530, "Caloric waste should match the expected value");
+        trail1.calculateCaloricWaste(MakeItFitDate.of(2024, 5, 5));
+        assertEquals(trail1.getCaloricWaste(), 500, "Caloric waste should match the expected value");
     }
 
     /**

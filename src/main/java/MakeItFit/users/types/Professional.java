@@ -90,6 +90,10 @@ public class Professional extends User {
         this.frequency = frequency;
     }
 
+    /**
+     * Updates the specialization of the professional based on the most frequent activity.
+     * If the professional has no activities, the specialization is set to "No specialization".
+     */
     public void updateSpecialization() {
         if(!this.getListActivities().isEmpty()) {
             Map<String, Integer> activityCount = new HashMap<>();
@@ -115,6 +119,11 @@ public class Professional extends User {
         return new Professional(this);
     }
 
+    /**
+     * Returns a string representation of the professional.
+     *
+     * @return a string representation including the specialization and training frequency
+     */
     public String toString() {
         return super.toString() + "Specialization: " + specialization + "\n" + "Frequency: " + frequency + "\n";
     }

@@ -110,6 +110,7 @@ public class UserView {
         appMenuItems.add(new MenuItem("Add activity", () -> addActivity()));
         appMenuItems.add(new MenuItem("List activities", () -> listActivities()));
         appMenuItems.add(new MenuItem("Create training plan", () -> createTrainingPlan()));
+        appMenuItems.add(new MenuItem("Advance time", () -> advanceTimeManager()));
 
         return new Menu(appMenuItems);
     }
@@ -462,6 +463,23 @@ public class UserView {
 
         try {
             System.out.println("[" + this.makeItFitController.getName() + "] Training plan generated successfully.");
+        } catch (Exception e) {
+            System.out.println("[" + this.makeItFitController.getName() + "] Invalid input.");
+        }
+    }
+
+    public void advanceTimeManager() {
+        System.out.println("[" + this.makeItFitController.getName() + "] Advancing time ...");
+
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            System.out.print("[" + this.makeItFitController.getName() + "] Please enter the number of days to advance: ");
+            int days = scanner.nextInt();
+            scanner.nextLine(); // Consume the remaining newline
+
+            this.makeItFitController.updateSystemDate(days);
+            System.out.println("[" + this.makeItFitController.getName() + "] Time advanced successfully.");
         } catch (Exception e) {
             System.out.println("[" + this.makeItFitController.getName() + "] Invalid input.");
         }

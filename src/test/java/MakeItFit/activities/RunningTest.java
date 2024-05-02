@@ -57,8 +57,9 @@ public class RunningTest {
     public void testCalculateCaloricWaste() {
         UUID UUID = java.util.UUID.randomUUID();
         Running run1 = new Running(UUID, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
-        int expectedCaloricWaste = 33350;
-        assertEquals(expectedCaloricWaste, run1.calculateCaloricWaste());
+        int expectedCaloricWaste = 16675;
+        run1.calculateCaloricWaste(MakeItFitDate.of(2024, 5, 5));
+        assertEquals(expectedCaloricWaste, run1.getCaloricWaste());
     }
 
     /**

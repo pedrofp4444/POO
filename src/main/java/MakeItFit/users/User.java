@@ -1,7 +1,6 @@
 package MakeItFit.users;
 
 import MakeItFit.activities.Activity;
-import MakeItFit.activities.implementation.PushUp;
 import MakeItFit.utils.MakeItFitDate;
 
 import java.util.*;
@@ -338,4 +337,15 @@ public abstract class User implements UserInterface {
      * @return A clone of the user.
      */
     public abstract User clone();
+
+    /**
+     * Updates the activities of the user based on the current date.
+     *
+     * @param currentDate The current date.
+     */
+    public void updateActivities(MakeItFitDate currentDate){
+        for(Activity activity : this.activities){
+            activity.updateActivity(currentDate);
+        }
+    }
 }

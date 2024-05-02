@@ -1,10 +1,12 @@
 package MakeItFit.activities;
 
+import MakeItFit.utils.MakeItFitDate;
+
 import java.util.UUID;
 
 public interface ActivityInterface {
 
-    int calculateCaloricWaste();
+    void calculateCaloricWaste(MakeItFitDate currentDate);
 
     UUID getUserCode();
 
