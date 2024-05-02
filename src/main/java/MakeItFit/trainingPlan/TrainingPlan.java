@@ -14,19 +14,18 @@ import java.util.*;
 public class TrainingPlan {
     private final UUID userCode;
     private final UUID code;
-    private final List<MyTuple<Integer, Activity>> activities; /* Tuple<Repetitions, Activity> */
-    private final MakeItFitDate startDate;
+    private List<MyTuple<Integer, Activity>> activities; /* Tuple<Repetitions, Activity> */
+    private MakeItFitDate startDate;
 
     /**
      * Constructs a new TrainingPlan instance with the specified parameters.
      *
      * @param userCode the user code
-     * @param code the training plan code
      * @param startDate the start date of the training plan
      */
-    public TrainingPlan(UUID userCode, UUID code, MakeItFitDate startDate) {
+    public TrainingPlan(UUID userCode, MakeItFitDate startDate) {
         this.userCode = userCode;
-        this.code = code;
+        this.code = UUID.randomUUID();
         this.startDate = startDate;
         this.activities = new ArrayList<MyTuple<Integer, Activity>>();
     }
@@ -80,6 +79,15 @@ public class TrainingPlan {
     }
 
     /**
+     * Sets the start date of the training plan.
+     *
+     * @param startDate the new start date
+     */
+    public void setStartDate(MakeItFitDate startDate) {
+        this.startDate = startDate;
+    }
+
+    /**
      * Adds an activity to the training plan.
      *
      * @param repetitions the number of repetitions
@@ -102,7 +110,6 @@ public class TrainingPlan {
             }
         }
     }
-
 
     public boolean equals(Object o) {
         if (o == this) {

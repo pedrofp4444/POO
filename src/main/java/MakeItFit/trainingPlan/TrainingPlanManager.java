@@ -23,18 +23,17 @@ public class TrainingPlanManager {
      * Creates a new training plan.
      *
      * @param userCode the code of the user
-     * @param code the code of the training plan
      * @param startDate the date that the training plan starts
      * @return the planing train created
      * @throws IllegalArgumentException if any argument is null
      */
-    public TrainingPlan createTrainingPlan(UUID userCode, UUID code, MakeItFitDate startDate) throws IllegalArgumentException {
+    public TrainingPlan createTrainingPlan(UUID userCode, MakeItFitDate startDate) throws IllegalArgumentException {
 
-        if (userCode == null || startDate == null || code == null) {
+        if (userCode == null || startDate == null) {
             throw new IllegalArgumentException("Invalid input: userCode, code, startDate.");
         }
 
-        TrainingPlan trainingPlan = new TrainingPlan(userCode, code, startDate);
+        TrainingPlan trainingPlan = new TrainingPlan(userCode, startDate);
         return trainingPlan;
     }
 

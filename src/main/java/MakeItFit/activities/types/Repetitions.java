@@ -3,12 +3,14 @@ package MakeItFit.activities.types;
 import MakeItFit.activities.Activity;
 import MakeItFit.utils.MakeItFitDate;
 
+import java.util.UUID;
+
 public abstract class Repetitions extends Activity {
     private int repetitions;
     private int series;
 
-    public Repetitions(int userCode, int code, MakeItFitDate realizationDate, int expectedDuration, String designation, int repetitions, int series) {
-        super(userCode, code, realizationDate, expectedDuration, designation);
+    public Repetitions(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, int repetitions, int series) {
+        super(userCode, realizationDate, expectedDuration, designation);
         this.repetitions = repetitions;
         this.series = series;
     }
@@ -45,4 +47,9 @@ public abstract class Repetitions extends Activity {
     }
 
     public abstract Repetitions clone();
+
+    @Override
+    public String toString(){
+        return super.toString() + "Repetitions: " + this.repetitions + ", " + "Series: " + this.series + "\n";
+    }
 }

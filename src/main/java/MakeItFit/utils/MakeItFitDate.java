@@ -86,7 +86,7 @@ public class MakeItFitDate implements Comparable<MakeItFitDate>{
 
     @Override
     public String toString(){
-        return String.format("%02d/%02d/%04d", this.getDayOfMonth(), this.getDayOfMonth(), this.getYear());
+        return String.format("%02d/%02d/%04d", this.getDayOfMonth(), this.getMonth(), this.getYear());
     }
 
     @Override

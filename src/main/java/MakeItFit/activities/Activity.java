@@ -2,10 +2,12 @@ package MakeItFit.activities;
 
 import MakeItFit.utils.MakeItFitDate;
 
-public abstract class Activity implements ActivityInterface {
-    private int userCode;
+import java.util.UUID;
 
-    private int code;
+public abstract class Activity implements ActivityInterface {
+    private UUID userCode;
+
+    private UUID code;
     private MakeItFitDate realizationDate;
     private int expectedDuration;
     private String designation;
@@ -13,9 +15,9 @@ public abstract class Activity implements ActivityInterface {
     private int duration;
     private int caloricWaste;
 
-    public Activity(int userCode, int code, MakeItFitDate realizationDate, int expectedDuration, String designation) {
+    public Activity(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation) {
         this.userCode = userCode;
-        this.code = code;
+        this.code = UUID.randomUUID();
         this.realizationDate = realizationDate;
         this.expectedDuration = expectedDuration;
         this.designation = designation;
@@ -33,9 +35,9 @@ public abstract class Activity implements ActivityInterface {
         this.caloricWaste = a.getCaloricWaste();
     }
 
-    public int getUserCode(){ return this.userCode; }
+    public UUID getUserCode(){ return this.userCode; }
 
-    public int getCode(){ return this.code;}
+    public UUID getCode(){ return this.code;}
 
     public MakeItFitDate getRealizationDate(){
         return this.realizationDate;
@@ -56,10 +58,6 @@ public abstract class Activity implements ActivityInterface {
     public int getCaloricWaste() {
         return this.caloricWaste;
     }
-
-    public void setUserCode(int userCode){ this.userCode = userCode; }
-
-    public void setCode(int code){ this.code = code; }
 
     public void setExpectedDuration(int expectedDuration) {
         this.expectedDuration = expectedDuration;
@@ -87,4 +85,15 @@ public abstract class Activity implements ActivityInterface {
     }
 
     public abstract Activity clone();
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Activity: ").append(this.designation).append(", ");
+        sb.append("Expected Duration: ").append(this.expectedDuration).append(", ");
+        sb.append("Realization Date: ").append(this.realizationDate).append(", ");
+        sb.append("Duration: ").append(this.duration).append(", ");
+        sb.append("Caloric Waste: ").append(this.caloricWaste).append(", ");
+        return sb.toString();
+    }
 }

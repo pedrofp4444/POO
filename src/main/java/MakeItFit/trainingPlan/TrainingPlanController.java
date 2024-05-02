@@ -28,12 +28,11 @@ public class TrainingPlanController {
      * Creates a new training plan based on the provided specifications.
      *
      * @param userCode  The code of the user for whom the training plan will be created.
-     * @param code      The code of the new training plan.
      * @param startDate The start date of the new training plan.
      * @throws IllegalArgumentException If the provided arguments are not valid.
      */
-    public void createTrainingPlan(UUID userCode, UUID code, MakeItFitDate startDate) throws IllegalArgumentException {
-        TrainingPlan trainingPlan = this.trainingPlanManager.createTrainingPlan(userCode, code, startDate);
+    public void createTrainingPlan(UUID userCode, MakeItFitDate startDate) throws IllegalArgumentException {
+        TrainingPlan trainingPlan = this.trainingPlanManager.createTrainingPlan(userCode, startDate);
         this.trainingPlanManager.insertTrainingPlan(trainingPlan);
     }
 

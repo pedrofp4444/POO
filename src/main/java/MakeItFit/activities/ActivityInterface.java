@@ -1,22 +1,20 @@
 package MakeItFit.activities;
 
+import java.util.UUID;
+
 public interface ActivityInterface {
 
     int calculateCaloricWaste();
 
-    int getUserCode();
+    UUID getUserCode();
 
-    int getCode();
+    UUID getCode();
 
     int getExpectedDuration();
 
     int getDuration();
 
     String getDesignation();
-
-    void setUserCode(int userCode);
-
-    void setCode(int code);
 
     void setDuration(int duration);
 

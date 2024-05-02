@@ -3,6 +3,8 @@ package MakeItFit.activities.implementation;
 import MakeItFit.activities.types.RepetitionsWithWeights;
 import MakeItFit.utils.MakeItFitDate;
 
+import java.util.UUID;
+
 /**
  * The WeightSquat class represents an activity of performing squats with weights as part of a fitness routine.
  * It extends the RepetitionsWithWeights class to include specific functionality related to squats with weights.
@@ -16,7 +18,6 @@ public class WeightSquat extends RepetitionsWithWeights {
      * Constructs a new WeightSquat activity with the given parameters.
      *
      * @param userCode        The user code associated with the activity.
-     * @param code            The activity code.
      * @param realizationDate The date the activity was performed.
      * @param expectedDuration The expected duration of the activity in minutes.
      * @param designation     The designation or name of the activity.
@@ -24,8 +25,8 @@ public class WeightSquat extends RepetitionsWithWeights {
      * @param series          The number of series performed.
      * @param weight          The weight used during the squats.
      */
-    public WeightSquat(int userCode, int code, MakeItFitDate realizationDate, int expectedDuration, String designation, int repetitions, int series, double weight) {
-        super(userCode, code, realizationDate, expectedDuration, designation, repetitions, series, weight);
+    public WeightSquat(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, int repetitions, int series, double weight) {
+        super(userCode, realizationDate, expectedDuration, designation, repetitions, series, weight);
     }
 
     /**

@@ -72,4 +72,8 @@ public class Occasional extends User {
     public Occasional clone() {
         return new Occasional(this);
     }
+
+    public String toString() {
+        return super.toString() + "Frequency: " + frequency + "\n";
+    }
 }

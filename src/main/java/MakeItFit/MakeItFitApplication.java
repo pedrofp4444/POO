@@ -1,8 +1,8 @@
 package MakeItFit;
 
-import MakeItFit.users.*;
-import MakeItFit.views.AdminView;
 import MakeItFit.menu.*;
+import MakeItFit.views.UserView;
+
 import java.util.*;
 
 /**
@@ -12,7 +12,7 @@ import java.util.*;
  * @version (a version number or a date)
  */
 public class MakeItFitApplication {
-    private AdminView adminView;
+    private UserView userView;
     private Menu mainMenu;
 
     /**
@@ -21,10 +21,8 @@ public class MakeItFitApplication {
      * Also creates the main menu of the application.
      */
     public void init() {
-        UserManager userManager = new UserManager();
-        UserController userController = new UserController(userManager);
-        this.adminView = new AdminView(userController);
-        this.mainMenu = createMainMenu(this.adminView);
+        this.userView = new UserView();
+        this.mainMenu = createMainMenu();
     }
 
     /**
@@ -38,12 +36,11 @@ public class MakeItFitApplication {
     /**
      * Creates the main menu of the application.
      *
-     * @param adminView The admin view to be used for managing user interactions.
      * @return The created main menu.
      */
-    private static Menu createMainMenu(AdminView adminView) {
+    private Menu createMainMenu() {
         List<MenuItem> mainMenuItems = new ArrayList<>();
-        mainMenuItems.add(new MenuItem("Init the application", () -> initApplication(adminView)));
+        mainMenuItems.add(new MenuItem("Init the application", () -> initApplication()));
         mainMenuItems.add(new MenuItem("Help", () -> showHelpMessage()));
         mainMenuItems.add(new MenuItem("Authors", () -> showAuthors()));
 
@@ -52,58 +49,10 @@ public class MakeItFitApplication {
 
     /**
      * Initializes the application and starts the app menu.
-     *
-     * @param adminView The admin view to be used for managing user interactions.
      */
-    private static void initApplication(AdminView adminView) {
+    private void initApplication() {
         System.out.println("[APP] Application is running ...");
-        Menu appMenu = createAppMenu(adminView);
-        appMenu.run();
-    }
-
-    /**
-     * Creates the app menu of the application.
-     *
-     * @param adminView The admin view to be used for managing user interactions.
-     * @return The created app menu.
-     */
-    private static Menu createAppMenu(AdminView adminView) {
-        List<MenuItem> appMenuItems = new ArrayList<>();
-
-        appMenuItems.add(new MenuItem("Create User", adminView::createUser));
-
-        Menu updateUserMenu = createUpdateUserMenu(adminView);
-        appMenuItems.add(new MenuItem("Update User", updateUserMenu::run));
-
-        appMenuItems.add(new MenuItem("Remove User", adminView::removeUser));
-        appMenuItems.add(new MenuItem("User Details", adminView::getUserDetails));
-        appMenuItems.add(new MenuItem("Populate Users", adminView::feedUsers));
-        appMenuItems.add(new MenuItem("List all users", adminView::printAllUsersDetails));
-
-        return new Menu(appMenuItems);
-    }
-
-    /**
-     * Creates the update user menu of the application.
-     *
-     * @param adminView The admin view to be used for managing user interactions.
-     * @return The created update user menu.
-     */
-    private static Menu createUpdateUserMenu(AdminView adminView) {
-        List<MenuItem> updateUserMenuItems = new ArrayList<>();
-
-        updateUserMenuItems.add(new MenuItem("Update Name", adminView::updateUserName));
-        updateUserMenuItems.add(new MenuItem("Update Age", adminView::updateUserAge));
-        updateUserMenuItems.add(new MenuItem("Update Gender", adminView::updateUserGender));
-        updateUserMenuItems.add(new MenuItem("Update Weight", adminView::updateUserWeight));
-        updateUserMenuItems.add(new MenuItem("Update Height", adminView::updateUserHeight));
-        updateUserMenuItems.add(new MenuItem("Update BPM", adminView::updateUserBpm));
-        updateUserMenuItems.add(new MenuItem("Update Level", adminView::updateUserLevel));
-        updateUserMenuItems.add(new MenuItem("Update Address", adminView::updateUserAddress));
-        updateUserMenuItems.add(new MenuItem("Update Phone", adminView::updateUserPhone));
-        updateUserMenuItems.add(new MenuItem("Update Email", adminView::updateUserEmail));
-
-        return new Menu(updateUserMenuItems);
+        this.userView.login();
     }
 
     /**

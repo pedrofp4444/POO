@@ -26,7 +26,7 @@ public class TrainingPlanManagerTest {
         MakeItFitDate startDate = MakeItFitDate.of(2024, 4, 4);
 
         TrainingPlanManager manager = new TrainingPlanManager();
-        TrainingPlan trainingPlan = manager.createTrainingPlan(userCode, code, startDate);
+        TrainingPlan trainingPlan = manager.createTrainingPlan(userCode, startDate);
 
         assertNotNull(trainingPlan);
         assertEquals(userCode, trainingPlan.getUserCode());
@@ -37,15 +37,15 @@ public class TrainingPlanManagerTest {
     public void testCreateTrainingPlanWithNullInputs() {
         TrainingPlanManager manager = new TrainingPlanManager();
         assertThrows(IllegalArgumentException.class, () -> {
-            manager.createTrainingPlan(null, UUID.randomUUID(), MakeItFitDate.of(2024, 4, 4));
+            manager.createTrainingPlan(null, MakeItFitDate.of(2024, 4, 4));
         });
 
         assertThrows(IllegalArgumentException.class, () -> {
-            manager.createTrainingPlan(UUID.randomUUID(), null, MakeItFitDate.of(2024, 4, 4));
+            manager.createTrainingPlan(UUID.randomUUID(), MakeItFitDate.of(2024, 4, 4));
         });
 
         assertThrows(IllegalArgumentException.class, () -> {
-            manager.createTrainingPlan(UUID.randomUUID(), UUID.randomUUID(), null);
+            manager.createTrainingPlan(UUID.randomUUID(), null);
         });
     }
 
@@ -55,7 +55,7 @@ public class TrainingPlanManagerTest {
     @Test
     public void testInsertTrainingPlanAndGetTrainingPlan() {
         UUID code = UUID.randomUUID();
-        TrainingPlan trainingPlan = new TrainingPlan(UUID.randomUUID(), code, MakeItFitDate.of(2024, 4, 4));
+        TrainingPlan trainingPlan = new TrainingPlan(UUID.randomUUID(), MakeItFitDate.of(2024, 4, 4));
 
         TrainingPlanManager manager = new TrainingPlanManager();
         manager.insertTrainingPlan(trainingPlan);
@@ -83,7 +83,7 @@ public class TrainingPlanManagerTest {
     @Test
     public void testRemoveTrainingPlan() {
         UUID code = UUID.randomUUID();
-        TrainingPlan trainingPlan = new TrainingPlan(UUID.randomUUID(), code, MakeItFitDate.of(2024, 4, 4));
+        TrainingPlan trainingPlan = new TrainingPlan(UUID.randomUUID(), MakeItFitDate.of(2024, 4, 4));
 
         TrainingPlanManager manager = new TrainingPlanManager();
         manager.insertTrainingPlan(trainingPlan);
@@ -101,12 +101,12 @@ public class TrainingPlanManagerTest {
     @Test
     public void testUpdateTrainingPlan() {
         UUID code = UUID.randomUUID();
-        TrainingPlan trainingPlan = new TrainingPlan(UUID.randomUUID(), code, MakeItFitDate.of(2024, 4, 4));
+        TrainingPlan trainingPlan = new TrainingPlan(UUID.randomUUID(), MakeItFitDate.of(2024, 4, 4));
 
         TrainingPlanManager manager = new TrainingPlanManager();
         manager.insertTrainingPlan(trainingPlan);
 
-        TrainingPlan updatedTrainingPlan = new TrainingPlan(UUID.randomUUID(), code, MakeItFitDate.of(2024, 4, 4));
+        TrainingPlan updatedTrainingPlan = new TrainingPlan(UUID.randomUUID(), MakeItFitDate.of(2024, 4, 4));
         manager.updateTrainingPlan(updatedTrainingPlan);
 
         TrainingPlan retrievedPlan = manager.getTrainingPlan(code);
@@ -122,8 +122,8 @@ public class TrainingPlanManagerTest {
     public void testGetAllTrainingPlans() {
         UUID code1 = UUID.randomUUID();
         UUID code2 = UUID.randomUUID();
-        TrainingPlan trainingPlan1 = new TrainingPlan(UUID.randomUUID(), code1, MakeItFitDate.of(2024, 4, 4));
-        TrainingPlan trainingPlan2 = new TrainingPlan(UUID.randomUUID(), code2, MakeItFitDate.of(2024, 4, 4));
+        TrainingPlan trainingPlan1 = new TrainingPlan(UUID.randomUUID(), MakeItFitDate.of(2024, 4, 4));
+        TrainingPlan trainingPlan2 = new TrainingPlan(UUID.randomUUID(), MakeItFitDate.of(2024, 4, 4));
 
         TrainingPlanManager manager = new TrainingPlanManager();
         manager.insertTrainingPlan(trainingPlan1);

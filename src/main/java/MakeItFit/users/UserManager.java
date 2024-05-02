@@ -1,5 +1,6 @@
 package MakeItFit.users;
 
+import MakeItFit.activities.Activity;
 import MakeItFit.exceptions.ExistingEntityConflictException;
 import MakeItFit.exceptions.EntityDoesNotExistException;
 import MakeItFit.users.types.Amateur;
@@ -126,7 +127,7 @@ public class UserManager {
             throw new EntityDoesNotExistException("User with code " + code + " does not exist.");
         }
 
-        return user.clone();
+        return user;
     }
 
     /**
@@ -144,7 +145,7 @@ public class UserManager {
             throw new EntityDoesNotExistException("User with email " + email + " does not exist.");
         }
 
-        return user.clone();
+        return user;
     }
 
     /**
@@ -177,5 +178,25 @@ public class UserManager {
      */
     public List<User> getAllUsers() {
         return new ArrayList<>(this.usersByCode.values());
+    }
+
+    /**
+     * Retrieves a list of all activities from a user.
+     *
+     * @param email the user's email address
+     * @return a list of all activities from the user
+     */
+    public List<Activity> getActivitiesFromUser(String email) {
+        return this.usersByEmail.get(email).getListActivities();
+    }
+
+    /**
+     * Adds an activity to a user.
+     *
+     * @param email the user's email
+     * @param activity the activity to be added
+     */
+    public void addActivityToUser(String email, Activity activity) {
+        usersByEmail.get(email).addActivity(activity);
     }
 }

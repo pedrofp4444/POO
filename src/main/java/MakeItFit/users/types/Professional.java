@@ -102,4 +102,8 @@ public class Professional extends User {
     public Professional clone() {
         return new Professional(this);
     }
+
+    public String toString() {
+        return super.toString() + "Specialization: " + specialization + "\n" + "Frequency: " + frequency + "\n";
+    }
 }

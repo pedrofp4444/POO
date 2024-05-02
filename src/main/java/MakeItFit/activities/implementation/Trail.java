@@ -4,6 +4,8 @@ import MakeItFit.activities.HardInterface;
 import MakeItFit.activities.types.DistanceWithAltimetry;
 import MakeItFit.utils.MakeItFitDate;
 
+import java.util.UUID;
+
 /**
  * The Trail class represents a trail activity that includes distance and altimetry information.
  * It extends the DistanceWithAltimetry class and includes a trail type (easy, medium, or hard).
@@ -25,7 +27,6 @@ public class Trail extends DistanceWithAltimetry implements HardInterface {
      * Constructs a new Trail instance with the specified parameters.
      *
      * @param userCode       The user code associated with the activity.
-     * @param code           The activity code.
      * @param realizationDate The date the activity was realized.
      * @param expectedDuration The expected duration of the activity.
      * @param designation     The name or description of the activity.
@@ -34,8 +35,8 @@ public class Trail extends DistanceWithAltimetry implements HardInterface {
      * @param elevationLoss   The total elevation loss during the activity.
      * @param trailType       The type of trail (easy, medium, or hard).
      */
-    public Trail(int userCode, int code, MakeItFitDate realizationDate, int expectedDuration, String designation, double distance, double elevationGain, double elevationLoss, int trailType) {
-        super(userCode, code, realizationDate, expectedDuration, designation, distance, elevationGain, elevationLoss);
+    public Trail(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, double distance, double elevationGain, double elevationLoss, int trailType) {
+        super(userCode, realizationDate, expectedDuration, designation, distance, elevationGain, elevationLoss);
         this.trailType = trailType;
     }
 

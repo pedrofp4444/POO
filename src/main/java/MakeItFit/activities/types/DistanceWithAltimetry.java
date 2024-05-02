@@ -2,12 +2,14 @@ package MakeItFit.activities.types;
 import MakeItFit.activities.Activity;
 import MakeItFit.utils.MakeItFitDate;
 
+import java.util.UUID;
+
 public abstract class DistanceWithAltimetry extends Distance {
     private double elevationGain;
     private double elevationLoss;
 
-    public DistanceWithAltimetry(int userCode, int code, MakeItFitDate realizationDate, int expectedDuration, String designation, double distance, double elevationGain, double elevationLoss) {
-        super(userCode, code, realizationDate, expectedDuration, designation, distance);
+    public DistanceWithAltimetry(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, double distance, double elevationGain, double elevationLoss) {
+        super(userCode, realizationDate, expectedDuration, designation, distance);
         this.elevationGain = elevationGain;
         this.elevationLoss = elevationLoss;
     }
@@ -44,4 +46,9 @@ public abstract class DistanceWithAltimetry extends Distance {
     }
 
     public abstract DistanceWithAltimetry clone();
+
+    @Override
+    public String toString(){
+        return super.toString() + "Elevation Gain: " + this.elevationGain + ", " + "Elevation Loss: " + this.elevationLoss + ", ";
+    }
 }

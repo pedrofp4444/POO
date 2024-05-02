@@ -3,6 +3,8 @@ package MakeItFit.activities.implementation;
 import MakeItFit.activities.types.Distance;
 import MakeItFit.utils.MakeItFitDate;
 
+import java.util.UUID;
+
 /**
  * The Running class represents a running activity in the application.
  * It extends the Distance class, providing additional properties and methods related to running activities.
@@ -17,15 +19,14 @@ public class Running extends Distance {
      * Constructs a new Running activity with the specified parameters.
      *
      * @param userCode          the code of the user who performed the activity
-     * @param code              the unique code of the activity
      * @param realizationDate   the date the activity was performed
      * @param expectedDuration  the expected duration of the activity in minutes
      * @param designation       a description of the activity
      * @param distance          the distance covered during the activity in meters
      * @param speed             the average speed during the activity in km/h
      */
-    public Running(int userCode, int code, MakeItFitDate realizationDate, int expectedDuration, String designation, double distance, double speed) {
-        super(userCode, code, realizationDate, expectedDuration, designation, distance);
+    public Running(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, double distance, double speed) {
+        super(userCode, realizationDate, expectedDuration, designation, distance);
         this.averageSpeed = speed;
     }
 

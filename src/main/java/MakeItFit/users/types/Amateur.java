@@ -47,4 +47,8 @@ public class Amateur extends User {
     public Amateur clone() {
         return new Amateur(this);
     }
+
+    public String toString() {
+        return super.toString();
+    }
 }

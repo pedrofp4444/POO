@@ -1,27 +1,23 @@
-package MakeItFit.users;
+package MakeItFit;
 
 import MakeItFit.activities.Activity;
 import MakeItFit.exceptions.*;
+import MakeItFit.trainingPlan.TrainingPlan;
+import MakeItFit.trainingPlan.TrainingPlanManager;
+import MakeItFit.users.*;
+import MakeItFit.utils.MakeItFitDate;
 
-import java.util.*;
+import java.util.List;
+import java.util.UUID;
 
-/**
- * The class UserController represents a controller of users.
- *
- * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
- * @version (a version number or a date)
- */
-public class UserController {
+public class MakeItFit {
 
     private final UserManager userManager;
+    private final TrainingPlanManager trainingPlanManager;
 
-    /**
-     * Constructs a new user controller with the provided user manager.
-     *
-     * @param userManager The user manager to be used by the controller.
-     */
-    public UserController(UserManager userManager) {
-        this.userManager = userManager;
+    public MakeItFit() {
+        this.userManager = new UserManager();
+        this.trainingPlanManager = new TrainingPlanManager();
     }
 
     /**
@@ -93,10 +89,11 @@ public class UserController {
     /**
      * Updates the user's name.
      *
-     * @param user The user to be updated.
      * @param name The new name for the user.
+     * @param email The user's email.
      */
-    public void updateUserName(User user, String name) {
+    public void updateUserName(String name, String email) {
+        User user = getUser(email);
         user.setName(name);
         this.userManager.updateUser(user);
     }
@@ -104,21 +101,23 @@ public class UserController {
     /**
      * Updates the user's age.
      *
-     * @param user The user to be updated.
      * @param age The new age for the user.
+     * @param email The user's email.
      */
-    public void updateUserAge(User user, int age) {
+    public void updateUserAge(int age, String email) {
+        User user = getUser(email);
         user.setAge(age);
         this.userManager.updateUser(user);
     }
 
     /**
      * Updates the user's gender.
-     *
-     * @param user The user to be updated.
+     * 
      * @param gender The new gender for the user.
+     * @param email The user's email.
      */
-    public void updateUserGender(User user, Gender gender) {
+    public void updateUserGender(Gender gender, String email) {
+        User user = getUser(email);
         user.setGender(gender);
         this.userManager.updateUser(user);
     }
@@ -126,10 +125,11 @@ public class UserController {
     /**
      * Updates the user's weight.
      *
-     * @param user The user to be updated.
      * @param weight The new weight for the user.
+     * @param email The user's email.
      */
-    public void updateUserWeight(User user, float weight) {
+    public void updateUserWeight(float weight, String email) {
+        User user = getUser(email);
         user.setWeight(weight);
         this.userManager.updateUser(user);
     }
@@ -137,10 +137,11 @@ public class UserController {
     /**
      * Updates the user's height.
      *
-     * @param user The user to be updated.
      * @param height The new height for the user.
+     * @param email The user's email.
      */
-    public void updateUserHeight(User user, int height) {
+    public void updateUserHeight(int height, String email) {
+        User user = getUser(email);
         user.setHeight(height);
         this.userManager.updateUser(user);
     }
@@ -148,10 +149,12 @@ public class UserController {
     /**
      * Updates the user's heart rate in beats per minute (BPM).
      *
-     * @param user The user to be updated.
      * @param bpm The new BPM for the user.
+     * @param email The user's email.
      */
-    public void updateUserBpm(User user, int bpm) {
+
+    public void updateUserBpm(int bpm, String email) {
+        User user = getUser(email);
         user.setBpm(bpm);
         this.userManager.updateUser(user);
     }
@@ -159,10 +162,11 @@ public class UserController {
     /**
      * Updates the user's experience level.
      *
-     * @param user The user to be updated.
      * @param level The new experience level for the user.
+     * @param email The user's email.
      */
-    public void updateUserLevel(User user, int level) {
+    public void updateUserLevel(int level, String email) {
+        User user = getUser(email);
         user.setLevel(level);
         this.userManager.updateUser(user);
     }
@@ -170,10 +174,11 @@ public class UserController {
     /**
      * Updates the user's address.
      *
-     * @param user The user to be updated.
      * @param address The new address for the user.
+     * @param email The user's email.
      */
-    public void updateUserAddress(User user, String address) {
+    public void updateUserAddress(String address, String email) {
+        User user = getUser(email);
         user.setAddress(address);
         this.userManager.updateUser(user);
     }
@@ -181,10 +186,11 @@ public class UserController {
     /**
      * Updates the user's phone number.
      *
-     * @param user The user to be updated.
      * @param phone The new phone number for the user.
+     * @param email The user's email.
      */
-    public void updateUserPhone(User user, String phone) {
+    public void updateUserPhone(String phone, String email) {
+        User user = getUser(email);
         user.setPhone(phone);
         this.userManager.updateUser(user);
     }
@@ -192,11 +198,12 @@ public class UserController {
     /**
      * Updates the user's email address.
      *
-     * @param user The user to be updated.
      * @param email The new email address for the user.
+     * @param email The user's email.
      */
-    public void updateUserEmail(User user, String email) {
-        user.setEmail(email);
+    public void updateUserEmail(String email, String newEmail) {
+        User user = getUser(email);
+        user.setEmail(newEmail);
         this.userManager.updateUser(user);
     }
 
@@ -227,5 +234,60 @@ public class UserController {
      */
     public void addActivityToUser(String email, Activity activity) {
         this.userManager.addActivityToUser(email, activity);
+    }
+
+
+    // TODO: SEPARATION BETWEEN USER AND TRAINING PLAN
+
+
+    /**
+     * Creates a new training plan based on the provided specifications.
+     *
+     * @param userCode  The code of the user for whom the training plan will be created.
+     * @param startDate The start date of the new training plan.
+     * @throws IllegalArgumentException If the provided arguments are not valid.
+     */
+    public void createTrainingPlan(UUID userCode, MakeItFitDate startDate) throws IllegalArgumentException {
+        TrainingPlan trainingPlan = this.trainingPlanManager.createTrainingPlan(userCode, startDate);
+        this.trainingPlanManager.insertTrainingPlan(trainingPlan);
+    }
+
+    /**
+     * Removes a training plan based on the provided code.
+     *
+     * @param code The code of the training plan to be removed.
+     */
+    public void removeTrainingPlan(UUID code) {
+        this.trainingPlanManager.removeTrainingPlan(code);
+    }
+
+    /**
+     * Retrieves a training plan based on the provided code.
+     *
+     * @param code The code of the training plan to be retrieved.
+     * @throws IllegalArgumentException If the provided code is not valid.
+     * @return The retrieved training plan.
+     */
+    public TrainingPlan getTrainingPlan(UUID code) throws IllegalArgumentException {
+        return this.trainingPlanManager.getTrainingPlan(code);
+    }
+
+    /**
+     * Updates a training plan based on the provided details.
+     *
+     * @param trainingPlan The updated training plan.
+     * @throws EntityDoesNotExistException If the training plan does not exist.
+     */
+    public void updateTrainingPlan(TrainingPlan trainingPlan) throws EntityDoesNotExistException {
+        this.trainingPlanManager.updateTrainingPlan(trainingPlan);
+    }
+
+    /**
+     * Returns a list of all existing training plans.
+     *
+     * @return A list of all training plans.
+     */
+    public List<TrainingPlan> getAllTrainingPlans() {
+        return this.trainingPlanManager.getAllTrainingPlans();
     }
 }

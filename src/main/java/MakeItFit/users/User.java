@@ -1,6 +1,9 @@
 package MakeItFit.users;
 
 import MakeItFit.activities.Activity;
+import MakeItFit.activities.implementation.PushUp;
+import MakeItFit.utils.MakeItFitDate;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -23,7 +26,7 @@ public abstract class User implements UserInterface {
     private String address;
     private String phone;
     private String email;
-    private List<Activity> activities;
+    public List<Activity> activities;
 
     /**
      * Constructs a new user with the specified details.

@@ -1,10 +1,14 @@
 package MakeItFit.views;
 
+import MakeItFit.activities.Activity;
+import MakeItFit.activities.implementation.PushUp;
 import MakeItFit.exceptions.*;
 import MakeItFit.feeder.Feeder;
 import MakeItFit.users.*;
+import MakeItFit.utils.MakeItFitDate;
 
-import java.util.Scanner;
+import java.time.LocalDate;
+import java.util.*;
 
 /**
  * The class AdminView represents a view of an admin user.
@@ -390,5 +394,60 @@ public class AdminView {
             System.out.println("[APP] Invalid input.");
         }
         System.out.println("==================");
+    }
+
+    /**
+     * Prompts the administrator to add an activity to a user.
+     * Requests the user's email or code and activity details from the console, and adds the activity to the user.
+     */
+    public void addActivity() {
+        System.out.println("[APP] Adding activity ...");
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("[APP] Enter the user's email or code: ");
+        Object identifier = scanner.nextLine();
+
+        try {
+            User user = this.userController.getUser(identifier);
+
+            PushUp pushUp = new PushUp(user.getCode(), MakeItFitDate.fromString("10/12/2021"), 30, "Push-up", 10, 3);
+
+            user.addActivity(pushUp);
+            user.addActivity(pushUp);
+            user.addActivity(pushUp);
+
+            List<Activity> activities = user.getListActivities();
+
+            System.out.println(activities);
+
+            //this.userController.addActivityToUser(user, pushUp);
+            System.out.println("[APP] Activity added successfully.");
+        } catch (Exception e) {
+            System.out.println("[APP] Invalid input.");
+        }
+    }
+
+    /**
+     * Prompts the administrator to list all activities from a user.
+     * Requests the user's email or code from the console and lists all activities from the user.
+     */
+    public void listActivitiesFromUser() {
+        System.out.println("[APP] Listing activities ...");
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("[APP] Enter the user's email or code: ");
+        Object identifier = scanner.nextLine();
+
+        try {
+            User user = this.userController.getUser(identifier);
+
+           List<Activity> activities = user.getListActivities();
+
+            System.out.println(activities);
+        } catch (Exception e) {
+            System.out.println("[APP] Invalid input.");
+        }
     }
 }
