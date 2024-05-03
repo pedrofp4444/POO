@@ -54,5 +54,4 @@ public class TimeManager {
         }
         return this.currentDate = this.currentDate.plusDays(days);
     }
-
 }

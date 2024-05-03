@@ -55,7 +55,7 @@ public abstract class Distance extends Activity {
      *
      * @param currentDate the current date
      */
-    public abstract void calculateCaloricWaste(MakeItFitDate currentDate);
+    public abstract void calculateCaloricWaste();
 
     /**
      * Returns a string representation of the Distance instance.

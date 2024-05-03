@@ -1,6 +1,7 @@
 package MakeItFit.trainingPlan;
 
 import MakeItFit.activities.Activity;
+import MakeItFit.users.User;
 import MakeItFit.utils.*;
 
 import java.util.*;
@@ -134,8 +135,27 @@ public class TrainingPlan {
      */
     public void updateActivities(MakeItFitDate currentDate) {
         for (MyTuple<Integer, Activity> tuple : this.activities) {
-            tuple.getItem2().updateActivity(currentDate);
+            Activity activity = tuple.getItem2();
+            if(currentDate.isAfter(activity.getRealizationDate())){
+                activity.updateActivity();
+            }
         }
+    }
+
+    /**
+     * Extracts the activities of the training plan.
+     *
+     * @param currentDate the current date
+     * @return a list of activities
+     */
+    public List<Activity> extractActivities(MakeItFitDate currentDate) {
+        List<Activity> activities = new ArrayList<Activity>();
+        for (MyTuple<Integer, Activity> tuple : this.activities) {
+            if (currentDate.isAfter(tuple.getItem2().getRealizationDate())) {
+                activities.add(tuple.getItem2().clone());
+            }
+        }
+        return activities;
     }
 }
 

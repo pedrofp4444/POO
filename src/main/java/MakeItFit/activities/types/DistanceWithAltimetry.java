@@ -77,7 +77,7 @@ public abstract class DistanceWithAltimetry extends Distance {
      *
      * @param currentDate the current date
      */
-    public abstract void calculateCaloricWaste(MakeItFitDate currentDate);
+    public abstract void calculateCaloricWaste();
 
     /**
      * Verifies if the DistanceWithAltimetry instance is equal to another object.

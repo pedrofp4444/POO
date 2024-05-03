@@ -77,7 +77,7 @@ public abstract class Repetitions extends Activity {
      *
      * @param currentDate the current date
      */
-    public abstract void calculateCaloricWaste(MakeItFitDate currentDate);
+    public abstract void calculateCaloricWaste();
 
     /**
      * Determines whether this Repetitions instance is equal to another object.

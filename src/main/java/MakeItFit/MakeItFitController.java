@@ -202,7 +202,7 @@ public class MakeItFitController {
      */
     public void updateSystemDate(int days) throws IllegalArgumentException {
         this.timeManager.advanceTime(days);
-        this.makeItFit.updateSystem(this.timeManager.getCurrentDate());
+        this.makeItFit.updateSystem(this.timeManager.getCurrentDate(), this.makeItFit.getUser(this.email).getCode());
     }
 
     /**

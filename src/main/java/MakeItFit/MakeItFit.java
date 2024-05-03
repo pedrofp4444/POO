@@ -299,8 +299,10 @@ public class MakeItFit {
      *
      * @param currentDate The current date of the system.
      */
-    public void updateSystem(MakeItFitDate currentDate){
-        this.userManager.updateSystem(currentDate);
-        this.trainingPlanManager.updateSystem(currentDate);
+    public void updateSystem(MakeItFitDate currentDate, UUID userCode){
+        this.userManager.updateSystem();
+        this.trainingPlanManager.updateActivities(currentDate);
+        List<Activity> activities = this.trainingPlanManager.extractActivities(currentDate, userCode);
+        this.userManager.addActivitiesToUser(userCode, activities);
     }
 }

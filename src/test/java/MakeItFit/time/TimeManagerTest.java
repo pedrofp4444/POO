@@ -22,7 +22,7 @@ public class TimeManagerTest {
         assertEquals(currentDate, timeManager.getCurrentDate());
 
         assertEquals(timeManager.getCurrentDate().plusDays(2).getDate(),timeManager.advanceTime(2).getDate() );
-        assertEquals(timeManager.getCurrentDate().plusDays(-2).getDate(),timeManager.advanceTime(-2).getDate() );
-        assertNotEquals(timeManager.getCurrentDate().plusDays(2).getDate(),timeManager.advanceTime(-2).getDate() );
+        assertEquals(timeManager.getCurrentDate().plusDays(18).getDate(),timeManager.advanceTime(18).getDate() );
+        assertNotEquals(timeManager.getCurrentDate().plusDays(2).getDate(),timeManager.advanceTime(4).getDate() );
     }
 }

@@ -203,13 +203,21 @@ public class UserManager {
     }
 
     /**
-     * Updates the system.
+     * Adds a list of activities to a user.
      *
-     * @param currentDate the current date
+     * @param userCode the user's code
+     * @param activities the activities to be added
      */
-    public void updateSystem(MakeItFitDate currentDate) {
+    public void addActivitiesToUser(UUID userCode, List<Activity> activities) {
+        usersByCode.get(userCode).addActivities(activities);
+    }
+
+    /**
+     * Updates the system.
+     */
+    public void updateSystem() {
         for (User user : usersByCode.values()) {
-            user.updateActivities(currentDate);
+            user.updateActivities();
             if(user instanceof Professional) {
                 ((Professional) user).updateSpecialization();
             }

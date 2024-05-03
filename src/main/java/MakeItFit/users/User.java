@@ -283,6 +283,10 @@ public abstract class User implements UserInterface {
         this.activities.add(activity.clone());
     }
 
+    public void addActivities(List<Activity> activities) {
+        this.activities.addAll(activities);
+    }
+
     /**
      * Removes an activity from the user's list of activities.
      *
@@ -340,12 +344,10 @@ public abstract class User implements UserInterface {
 
     /**
      * Updates the activities of the user based on the current date.
-     *
-     * @param currentDate The current date.
      */
-    public void updateActivities(MakeItFitDate currentDate){
+    public void updateActivities(){
         for(Activity activity : this.activities){
-            activity.updateActivity(currentDate);
+            activity.updateActivity();
         }
     }
 }

@@ -1,5 +1,6 @@
 package MakeItFit.trainingPlan;
 
+import MakeItFit.activities.Activity;
 import MakeItFit.exceptions.EntityDoesNotExistException;
 import MakeItFit.utils.MakeItFitDate;
 
@@ -110,9 +111,26 @@ public class TrainingPlanManager {
      *
      * @param currentDate the current date
      */
-    public void updateSystem(MakeItFitDate currentDate){
+    public void updateActivities(MakeItFitDate currentDate){
         for(TrainingPlan trainingPlan : this.trainingPlans.values()){
             trainingPlan.updateActivities(currentDate);
         }
+    }
+
+    /**
+     * Extracts the activities of the user.
+     *
+     * @param currentDate the current date
+     * @param userCode the code of the user
+     * @return a list of activities
+     */
+    public List<Activity> extractActivities(MakeItFitDate currentDate, UUID userCode) {
+        List<Activity> activities = new ArrayList<Activity>();
+        for (TrainingPlan trainingPlan : this.trainingPlans.values()) {
+            if (trainingPlan.getUserCode().equals(userCode)) {
+                activities.addAll(trainingPlan.extractActivities(currentDate));
+            }
+        }
+        return activities;
     }
 }

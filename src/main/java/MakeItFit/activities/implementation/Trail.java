@@ -80,11 +80,9 @@ public class Trail extends DistanceWithAltimetry implements HardInterface {
      *
      * @return The calculated caloric waste as an integer.
      */
-    public void calculateCaloricWaste(MakeItFitDate currentDate) {
-        if (currentDate.isAfter(this.getRealizationDate())) {
-            int caloricWaste = (int) (getDistance() * 0.5 + getElevationGain() * 0.1 - getElevationLoss() * 0.1);
-            setCaloricWaste(caloricWaste);
-        }
+    public void calculateCaloricWaste() {
+        int caloricWaste = (int) (getDistance() * 0.5 + getElevationGain() * 0.1 - getElevationLoss() * 0.1);
+        setCaloricWaste(caloricWaste);
     }
 
     /**
