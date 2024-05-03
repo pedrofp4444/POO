@@ -54,9 +54,9 @@ public abstract class RepetitionsWithWeights extends Repetitions{
     /**
      * Calculates the caloric waste of the activity.
      *
-     * @param currentDate the current date
+     * @param index the index of the user
      */
-    public abstract void calculateCaloricWaste();
+    public abstract void calculateCaloricWaste(float index);
 
     /**
      * Returns a string representation of the RepetitionsWithWeights instance.

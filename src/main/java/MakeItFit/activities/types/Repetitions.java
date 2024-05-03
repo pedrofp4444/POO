@@ -75,9 +75,9 @@ public abstract class Repetitions extends Activity {
     /**
      * Calculates the caloric waste of the activity.
      *
-     * @param currentDate the current date
+     * @param index the index of the user
      */
-    public abstract void calculateCaloricWaste();
+    public abstract void calculateCaloricWaste(float index);
 
     /**
      * Determines whether this Repetitions instance is equal to another object.

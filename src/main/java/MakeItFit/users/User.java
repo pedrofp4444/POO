@@ -25,6 +25,7 @@ public abstract class User implements UserInterface {
     private String address;
     private String phone;
     private String email;
+    private float index;
     public List<Activity> activities;
 
     /**
@@ -53,6 +54,7 @@ public abstract class User implements UserInterface {
         this.address = address;
         this.phone = phone;
         this.email = email;
+        this.index = calculateIndex(weight, height, bpm);
         this.activities = new ArrayList<>();
     }
 
@@ -73,6 +75,7 @@ public abstract class User implements UserInterface {
         this.address = u.getAddress();
         this.phone = u.getPhone();
         this.email = u.getEmail();
+        this.index = u.getIndex();
         this.activities = u.getListActivities();
     }
 
@@ -176,6 +179,15 @@ public abstract class User implements UserInterface {
     }
 
     /**
+     * Gets the index of the user.
+     *
+     * @return The index of the user.
+     */
+    public float getIndex() {
+        return this.index;
+    }
+
+    /**
      * Gets the list of activities of the user.
      *
      * @return A list of activities of the user, cloned to avoid modifications to the original list.
@@ -275,6 +287,15 @@ public abstract class User implements UserInterface {
     }
 
     /**
+     * Sets the index of the user.
+     *
+     * @param index The new index of the user.
+     */
+    public void setIndex(float index) {
+        this.index = index;
+    }
+
+    /**
      * Adds an activity to the user's list of activities.
      *
      * @param activity The activity to add.
@@ -347,7 +368,19 @@ public abstract class User implements UserInterface {
      */
     public void updateActivities(){
         for(Activity activity : this.activities){
-            activity.updateActivity();
+            activity.updateActivity(this.index);
         }
+    }
+
+    /**
+     * Calculates the index of the user based on the weight, height, and bpm.
+     *
+     * @param weight The weight of the user.
+     * @param height The height of the user.
+     * @param bpm The beats per minute (heart rate) of the user.
+     * @return The index of the user.
+     */
+    public float calculateIndex(float weight, int height, int bpm){
+        return (weight / (( (float) height /100) * ((float) height /100)) + (float) bpm /40);
     }
 }

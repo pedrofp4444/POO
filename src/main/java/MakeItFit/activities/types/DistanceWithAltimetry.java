@@ -75,9 +75,9 @@ public abstract class DistanceWithAltimetry extends Distance {
     /**
      * Calculates the caloric waste of the activity.
      *
-     * @param currentDate the current date
+     * @param index the index of the user
      */
-    public abstract void calculateCaloricWaste();
+    public abstract void calculateCaloricWaste(float index);
 
     /**
      * Verifies if the DistanceWithAltimetry instance is equal to another object.

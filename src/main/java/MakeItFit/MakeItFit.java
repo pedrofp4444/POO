@@ -301,7 +301,7 @@ public class MakeItFit {
      */
     public void updateSystem(MakeItFitDate currentDate, UUID userCode){
         this.userManager.updateSystem();
-        this.trainingPlanManager.updateActivities(currentDate);
+        this.trainingPlanManager.updateActivities(currentDate, userManager.getUserByCode(userCode).getIndex());
         List<Activity> activities = this.trainingPlanManager.extractActivities(currentDate, userCode);
         this.userManager.addActivitiesToUser(userCode, activities);
     }

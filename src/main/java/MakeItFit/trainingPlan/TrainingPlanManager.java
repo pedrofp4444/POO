@@ -111,9 +111,9 @@ public class TrainingPlanManager {
      *
      * @param currentDate the current date
      */
-    public void updateActivities(MakeItFitDate currentDate){
+    public void updateActivities(MakeItFitDate currentDate, float index){
         for(TrainingPlan trainingPlan : this.trainingPlans.values()){
-            trainingPlan.updateActivities(currentDate);
+            trainingPlan.updateActivities(currentDate, index);
         }
     }
 

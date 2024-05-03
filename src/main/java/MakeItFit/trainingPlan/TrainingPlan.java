@@ -1,7 +1,7 @@
 package MakeItFit.trainingPlan;
 
 import MakeItFit.activities.Activity;
-import MakeItFit.users.User;
+import MakeItFit.users.UserManager;
 import MakeItFit.utils.*;
 
 import java.util.*;
@@ -133,11 +133,11 @@ public class TrainingPlan {
      *
      * @param currentDate the current date
      */
-    public void updateActivities(MakeItFitDate currentDate) {
+    public void updateActivities(MakeItFitDate currentDate, float index) {
         for (MyTuple<Integer, Activity> tuple : this.activities) {
             Activity activity = tuple.getItem2();
             if(currentDate.isAfter(activity.getRealizationDate())){
-                activity.updateActivity();
+                activity.updateActivity(index);
             }
         }
     }

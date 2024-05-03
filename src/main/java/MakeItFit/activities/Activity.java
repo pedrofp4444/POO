@@ -146,14 +146,16 @@ public abstract class Activity implements ActivityInterface {
     /**
      * Updates the activity based on the current date.
      */
-    public void updateActivity(){
-        calculateCaloricWaste();
+    public void updateActivity(float index){
+        calculateCaloricWaste(index);
     }
 
     /**
      * Calculates the caloric waste of the activity based on the current date.
+     *
+     * @param index the index of the user
      */
-    public abstract void calculateCaloricWaste();
+    public abstract void calculateCaloricWaste(float index);
 
     /**
      * Sets the specialization of the activity.

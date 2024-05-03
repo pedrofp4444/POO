@@ -80,8 +80,8 @@ public class Trail extends DistanceWithAltimetry implements HardInterface {
      *
      * @return The calculated caloric waste as an integer.
      */
-    public void calculateCaloricWaste() {
-        int caloricWaste = (int) (getDistance() * 0.5 + getElevationGain() * 0.1 - getElevationLoss() * 0.1);
+    public void calculateCaloricWaste(float index) {
+        int caloricWaste = (int) ((getDistance() * 0.5 + getElevationGain() * 0.1 - getElevationLoss() * 0.1) * index * 0.5);
         setCaloricWaste(caloricWaste);
     }
 

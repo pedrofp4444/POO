@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public interface ActivityInterface {
 
-    void calculateCaloricWaste();
+    void calculateCaloricWaste(float index);
 
     UUID getUserCode();
 

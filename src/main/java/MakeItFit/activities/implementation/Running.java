@@ -64,8 +64,8 @@ public class Running extends Distance {
      *
      * @return the estimated caloric waste as an integer value
      */
-    public void calculateCaloricWaste() {
-        int caloricWaste = (int) (averageSpeed * getDistance() * 0.5);
+    public void calculateCaloricWaste(float index) {
+        int caloricWaste = (int) (averageSpeed * getDistance() * index * 0.005);
         setCaloricWaste(caloricWaste);
     }
 
