@@ -2,8 +2,7 @@ package MakeItFit;
 
 import MakeItFit.activities.Activity;
 import MakeItFit.exceptions.*;
-import MakeItFit.trainingPlan.TrainingPlan;
-import MakeItFit.trainingPlan.TrainingPlanManager;
+import MakeItFit.trainingPlan.*;
 import MakeItFit.users.*;
 import MakeItFit.utils.MakeItFitDate;
 
@@ -249,6 +248,11 @@ public class MakeItFit {
      */
     public void createTrainingPlan(UUID userCode, MakeItFitDate startDate) throws IllegalArgumentException {
         TrainingPlan trainingPlan = this.trainingPlanManager.createTrainingPlan(userCode, startDate);
+        this.trainingPlanManager.insertTrainingPlan(trainingPlan);
+    }
+
+    public void createTrainingPlanByObjectives(UUID userCode, MakeItFitDate startDate, boolean hardActivity, int maxActivitiesPerDay, int maxDifferentActivities, int weeklyRecurrence, int minimumCaloricWaste) throws IllegalArgumentException {
+        TrainingPlan trainingPlan = this.trainingPlanManager.createTrainingPlanByObjectives(userCode, startDate, hardActivity, maxActivitiesPerDay, maxDifferentActivities, weeklyRecurrence, minimumCaloricWaste);
         this.trainingPlanManager.insertTrainingPlan(trainingPlan);
     }
 

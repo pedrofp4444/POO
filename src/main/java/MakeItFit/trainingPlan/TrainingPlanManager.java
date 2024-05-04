@@ -1,6 +1,9 @@
 package MakeItFit.trainingPlan;
 
 import MakeItFit.activities.Activity;
+import MakeItFit.activities.ActivityManager;
+import MakeItFit.activities.HardInterface;
+import MakeItFit.activities.implementation.*;
 import MakeItFit.exceptions.EntityDoesNotExistException;
 import MakeItFit.utils.MakeItFitDate;
 
@@ -31,13 +34,111 @@ public class TrainingPlanManager {
     public TrainingPlan createTrainingPlan(UUID userCode, MakeItFitDate startDate) throws IllegalArgumentException {
 
         if (userCode == null || startDate == null) {
-            throw new IllegalArgumentException("Invalid input: userCode, code, startDate.");
+            throw new IllegalArgumentException("Invalid input: userCode, startDate.");
         }
 
         TrainingPlan trainingPlan = new TrainingPlan(userCode, startDate);
         return trainingPlan;
     }
 
+    /**
+     * Creates a new training plan by objectives.
+     *
+     * @param userCode the code of the user
+     * @param startDate the date that the training plan starts
+     * @param hardActivities if the activities are hard
+     * @param maxActivitiesPerDay the maximum number of activities per day
+     * @param maxDifferentActivities the maximum number of different activities
+     * @param weeklyRecurrence the weekly recurrence
+     * @param minimumCaloricWaste the minimum caloric waste
+     * @return the planing train created
+     * @throws IllegalArgumentException if any argument is invalid
+     */
+    public TrainingPlan createTrainingPlanByObjectives(UUID userCode, MakeItFitDate startDate, boolean hardActivities, int maxActivitiesPerDay, int maxDifferentActivities, int weeklyRecurrence, int minimumCaloricWaste) throws IllegalArgumentException {
+
+        if (userCode == null || startDate == null || maxActivitiesPerDay < 0 || maxActivitiesPerDay > 3 || maxDifferentActivities < 0 || weeklyRecurrence < 0 || weeklyRecurrence > 7 || minimumCaloricWaste < 0) {
+            throw new IllegalArgumentException("Invalid input.");
+        }
+        
+        TrainingPlan trainingPlan = new TrainingPlan(userCode, startDate);
+        ActivityManager activityManager = new ActivityManager();
+        int totalCaloricWaste = 0;
+        int activitiesAddedToday = 0;
+        int differentActivities = 0;
+        int startDayOfWeek = startDate.getDayOfWeek();
+        MakeItFitDate currentDate = startDate;
+        Activity previousActivity = null;
+        Random random = new Random();
+        boolean hardActivityAddedYesterday = false;
+        boolean hardActivityAddedToday = false;
+        
+        while (totalCaloricWaste < minimumCaloricWaste) {
+
+            String activityType = activityManager.getRandomActivity();
+            Activity activity;
+
+            switch (activityType) {
+                case "PushUp" -> {
+                    int expectedDuration = random.nextInt(10, 40);
+                    int repetitions = random.nextInt(5, 20);
+                    int series = random.nextInt(1, 5);
+                    activity = new PushUp(userCode, currentDate, expectedDuration, "PushUp created automatically", repetitions, series);
+                }
+                case "Running" -> {
+                    int expectedDuration = random.nextInt(10, 40);
+                    double distance = random.nextInt(500, 5000);
+                    double speed = random.nextInt(5, 20);
+                    activity = new Running(userCode, currentDate, expectedDuration, "Running created automatically", distance, speed);
+                }
+                case "Trail" -> {
+                    int expectedDuration = random.nextInt(10, 40);
+                    int distance = random.nextInt(500, 5000);
+                    int elevationGain = random.nextInt(0, 800);
+                    int elevationLoss = random.nextInt(0, 800);
+                    int trailType = random.nextInt(1, 3);
+                    activity = new Trail(userCode, currentDate, expectedDuration, "Trail created automatically", distance, elevationGain, elevationLoss, trailType);
+                }
+                case "WeightSquat" -> {
+                    int expectedDuration = random.nextInt(10, 40);
+                    int repetitions = random.nextInt(5, 20);
+                    int series = random.nextInt(1, 5);
+                    double weight = random.nextInt(5, 80);
+                    activity = new WeightSquat(userCode, currentDate, expectedDuration, "WeightSquat created automatically", repetitions, series, weight);
+                }
+                default -> throw new IllegalArgumentException("Invalid type.");
+            }
+
+                if (!hardActivities && activity instanceof HardInterface) {
+                    continue;
+                }
+
+                if (hardActivities && activity instanceof HardInterface) {
+                    if (hardActivityAddedYesterday || hardActivityAddedToday) {
+                        continue;
+                    }
+                }
+
+                if (activitiesAddedToday < maxActivitiesPerDay && differentActivities < maxDifferentActivities && (previousActivity == null || !previousActivity.equals(activity))) {
+                    trainingPlan.addActivity(random.nextInt(1, 4), activity);
+                    totalCaloricWaste += activity.getCaloricWaste();
+                    activitiesAddedToday++;
+                    differentActivities++;
+                    previousActivity = activity;
+                    if (activity instanceof HardInterface) {
+                        hardActivityAddedToday = true;
+                    }
+                }
+
+
+            currentDate = currentDate.plusDays(1);
+            if ((currentDate.getDayOfWeek() - startDayOfWeek) % weeklyRecurrence == 0) {
+                activitiesAddedToday = 0;
+                hardActivityAddedYesterday = hardActivityAddedToday;
+                hardActivityAddedToday = false;
+            }
+        }
+        return trainingPlan;
+    }
     /**
      * Inserts a training plan into the manager.
      *
