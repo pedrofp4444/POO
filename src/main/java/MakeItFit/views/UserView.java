@@ -682,8 +682,6 @@ public class UserView {
             }
             scanner.nextLine(); // Consume the remaining newline
 
-            System.out.println("Chegou aqui !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
             this.makeItFitController.constructTrainingPlanByObjectives(hardActivities, maxActivitiesPerDay, maxDifferentActivities, maxWeeklyRecurrence, minCalories);
             System.out.println("[" + this.makeItFitController.getName() + "] Training plan generated successfully.");
         } catch (Exception e) {

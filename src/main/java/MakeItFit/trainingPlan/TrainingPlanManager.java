@@ -58,27 +58,33 @@ public class TrainingPlanManager implements Serializable {
      */
     public TrainingPlan constructTrainingPlanByObjectives(TrainingPlan trainingPlan, float index, boolean hardActivities, int maxActivitiesPerDay, int maxDifferentActivities, int weeklyRecurrence, int minimumCaloricWaste) throws IllegalArgumentException {
 
-        System.out.println("CHEGOU AQUI");
-
         if (maxActivitiesPerDay < 0 || maxActivitiesPerDay > 3 || maxDifferentActivities < 0 || weeklyRecurrence < 0 || weeklyRecurrence > 7 || minimumCaloricWaste < 0) {
             throw new IllegalArgumentException("Invalid input.");
         }
 
-        ActivityManager activityManager = new ActivityManager();
         int totalCaloricWaste = 0;
         int activitiesAddedToday = 0;
-        int differentActivities = 0;
+        int daysWithActivitiesThisWeek = 0;
         int startDayOfWeek = trainingPlan.getStartDate().getDayOfWeek();
-        MakeItFitDate currentDate = trainingPlan.getStartDate();
-        Activity previousActivity = null;
-        Random random = new Random();
         boolean hardActivityAddedYesterday = false;
         boolean hardActivityAddedToday = false;
+        boolean newWeek = false;
+        boolean addedActivity = false;
+
+        ActivityManager activityManager = new ActivityManager();
+        MakeItFitDate currentDate = trainingPlan.getStartDate();
+        Random random = new Random();
         
+        Set<String> differentActivityTypes = new HashSet<>();
+
         while (totalCaloricWaste < minimumCaloricWaste) {
 
             String activityType = activityManager.getRandomActivity();
             Activity activity;
+
+            while (differentActivityTypes.size() == maxDifferentActivities && !differentActivityTypes.contains(activityType)) {
+                activityType = activityManager.getRandomActivity();
+            }
 
             switch (activityType) {
                 case "PushUp" -> {
@@ -111,33 +117,40 @@ public class TrainingPlanManager implements Serializable {
                 default -> throw new IllegalArgumentException("Invalid type.");
             }
 
-                if (!hardActivities && activity instanceof HardInterface) {
+            if (!hardActivities && activity instanceof HardInterface) {
+                continue;
+            }
+
+            if (hardActivities && activity instanceof HardInterface) {
+                if (hardActivityAddedYesterday || hardActivityAddedToday) {
                     continue;
                 }
+            }
 
-                if (hardActivities && activity instanceof HardInterface) {
-                    if (hardActivityAddedYesterday || hardActivityAddedToday) {
-                        continue;
-                    }
+            if (activitiesAddedToday < maxActivitiesPerDay && daysWithActivitiesThisWeek < weeklyRecurrence) {
+                differentActivityTypes.add(activityType);
+                trainingPlan.addActivity(random.nextInt(1, 4), activity);
+                totalCaloricWaste += activity.caloricWaste(index);
+                activitiesAddedToday++;
+                addedActivity = true;
+                if (activity instanceof HardInterface) {
+                    hardActivityAddedToday = true;
                 }
-
-                if (activitiesAddedToday < maxActivitiesPerDay && differentActivities < maxDifferentActivities && (previousActivity == null || !previousActivity.equals(activity))) {
-                    trainingPlan.addActivity(random.nextInt(1, 4), activity);
-                    totalCaloricWaste += activity.caloricWaste(index);
-                    activitiesAddedToday++;
-                    differentActivities++;
-                    previousActivity = activity;
-                    if (activity instanceof HardInterface) {
-                        hardActivityAddedToday = true;
-                    }
-                }
-
-
-            currentDate = currentDate.plusDays(1);
-            if ((currentDate.getDayOfWeek() - startDayOfWeek) % weeklyRecurrence == 0) {
+            } else {
+                currentDate = currentDate.plusDays(1);
+                newWeek = true;
                 activitiesAddedToday = 0;
+                if(addedActivity){
+                    daysWithActivitiesThisWeek++;
+                }
+                addedActivity = false;
+            }
+
+            if ((currentDate.getDayOfWeek() == startDayOfWeek) && newWeek) {
+                daysWithActivitiesThisWeek = 0;
                 hardActivityAddedYesterday = hardActivityAddedToday;
                 hardActivityAddedToday = false;
+                newWeek = false;
             }
         }
         return trainingPlan;
