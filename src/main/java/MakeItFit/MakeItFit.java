@@ -7,6 +7,8 @@ import MakeItFit.trainingPlan.*;
 import MakeItFit.users.*;
 import MakeItFit.utils.MakeItFitDate;
 
+import MakeItFit.queries.*;
+
 import java.io.*;
 import java.util.List;
 import java.util.UUID;
@@ -15,10 +17,12 @@ public class MakeItFit implements Serializable {
 
     private UserManager userManager;
     private TrainingPlanManager trainingPlanManager;
+    private QueriesManager queriesManager;
 
     public MakeItFit() {
         this.userManager = new UserManager();
         this.trainingPlanManager = new TrainingPlanManager();
+        this.queriesManager = new QueriesManager(userManager , trainingPlanManager);
     }
 
     /**
@@ -506,4 +510,75 @@ public class MakeItFit implements Serializable {
             throw new FileNotFoundException();
         }
     }
+
+
+    /**
+     * Executes a query and returns the result.
+     * @param userManager
+     * @param email
+     * @param date1
+     * @param date2
+     * @return number of km the user did in a given period of time or in total
+     */
+    public double executeQueryHowManyKMsDone(UserManager userManager  ,String email , MakeItFitDate date1 , MakeItFitDate date2) {
+        return this.queriesManager.executeQueryHowManyKMsDone(userManager,email, date1, date2);
+    }
+
+    /**
+     * Executes a query and returns the result.
+     * @param userManager
+     * @param email
+     * @param date1
+     * @param date2
+     * @return number of altimetry the user did in a given period of time or in total
+     */
+    public double executeQueryHowManyAltimetryDone(UserManager userManager, String email, MakeItFitDate date1 , MakeItFitDate date2) {
+        return this.queriesManager.executeQueryHowManyAltimetryDone(userManager, email, date1, date2);
+    }
+
+    /**
+     *  Executes a query and returns the result.
+     * @param trainingPlanManager
+     * @param userManager
+     *
+     * @return the most demanding training plan
+     */
+    public TrainingPlan executeQueryMostDemandingTrainingPlan(TrainingPlanManager trainingPlanManager, UserManager userManager){
+        return this.queriesManager.executeQueryMostDemandingTrainingPlan(trainingPlanManager, userManager);
+    }
+
+
+    /**
+     * Executes a query and returns the result.
+     * @param userManager
+     * @return the most done activity
+     */
+    public String executeQueryMostDoneActivity(UserManager userManager) {
+        return this.queriesManager.executeQueryMostDoneActivity(userManager);
+    }
+
+
+    /**
+     * Executes a query and returns the result.
+     * @param userManager
+     * @param date1
+     * @param date2
+     * @return the user who burns more calories between two dates or in total
+     */
+    public User executeQuerywhoBurnsMoreCalories(UserManager userManager, MakeItFitDate date1, MakeItFitDate date2) {
+        return this.queriesManager.executeQuerywhoBurnsMoreCalories(userManager, date1, date2);
+    }
+
+    /**
+     *  Executes a query and returns the result.
+     * @param userManager
+     * @param date1
+     * @param date2
+     * @return the user who did the most activities between two dates or in total
+     */
+    public User executeQueryWhoDidTheMostActivities(UserManager userManager, MakeItFitDate date1, MakeItFitDate date2) {
+        return this.queriesManager.executeQueryWhoDidTheMostActivities(userManager, date1, date2);
+    }
+
+
 }
