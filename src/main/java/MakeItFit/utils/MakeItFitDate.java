@@ -1,5 +1,6 @@
 package MakeItFit.utils;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -8,7 +9,7 @@ import java.time.LocalDate;
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
-public class MakeItFitDate implements Comparable<MakeItFitDate>{
+public class MakeItFitDate implements Comparable<MakeItFitDate>, Serializable {
 
     private final LocalDate date;
 

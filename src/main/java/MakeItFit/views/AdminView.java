@@ -411,11 +411,11 @@ public class AdminView {
         try {
             User user = this.userController.getUser(identifier);
 
-            PushUp pushUp = new PushUp(user.getCode(), MakeItFitDate.fromString("10/12/2021"), 30, "Push-up", 10, 3);
+            //PushUp pushUp = new PushUp(user.getCode(), MakeItFitDate.fromString("10/12/2021"), 30, "Push-up", 10, 3);
 
-            user.addActivity(pushUp);
-            user.addActivity(pushUp);
-            user.addActivity(pushUp);
+            //user.addActivity(pushUp);
+            //user.addActivity(pushUp);
+            //user.addActivity(pushUp);
 
             List<Activity> activities = user.getListActivities();
 

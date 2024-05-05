@@ -3,10 +3,11 @@ package MakeItFit.users;
 import MakeItFit.activities.Activity;
 import MakeItFit.exceptions.ExistingEntityConflictException;
 import MakeItFit.exceptions.EntityDoesNotExistException;
-import MakeItFit.users.types.Amateur;
-import MakeItFit.users.types.Professional;
+import MakeItFit.exceptions.InvalidTypeException;
+import MakeItFit.users.types.*;
 import MakeItFit.utils.MakeItFitDate;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -15,7 +16,7 @@ import java.util.*;
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
-public class UserManager {
+public class UserManager implements Serializable {
 
     private Map<UUID, User> usersByCode;
     private Map<String, User> usersByEmail;
@@ -38,10 +39,12 @@ public class UserManager {
      * @param address the address of the user
      * @param phone the phone number of the user
      * @param email the email address of the user
+     * @param frequency the training frequency of the user
+     * @param type the type of the user
      * @return the created user
      * @throws IllegalArgumentException if any argument is null or invalid
      */
-    public User createUser(String name, int age, Gender gender, float weight, int height, int bpm, int level, String address, String phone, String email) throws IllegalArgumentException {
+    public User createUser(String name, int age, Gender gender, float weight, int height, int bpm, int level, String address, String phone, String email, int frequency, String type) throws IllegalArgumentException, InvalidTypeException {
 
         if (name == null || address == null || phone == null || email == null) {
             throw new IllegalArgumentException("Invalid input: name, address, phone, or email cannot be null.");
@@ -50,8 +53,13 @@ public class UserManager {
             throw new IllegalArgumentException("Invalid input: age, weight, height, bpm, and level must be non-negative.");
         }
 
-        User user = new Amateur(name, age, gender, weight, height, bpm, level, address, phone, email);
-        return user;
+        if (type.equals("Amateur")) {
+           return new Amateur(name, age, gender, weight, height, bpm, level, address, phone, email);
+        } else if (type.equals("Occasional")) {
+            return new Occasional(name, age, gender, weight, height, bpm, level, address, phone, email, frequency);
+        } else if (type.equals("Professional")) {
+            return new Professional(name, age, gender, weight, height, bpm, level, address, phone, email, frequency);
+        } else throw new InvalidTypeException(type);
     }
 
     /**

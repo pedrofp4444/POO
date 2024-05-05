@@ -2,14 +2,16 @@ package MakeItFit.activities;
 
 import MakeItFit.utils.MakeItFitDate;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class Activity implements ActivityInterface {
+public abstract class Activity implements ActivityInterface, Serializable {
     private UUID userCode;
     private UUID code;
     private MakeItFitDate realizationDate;
     private int expectedDuration;
     private String designation;
+    private String name;
 
     private String specialization;
     private int duration;
@@ -22,8 +24,9 @@ public abstract class Activity implements ActivityInterface {
      * @param realizationDate the realization date of the activity
      * @param expectedDuration the expected duration of the activity
      * @param designation the designation of the activity
+     * @param name the name of the activity
      */
-    public Activity(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation) {
+    public Activity(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, String name) {
         this.userCode = userCode;
         this.code = UUID.randomUUID();
         this.realizationDate = realizationDate;
@@ -31,6 +34,7 @@ public abstract class Activity implements ActivityInterface {
         this.designation = designation;
         this.duration = 0;
         this.caloricWaste = 0;
+        this.name = name;
     }
 
     /**
@@ -46,6 +50,7 @@ public abstract class Activity implements ActivityInterface {
         this.designation = a.getDesignation();
         this.duration = a.getDuration();
         this.caloricWaste = a.getCaloricWaste();
+        this.name = a.getName();
     }
 
     /**
@@ -87,6 +92,15 @@ public abstract class Activity implements ActivityInterface {
      */
     public String getDesignation() {
         return this.designation;
+    }
+
+    /**
+     * Gets the name of the activity.
+     *
+     * @return the name of the activity
+     */
+    public String getName() {
+        return this.name;
     }
 
     /**
@@ -158,6 +172,14 @@ public abstract class Activity implements ActivityInterface {
     public abstract void calculateCaloricWaste(float index);
 
     /**
+     * Calculates the caloric waste of the activity.
+     *
+     * @param index the index of the user
+     * @return the caloric waste of the activity
+     */
+    public abstract int caloricWaste(float index);
+
+    /**
      * Sets the specialization of the activity.
      *
      * @param specialization the specialization of the activity
@@ -193,11 +215,12 @@ public abstract class Activity implements ActivityInterface {
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Activity: ").append(this.designation).append(", ");
-        sb.append("Expected Duration: ").append(this.expectedDuration).append(", ");
+        sb.append("Activity: ").append(this.name).append(", ");
+        sb.append("Designation: ").append(this.designation).append(", ");
+        sb.append("Expected Duration: ").append(this.expectedDuration).append(" minutes, ");
         sb.append("Realization Date: ").append(this.realizationDate).append(", ");
-        sb.append("Duration: ").append(this.duration).append(", ");
-        sb.append("Caloric Waste: ").append(this.caloricWaste).append(", ");
+        sb.append("Duration: ").append(this.duration).append(" minutes, ");
+        sb.append("Caloric Waste: ").append(this.caloricWaste).append(" calories, ");
         return sb.toString();
     }
 }

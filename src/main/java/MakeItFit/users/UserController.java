@@ -42,8 +42,8 @@ public class UserController {
      * @throws InvalidTypeException If an invalid type is encountered during user creation.
      */
     public void createUser(String name, int age, Gender gender, float weight, int height, int bpm, int level, String address, String phone, String email) throws IllegalArgumentException, ExistingEntityConflictException, InvalidTypeException {
-        User user = this.userManager.createUser(name, age, gender, weight, height, bpm, level, address, phone, email);
-        this.userManager.insertUser(user);
+        //User user = this.userManager.createUser(name, age, gender, weight, height, bpm, level, address, phone, email);
+        //this.userManager.insertUser(user);
     }
 
     /**

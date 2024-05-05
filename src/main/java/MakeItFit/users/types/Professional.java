@@ -4,6 +4,7 @@ import MakeItFit.activities.Activity;
 import MakeItFit.users.User;
 import MakeItFit.users.Gender;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -12,7 +13,7 @@ import java.util.*;
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
-public class Professional extends User {
+public class Professional extends User implements Serializable {
     /**
      * The specialization options for a professional athlete.
      */
@@ -125,6 +126,6 @@ public class Professional extends User {
      * @return a string representation including the specialization and training frequency
      */
     public String toString() {
-        return super.toString() + "Specialization: " + specialization + "\n" + "Frequency: " + frequency + "\n";
+        return super.toString() + "        Specialization: " + specialization + "\n" + "        Frequency: " + frequency + "\n" + "        ====================\n";
     }
 }

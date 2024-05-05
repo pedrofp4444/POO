@@ -3,13 +3,15 @@ package MakeItFit.users.types;
 import MakeItFit.users.Gender;
 import MakeItFit.users.User;
 
+import java.io.Serializable;
+
 /**
  * A class that represents an amateur user, extending the User class.
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
-public class Amateur extends User {
+public class Amateur extends User implements Serializable {
 
     /**
      * Constructs an Amateur user with the specified details.
@@ -49,6 +51,6 @@ public class Amateur extends User {
     }
 
     public String toString() {
-        return super.toString();
+        return super.toString() + "        ====================\n";
     }
 }

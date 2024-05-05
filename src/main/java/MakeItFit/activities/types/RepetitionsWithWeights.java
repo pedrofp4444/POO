@@ -1,10 +1,11 @@
 package MakeItFit.activities.types;
-import MakeItFit.activities.Activity;
+
 import MakeItFit.utils.MakeItFitDate;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class RepetitionsWithWeights extends Repetitions{
+public abstract class RepetitionsWithWeights extends Repetitions implements Serializable {
     private double weight;
 
     /**
@@ -14,12 +15,13 @@ public abstract class RepetitionsWithWeights extends Repetitions{
      * @param realizationDate the realization date of the activity
      * @param expectedDuration the expected duration of the activity
      * @param designation the designation of the activity
+     * @param name the name of the activity
      * @param repetitions the number of repetitions
      * @param series the number of series
      * @param weight the weight used during the activity
      */
-    public RepetitionsWithWeights(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, int repetitions, int series, double weight) {
-        super(userCode, realizationDate, expectedDuration, designation, repetitions, series);
+    public RepetitionsWithWeights(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, String name, int repetitions, int series, double weight) {
+        super(userCode, realizationDate, expectedDuration, designation, name, repetitions, series);
         this.weight = weight;
     }
 
@@ -59,13 +61,21 @@ public abstract class RepetitionsWithWeights extends Repetitions{
     public abstract void calculateCaloricWaste(float index);
 
     /**
+     * Calculates the caloric waste of the activity.
+     *
+     * @param index the index of the user
+     * @return the caloric waste of the activity
+     */
+    public abstract int caloricWaste(float index);
+
+    /**
      * Returns a string representation of the RepetitionsWithWeights instance.
      *
      * @return a string representation of the RepetitionsWithWeights instance
      */
     @Override
     public String toString(){
-        return super.toString() + "Weight: " + weight + "\n";
+        return super.toString() + "Weight: " + weight + " Kg\n";
     }
 
     /**

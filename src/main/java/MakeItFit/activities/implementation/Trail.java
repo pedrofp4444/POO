@@ -4,6 +4,7 @@ import MakeItFit.activities.HardInterface;
 import MakeItFit.activities.types.DistanceWithAltimetry;
 import MakeItFit.utils.MakeItFitDate;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -13,7 +14,7 @@ import java.util.UUID;
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
-public class Trail extends DistanceWithAltimetry implements HardInterface {
+public class Trail extends DistanceWithAltimetry implements HardInterface, Serializable {
 
     // Constants representing the different types of trail difficulty
     public static final int TRAIL_TYPE_EASY = 0;
@@ -30,13 +31,14 @@ public class Trail extends DistanceWithAltimetry implements HardInterface {
      * @param realizationDate The date the activity was realized.
      * @param expectedDuration The expected duration of the activity.
      * @param designation     The name or description of the activity.
+     * @param name            The name of the activity.
      * @param distance        The distance covered during the activity.
      * @param elevationGain   The total elevation gain during the activity.
      * @param elevationLoss   The total elevation loss during the activity.
      * @param trailType       The type of trail (easy, medium, or hard).
      */
-    public Trail(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, double distance, double elevationGain, double elevationLoss, int trailType) {
-        super(userCode, realizationDate, expectedDuration, designation, distance, elevationGain, elevationLoss);
+    public Trail(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, String name, double distance, double elevationGain, double elevationLoss, int trailType) {
+        super(userCode, realizationDate, expectedDuration, designation, name, distance, elevationGain, elevationLoss);
         setSpecialization(this.getClass().getSimpleName());
         this.trailType = trailType;
     }
@@ -81,8 +83,17 @@ public class Trail extends DistanceWithAltimetry implements HardInterface {
      * @return The calculated caloric waste as an integer.
      */
     public void calculateCaloricWaste(float index) {
-        int caloricWaste = (int) ((getDistance() * 0.5 + getElevationGain() * 0.1 - getElevationLoss() * 0.1) * index * 0.5);
-        setCaloricWaste(caloricWaste);
+        setCaloricWaste(caloricWaste(index));
+    }
+
+    /**
+     * Calculates the caloric waste for the Trail instance based on distance, elevation gain, and elevation loss.
+     *
+     * @param index The index to be used in the calculation.
+     * @return The calculated caloric waste as an integer.
+     */
+    public int caloricWaste(float index) {
+        return (int) ((getDistance() * 0.5 + getElevationGain() * 0.1 - getElevationLoss() * 0.1) * index * 0.5);
     }
 
     /**

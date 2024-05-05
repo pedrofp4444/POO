@@ -3,6 +3,7 @@ package MakeItFit.activities.implementation;
 import MakeItFit.activities.types.Repetitions;
 import MakeItFit.utils.MakeItFitDate;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -12,7 +13,7 @@ import java.util.UUID;
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
-public class PushUp extends Repetitions {
+public class PushUp extends Repetitions implements Serializable {
     /**
      * Constructs a PushUp instance with the given parameters.
      *
@@ -20,11 +21,12 @@ public class PushUp extends Repetitions {
      * @param realizationDate  The date when the exercise was performed.
      * @param expectedDuration The expected duration of the exercise in minutes.
      * @param designation      The name of the exercise.
+     * @param name             The name of the exercise.
      * @param repetitions      The number of repetitions in each series.
      * @param series           The number of series.
      */
-    public PushUp(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, int repetitions, int series) {
-        super(userCode, realizationDate, expectedDuration, designation, repetitions, series);
+    public PushUp(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, String name, int repetitions, int series) {
+        super(userCode, realizationDate, expectedDuration, designation, name, repetitions, series);
         setSpecialization(this.getClass().getSimpleName());
     }
 
@@ -43,8 +45,17 @@ public class PushUp extends Repetitions {
      * @return The total caloric waste calculated based on the number of repetitions and series.
      */
     public void calculateCaloricWaste(float index) {
-        int caloricWaste = (int) (getRepetitions() * getSeries() * index * 0.1);
-        setCaloricWaste(caloricWaste);
+        setCaloricWaste(caloricWaste(index));
+    }
+
+    /**
+     * Calculates the caloric waste for the push-up exercise.
+     *
+     * @param index The index to be used in the calculation.
+     * @return The total caloric waste calculated based on the number of repetitions and series.
+     */
+    public int caloricWaste(float index) {
+        return (int) (getRepetitions() * getSeries() * index * 0.1);
     }
 
     /**

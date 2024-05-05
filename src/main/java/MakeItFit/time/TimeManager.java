@@ -2,12 +2,14 @@ package MakeItFit.time;
 
 import MakeItFit.utils.MakeItFitDate;
 
+import java.io.Serializable;
+
 /**
  * Represents the time manager of the system, with the current date and the ability to advance time.
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  */
-public class TimeManager {
+public class TimeManager implements Serializable {
     private MakeItFitDate currentDate;
 
     /**

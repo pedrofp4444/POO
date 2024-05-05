@@ -4,6 +4,7 @@ import MakeItFit.activities.Activity;
 import MakeItFit.users.UserManager;
 import MakeItFit.utils.*;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -12,7 +13,7 @@ import java.util.*;
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
-public class TrainingPlan {
+public class TrainingPlan implements Serializable {
     private final UUID userCode;
     private final UUID code;
     private List<MyTuple<Integer, Activity>> activities; /* Tuple<Repetitions, Activity> */
@@ -117,6 +118,18 @@ public class TrainingPlan {
      *
      * @return a string representation of the training plan
      */
+    @Override
+    public String toString() {
+        return "        == (Training plan details) ==" + "        \nTraining Plan: " + this.code + "\n        User Code: " + this.userCode + "\n        Start Date: " + this.startDate + "\n        Activities(Iterations / Activity): " + this.activities;
+    }
+
+    /**
+     * The equals method compares two training plans for equality.
+     * 
+     * @param o the object to compare
+     * @return true if the training plans are equal, false otherwise
+     */
+    @Override
     public boolean equals(Object o) {
         if (o == this) {
             return true;

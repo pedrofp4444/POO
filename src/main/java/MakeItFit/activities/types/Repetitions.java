@@ -3,9 +3,10 @@ package MakeItFit.activities.types;
 import MakeItFit.activities.Activity;
 import MakeItFit.utils.MakeItFitDate;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class Repetitions extends Activity {
+public abstract class Repetitions extends Activity implements Serializable {
     private int repetitions;
     private int series;
 
@@ -16,11 +17,12 @@ public abstract class Repetitions extends Activity {
      * @param realizationDate the realization date of the activity
      * @param expectedDuration the expected duration of the activity
      * @param designation the designation of the activity
+     * @param name the name of the activity
      * @param repetitions the number of repetitions
      * @param series the number of series
      */
-    public Repetitions(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, int repetitions, int series) {
-        super(userCode, realizationDate, expectedDuration, designation);
+    public Repetitions(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, String name, int repetitions, int series) {
+        super(userCode, realizationDate, expectedDuration, designation, name);
         this.repetitions = repetitions;
         this.series = series;
     }
@@ -80,6 +82,14 @@ public abstract class Repetitions extends Activity {
     public abstract void calculateCaloricWaste(float index);
 
     /**
+     * Calculates the caloric waste of the activity.
+     *
+     * @param index the index of the user
+     * @return the caloric waste of the activity
+     */
+    public abstract int caloricWaste(float index);
+
+    /**
      * Determines whether this Repetitions instance is equal to another object.
      *
      * @param o the object to compare with
@@ -106,6 +116,6 @@ public abstract class Repetitions extends Activity {
      */
     @Override
     public String toString(){
-        return super.toString() + "Repetitions: " + this.repetitions + ", " + "Series: " + this.series + "\n";
+        return super.toString() + "Repetitions: " + this.repetitions + ", " + "Series: " + this.series + ", ";
     }
 }

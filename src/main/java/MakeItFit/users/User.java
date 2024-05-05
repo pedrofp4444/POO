@@ -3,6 +3,7 @@ package MakeItFit.users;
 import MakeItFit.activities.Activity;
 import MakeItFit.utils.MakeItFitDate;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
-public abstract class User implements UserInterface {
+public abstract class User implements UserInterface, Serializable {
 
     private final UUID code;
     private String name;
@@ -339,7 +340,6 @@ public abstract class User implements UserInterface {
                         Phone: %s
                         Email: %s
                         Activities: %s
-                        ====================
                 """,
                 this.code,
                 this.name,

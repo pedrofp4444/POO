@@ -6,7 +6,9 @@ import MakeItFit.activities.HardInterface;
 import MakeItFit.activities.implementation.*;
 import MakeItFit.exceptions.EntityDoesNotExistException;
 import MakeItFit.utils.MakeItFitDate;
+import MakeItFit.utils.MyTuple;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -15,7 +17,7 @@ import java.util.*;
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
-public class TrainingPlanManager {
+public class TrainingPlanManager implements Serializable {
 
     private Map<UUID, TrainingPlan> trainingPlans;
 
@@ -42,10 +44,10 @@ public class TrainingPlanManager {
     }
 
     /**
-     * Creates a new training plan by objectives.
+     * Constructs a new training plan by objectives.
      *
-     * @param userCode the code of the user
-     * @param startDate the date that the training plan starts
+     * @param trainingPlan The training plan in usage.
+     * @param index The index of the user.
      * @param hardActivities if the activities are hard
      * @param maxActivitiesPerDay the maximum number of activities per day
      * @param maxDifferentActivities the maximum number of different activities
@@ -54,19 +56,20 @@ public class TrainingPlanManager {
      * @return the planing train created
      * @throws IllegalArgumentException if any argument is invalid
      */
-    public TrainingPlan createTrainingPlanByObjectives(UUID userCode, MakeItFitDate startDate, boolean hardActivities, int maxActivitiesPerDay, int maxDifferentActivities, int weeklyRecurrence, int minimumCaloricWaste) throws IllegalArgumentException {
+    public TrainingPlan constructTrainingPlanByObjectives(TrainingPlan trainingPlan, float index, boolean hardActivities, int maxActivitiesPerDay, int maxDifferentActivities, int weeklyRecurrence, int minimumCaloricWaste) throws IllegalArgumentException {
 
-        if (userCode == null || startDate == null || maxActivitiesPerDay < 0 || maxActivitiesPerDay > 3 || maxDifferentActivities < 0 || weeklyRecurrence < 0 || weeklyRecurrence > 7 || minimumCaloricWaste < 0) {
+        System.out.println("CHEGOU AQUI");
+
+        if (maxActivitiesPerDay < 0 || maxActivitiesPerDay > 3 || maxDifferentActivities < 0 || weeklyRecurrence < 0 || weeklyRecurrence > 7 || minimumCaloricWaste < 0) {
             throw new IllegalArgumentException("Invalid input.");
         }
-        
-        TrainingPlan trainingPlan = new TrainingPlan(userCode, startDate);
+
         ActivityManager activityManager = new ActivityManager();
         int totalCaloricWaste = 0;
         int activitiesAddedToday = 0;
         int differentActivities = 0;
-        int startDayOfWeek = startDate.getDayOfWeek();
-        MakeItFitDate currentDate = startDate;
+        int startDayOfWeek = trainingPlan.getStartDate().getDayOfWeek();
+        MakeItFitDate currentDate = trainingPlan.getStartDate();
         Activity previousActivity = null;
         Random random = new Random();
         boolean hardActivityAddedYesterday = false;
@@ -82,13 +85,13 @@ public class TrainingPlanManager {
                     int expectedDuration = random.nextInt(10, 40);
                     int repetitions = random.nextInt(5, 20);
                     int series = random.nextInt(1, 5);
-                    activity = new PushUp(userCode, currentDate, expectedDuration, "PushUp created automatically", repetitions, series);
+                    activity = new PushUp(trainingPlan.getUserCode(), currentDate, expectedDuration, "PushUp created automatically", activityType, repetitions, series);
                 }
                 case "Running" -> {
                     int expectedDuration = random.nextInt(10, 40);
                     double distance = random.nextInt(500, 5000);
                     double speed = random.nextInt(5, 20);
-                    activity = new Running(userCode, currentDate, expectedDuration, "Running created automatically", distance, speed);
+                    activity = new Running(trainingPlan.getUserCode(), currentDate, expectedDuration, "Running created automatically", activityType, distance, speed);
                 }
                 case "Trail" -> {
                     int expectedDuration = random.nextInt(10, 40);
@@ -96,14 +99,14 @@ public class TrainingPlanManager {
                     int elevationGain = random.nextInt(0, 800);
                     int elevationLoss = random.nextInt(0, 800);
                     int trailType = random.nextInt(1, 3);
-                    activity = new Trail(userCode, currentDate, expectedDuration, "Trail created automatically", distance, elevationGain, elevationLoss, trailType);
+                    activity = new Trail(trainingPlan.getUserCode(), currentDate, expectedDuration, "Trail created automatically", activityType, distance, elevationGain, elevationLoss, trailType);
                 }
                 case "WeightSquat" -> {
                     int expectedDuration = random.nextInt(10, 40);
                     int repetitions = random.nextInt(5, 20);
                     int series = random.nextInt(1, 5);
                     double weight = random.nextInt(5, 80);
-                    activity = new WeightSquat(userCode, currentDate, expectedDuration, "WeightSquat created automatically", repetitions, series, weight);
+                    activity = new WeightSquat(trainingPlan.getUserCode(), currentDate, expectedDuration, "WeightSquat created automatically", activityType, repetitions, series, weight);
                 }
                 default -> throw new IllegalArgumentException("Invalid type.");
             }
@@ -120,7 +123,7 @@ public class TrainingPlanManager {
 
                 if (activitiesAddedToday < maxActivitiesPerDay && differentActivities < maxDifferentActivities && (previousActivity == null || !previousActivity.equals(activity))) {
                     trainingPlan.addActivity(random.nextInt(1, 4), activity);
-                    totalCaloricWaste += activity.getCaloricWaste();
+                    totalCaloricWaste += activity.caloricWaste(index);
                     activitiesAddedToday++;
                     differentActivities++;
                     previousActivity = activity;
@@ -139,6 +142,7 @@ public class TrainingPlanManager {
         }
         return trainingPlan;
     }
+
     /**
      * Inserts a training plan into the manager.
      *
@@ -205,6 +209,33 @@ public class TrainingPlanManager {
      */
     public List<TrainingPlan> getAllTrainingPlans(){
         return new ArrayList<>(this.trainingPlans.values());
+    }
+
+    /**
+     * Adds an activity to a specific training plan.
+     *
+     * @param repetitions the number of repetitions
+     * @param activity the activity to add
+     */
+    public void addActivity(UUID code, int repetitions, Activity activity) {
+        this.trainingPlans.get(code).addActivity(repetitions, activity);
+    }
+
+    /**
+     * Removes an activity from a specific training plan.
+     *
+     * @param repetitions the number of repetitions
+     * @param activity the activity to remove
+     */
+    public List<TrainingPlan> getTrainingPlansFromUser(UUID userCode){
+        List<TrainingPlan> trainingPlans = new ArrayList<>();
+
+        for(TrainingPlan trainingPlan : this.trainingPlans.values()){
+            if(trainingPlan.getUserCode().equals(userCode)){
+                trainingPlans.add(trainingPlan);
+            }
+        }
+        return trainingPlans;
     }
 
     /**

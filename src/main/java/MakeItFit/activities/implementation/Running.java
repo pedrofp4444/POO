@@ -3,6 +3,7 @@ package MakeItFit.activities.implementation;
 import MakeItFit.activities.types.Distance;
 import MakeItFit.utils.MakeItFitDate;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -12,7 +13,7 @@ import java.util.UUID;
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
-public class Running extends Distance {
+public class Running extends Distance implements Serializable {
     private double averageSpeed;
 
     /**
@@ -22,11 +23,12 @@ public class Running extends Distance {
      * @param realizationDate   the date the activity was performed
      * @param expectedDuration  the expected duration of the activity in minutes
      * @param designation       a description of the activity
+     * @param name              the name of the activity
      * @param distance          the distance covered during the activity in meters
      * @param speed             the average speed during the activity in km/h
      */
-    public Running(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, double distance, double speed) {
-        super(userCode, realizationDate, expectedDuration, designation, distance);
+    public Running(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, String name, double distance, double speed) {
+        super(userCode, realizationDate, expectedDuration, designation, name, distance);
         setSpecialization(this.getClass().getSimpleName());
         this.averageSpeed = speed;
     }
@@ -65,8 +67,17 @@ public class Running extends Distance {
      * @return the estimated caloric waste as an integer value
      */
     public void calculateCaloricWaste(float index) {
-        int caloricWaste = (int) (averageSpeed * getDistance() * index * 0.005);
-        setCaloricWaste(caloricWaste);
+        setCaloricWaste(caloricWaste(index));
+    }
+
+    /**
+     * Calculates the caloric waste during the running activity.
+     *
+     * @param index the index to be used in the calculation
+     * @return the estimated caloric waste as an integer value
+     */
+    public int caloricWaste(float index) {
+        return (int) (averageSpeed * getDistance() * index * 0.005);
     }
 
     /**
@@ -76,7 +87,7 @@ public class Running extends Distance {
      */
     @Override
     public String toString() {
-        return super.toString() + "Speed: " + averageSpeed + " km/h\n";
+        return super.toString() + "Speed: " + averageSpeed + " Km/h\n";
     }
 
     /**

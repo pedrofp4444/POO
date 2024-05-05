@@ -3,9 +3,10 @@ package MakeItFit.activities.types;
 import MakeItFit.activities.Activity;
 import MakeItFit.utils.MakeItFitDate;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class Distance extends Activity {
+public abstract class Distance extends Activity implements Serializable {
     private double distance;
 
     /**
@@ -15,10 +16,11 @@ public abstract class Distance extends Activity {
      * @param realizationDate the realization date of the activity
      * @param expectedDuration the expected duration of the activity
      * @param designation the designation of the activity
+     * @param name the name of the activity
      * @param distance the distance covered during the activity
      */
-    public Distance(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, double distance) {
-        super(userCode, realizationDate, expectedDuration, designation);
+    public Distance(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, String name, double distance) {
+        super(userCode, realizationDate, expectedDuration, designation, name);
         this.distance = distance;
     }
 
@@ -58,6 +60,14 @@ public abstract class Distance extends Activity {
     public abstract void calculateCaloricWaste(float index);
 
     /**
+     * Calculates the caloric waste of the activity.
+     *
+     * @param index the index of the user
+     * @return the caloric waste of the activity
+     */
+    public abstract int caloricWaste(float index);
+
+    /**
      * Returns a string representation of the Distance instance.
      *
      * @return the string representation of the Distance instance
@@ -83,6 +93,6 @@ public abstract class Distance extends Activity {
      */
     @Override
     public String toString(){
-        return super.toString() + "Distance: " + this.distance + ", ";
+        return super.toString() + "Distance: " + this.distance + " meters, ";
     }
 }

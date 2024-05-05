@@ -67,6 +67,13 @@ public class Menu {
     }
 
     /**
+     * Stops the menu from running.
+     */
+    public void stopMenu() {
+        keepRunning = false;
+    }
+
+    /**
      * Runs the menu, displaying the options and handling user input.
      * The menu will keep running until the user selects the "Exit" option.
      */

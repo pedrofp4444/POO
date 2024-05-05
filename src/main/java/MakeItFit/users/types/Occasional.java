@@ -3,13 +3,15 @@ package MakeItFit.users.types;
 import MakeItFit.users.Gender;
 import MakeItFit.users.User;
 
+import java.io.Serializable;
+
 /**
  * The Occasional class defines a subclass of the User class, representing an occasional user.
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
-public class Occasional extends User {
+public class Occasional extends User implements Serializable {
     private int frequency;
 
     /**
@@ -74,6 +76,6 @@ public class Occasional extends User {
     }
 
     public String toString() {
-        return super.toString() + "Frequency: " + frequency + "\n";
+        return super.toString() + "        Frequency: " + frequency + "\n" + "        ====================\n";
     }
 }

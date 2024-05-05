@@ -3,6 +3,7 @@ package MakeItFit.activities.implementation;
 import MakeItFit.activities.types.RepetitionsWithWeights;
 import MakeItFit.utils.MakeItFitDate;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -12,7 +13,7 @@ import java.util.UUID;
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
-public class WeightSquat extends RepetitionsWithWeights {
+public class WeightSquat extends RepetitionsWithWeights implements Serializable {
 
     /**
      * Constructs a new WeightSquat activity with the given parameters.
@@ -21,12 +22,13 @@ public class WeightSquat extends RepetitionsWithWeights {
      * @param realizationDate The date the activity was performed.
      * @param expectedDuration The expected duration of the activity in minutes.
      * @param designation     The designation or name of the activity.
+     * @param name            The name of the activity.
      * @param repetitions     The number of repetitions performed in each series.
      * @param series          The number of series performed.
      * @param weight          The weight used during the squats.
      */
-    public WeightSquat(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, int repetitions, int series, double weight) {
-        super(userCode, realizationDate, expectedDuration, designation, repetitions, series, weight);
+    public WeightSquat(UUID userCode, MakeItFitDate realizationDate, int expectedDuration, String designation, String name, int repetitions, int series, double weight) {
+        super(userCode, realizationDate, expectedDuration, designation, name, repetitions, series, weight);
         setSpecialization(this.getClass().getSimpleName());
     }
 
@@ -40,12 +42,22 @@ public class WeightSquat extends RepetitionsWithWeights {
     }
 
     /**
-     * Calculates the caloric waste for the WeightSquat activity based on the repetitions, series, and weight.
+     * Calculates the caloric waste for the WeightSquat activity.
      *
+     * @param index The index to be used in the calculation.
      */
     public void calculateCaloricWaste(float index) {
-        int caloricWaste = (int) (getRepetitions() * getSeries() * getWeight() * 0.2 * index * 0.5);
-        setCaloricWaste(caloricWaste);
+        setCaloricWaste(caloricWaste(index));
+    }
+
+    /**
+     * Calculates the caloric waste for the WeightSquat activity based on the repetitions, series, and weight.
+     *
+     * @param index The index to be used in the calculation.
+     * @return The total caloric waste calculated based on the number of repetitions, series, and weight.
+     */
+    public int caloricWaste(float index) {
+        return (int) (getRepetitions() * getSeries() * getWeight() * 0.2 * index * 0.5);
     }
 
     /**

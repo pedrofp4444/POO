@@ -1,5 +1,7 @@
 package MakeItFit.utils;
 
+import java.io.Serializable;
+
 /**
  * The class MyTuple represents a tuple.
  *
@@ -9,7 +11,7 @@ package MakeItFit.utils;
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
-public class MyTuple<T1, T2> {
+public class MyTuple<T1, T2> implements Serializable {
 
     private final T1 item1;
     private final T2 item2;
