@@ -28,7 +28,6 @@ public class TrainingPlanTest {
     @Test
     public void testConstructors() {
         UUID UUID_user = java.util.UUID.randomUUID();
-        UUID UUID_trainingPlan = java.util.UUID.randomUUID();
         TrainingPlan trainingPlan1 = new TrainingPlan(UUID_user, MakeItFitDate.of(2024, 4, 4));
         assertNotNull(trainingPlan1);
         TrainingPlan trainingPlan2 = new TrainingPlan(trainingPlan1);
@@ -42,7 +41,6 @@ public class TrainingPlanTest {
     @Test
     public void testTrainingPlanConstructors() {
         UUID UUID_user = java.util.UUID.randomUUID();
-        UUID UUID_trainingPlan = java.util.UUID.randomUUID();
         TrainingPlan trainingPlan1 = new TrainingPlan(UUID_user, MakeItFitDate.of(2024, 4, 4));
         assertNotNull(trainingPlan1, "TrainingPlan instance should be created successfully.");
 
@@ -57,11 +55,9 @@ public class TrainingPlanTest {
     @Test
     public void testTrainingPlanGetters() {
         UUID UUID_user = java.util.UUID.randomUUID();
-        UUID UUID_trainingPlan = java.util.UUID.randomUUID();
         MakeItFitDate startDate = MakeItFitDate.of(2024, 4, 4);
         TrainingPlan trainingPlan = new TrainingPlan(UUID_user, startDate);
         assertEquals(UUID_user, trainingPlan.getUserCode(), "User code should match the expected value.");
-        assertEquals(UUID_trainingPlan, trainingPlan.getCode(), "Training plan code should match the expected value.");
         assertEquals(startDate, trainingPlan.getStartDate(), "Start date should match the expected value.");
     }
 
@@ -72,7 +68,6 @@ public class TrainingPlanTest {
     @Test
     public void testTrainingPlanAddActivity() {
         UUID UUID_user = java.util.UUID.randomUUID();
-        UUID UUID_trainingPlan = java.util.UUID.randomUUID();
         MakeItFitDate startDate = MakeItFitDate.of(2024, 4, 4);
         TrainingPlan trainingPlan = new TrainingPlan(UUID_user, startDate);
         assertEquals(0, trainingPlan.getActivities().size(), "The activities list should be empty.");
@@ -88,16 +83,15 @@ public class TrainingPlanTest {
     @Test
     public void testTrainingPlanRemoveActivity() {
         UUID UUID_user = java.util.UUID.randomUUID();
-        UUID UUID_trainingPlan = java.util.UUID.randomUUID();
         MakeItFitDate startDate = MakeItFitDate.of(2024, 4, 4);
         TrainingPlan trainingPlan = new TrainingPlan(UUID_user, startDate);
         assertEquals(0, trainingPlan.getActivities().size(), "The activities list should be empty.");
 
-        PushUp pushUp = new PushUp(UUID.randomUUID(), MakeItFitDate.of(2024, 4, 4), 30, "Daily try", 10, 10);
+        PushUp pushUp = new PushUp(UUID.randomUUID(), MakeItFitDate.of(2024, 4, 4), 30, "Daily try", "PushUp", 10, 10);
         trainingPlan.addActivity(10, pushUp);
         assertEquals(1, trainingPlan.getActivities().size(), "The activities list should have one element.");
 
-        trainingPlan.removeActivity(  pushUp);
+        trainingPlan.removeActivity(pushUp.getCode());
         assertEquals(0, trainingPlan.getActivities().size(), "The activities list should be empty.");
     }
 
@@ -108,12 +102,10 @@ public class TrainingPlanTest {
     @Test
     public void testTrainingPlanEquals() {
         UUID UUID_user = java.util.UUID.randomUUID();
-        UUID UUID_trainingPlan = java.util.UUID.randomUUID();
         TrainingPlan trainingPlan1 = new TrainingPlan(UUID_user, MakeItFitDate.of(2024, 4, 4));
-       TrainingPlan trainingPlan2 = new TrainingPlan(UUID_user, MakeItFitDate.of(2025, 4, 4));
-        assertFalse(trainingPlan1.equals(trainingPlan2), "TrainingPlan instance should not be equal to null.");
+        TrainingPlan trainingPlan2 = new TrainingPlan(UUID_user, MakeItFitDate.of(2024, 4, 4));
+        assertNotEquals(trainingPlan1, null, "TrainingPlan instance should not be equal to null.");
 
-        TrainingPlan trainingPlan3 = new TrainingPlan(UUID_user, MakeItFitDate.of(2024, 4, 4));
-        assertTrue(trainingPlan1.equals(trainingPlan3), "TrainingPlan instance should be equal to another instance with the same attributes.");
+        assertTrue(trainingPlan1.equals(trainingPlan2), "TrainingPlan instance should be equal to another instance with the same attributes.");
     }
 }

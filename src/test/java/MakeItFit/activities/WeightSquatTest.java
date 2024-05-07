@@ -1,6 +1,9 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import MakeItFit.activities.implementation.WeightSquat;
+import MakeItFit.users.Gender;
+import MakeItFit.users.User;
+import MakeItFit.users.types.Amateur;
 import MakeItFit.utils.MakeItFitDate;
 import org.junit.jupiter.api.Test;
 
@@ -22,8 +25,8 @@ public class WeightSquatTest {
      */
     @Test
     public void testConstructors() {
-        UUID UUID = java.util.UUID.randomUUID();
-        WeightSquat squat1 = new WeightSquat(UUID, MakeItFitDate.of(2024, 4, 4), 30, "Weekly try", 20, 3, 50);
+        User user = new Amateur("John", 20, Gender.Male, 70, 180, 65, 3, "Wallstreet N16", "974632836", "jonh@mail.com");
+        WeightSquat squat1 = new WeightSquat(user.getCode(), MakeItFitDate.of(2024, 4, 4), 30, "Weekly try", "WeightSquat", 20, 3, 50);
         assertNotNull(squat1, "WeightSquat instance should be created successfully.");
 
         WeightSquat squat3 = new WeightSquat(squat1);
@@ -35,10 +38,10 @@ public class WeightSquatTest {
      */
     @Test
     public void testCalculateCaloricWaste() {
-        UUID UUID = java.util.UUID.randomUUID();
-        WeightSquat squat1 = new WeightSquat(UUID, MakeItFitDate.of(2024, 4, 4), 30, "Weekly try", 20, 3, 50);
-        squat1.calculateCaloricWaste();
-        assertEquals(1500, squat1.getCaloricWaste(), "Calculated caloric waste should match the expected value.");
+        User user = new Amateur("John", 20, Gender.Male, 70, 180, 65, 3, "Wallstreet N16", "974632836", "jonh@mail.com");
+        WeightSquat squat1 = new WeightSquat(user.getCode(), MakeItFitDate.of(2024, 4, 4), 30, "Weekly try", "WeightSquat", 20, 3, 50);
+        squat1.calculateCaloricWaste(user.getIndex());
+        assertEquals(6968, squat1.getCaloricWaste(), "Calculated caloric waste should match the expected value.");
     }
 
     /**
@@ -46,12 +49,12 @@ public class WeightSquatTest {
      */
     @Test
     public void testEquals() {
-        UUID UUID = java.util.UUID.randomUUID();
-        WeightSquat squat1 = new WeightSquat(UUID, MakeItFitDate.of(2024, 4, 4), 30, "Weekly try", 20, 3, 50);
-        assertFalse(squat1.equals(null), "WeightSquat instance should not be equal to null.");
+        User user = new Amateur("John", 20, Gender.Male, 70, 180, 65, 3, "Wallstreet N16", "974632836", "jonh@mail.com");
+        WeightSquat squat1 = new WeightSquat(user.getCode(), MakeItFitDate.of(2024, 4, 4), 30, "Weekly try", "WeightSquat", 20, 3, 50);
+        assertNotEquals(null, squat1, "WeightSquat instance should not be equal to null.");
 
         UUID UUID2 = java.util.UUID.randomUUID();
-        WeightSquat squat2 = new WeightSquat(UUID2, MakeItFitDate.of(2024, 4, 4), 30, "Weekly try", 20, 3, 50);
-        assertTrue(squat1.equals(squat2), "WeightSquat instances with identical parameters should be considered equal.");
+        WeightSquat squat2 = new WeightSquat(user.getCode(), MakeItFitDate.of(2024, 4, 4), 30, "Weekly try", "WeightSquat", 20, 3, 50);
+        assertEquals(squat1, squat2, "WeightSquat instances with identical parameters should be considered equal.");
     }
 }

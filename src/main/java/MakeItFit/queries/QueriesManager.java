@@ -17,7 +17,7 @@ import MakeItFit.utils.MakeItFitDate;
 
 public class QueriesManager {
     private HowManyAltimetryDone howManyAltimetryDone;
-    private HowManyKMsDone howManyKMsDone;
+    private HowManyKMsDone howManyMetersDone;
     private MostDoneActivity mostDoneActivity;
     private MostDemandingTrainingPlan mostDemandingTrainingPlan;
     private WhoBurnsMoreCalories whoBurnsMoreCalories;
@@ -30,7 +30,7 @@ public class QueriesManager {
      */
     public QueriesManager(UserManager userManager, TrainingPlanManager trainingPlanManager) {
         this.howManyAltimetryDone = new HowManyAltimetryDone();
-        this.howManyKMsDone = new HowManyKMsDone();
+        this.howManyMetersDone = new HowManyKMsDone();
         this.mostDoneActivity = new MostDoneActivity();
         this.mostDemandingTrainingPlan = new MostDemandingTrainingPlan();
         this.whoBurnsMoreCalories = new WhoBurnsMoreCalories();
@@ -63,7 +63,7 @@ public class QueriesManager {
      * @return number of km the user did in a given period of time or in total
      */
     public double executeQueryHowManyKMsDone(UserManager userManager, String email , MakeItFitDate date1 , MakeItFitDate date2) {
-        return this.howManyKMsDone.executeQuery(userManager, email, date1, date2);
+        return this.howManyMetersDone.executeQuery(userManager, email, date1, date2);
     }
 
     /**

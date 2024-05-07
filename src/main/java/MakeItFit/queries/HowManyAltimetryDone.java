@@ -34,7 +34,7 @@ public class HowManyAltimetryDone {
             for (Activity a : user.getListActivities()) {
 
                 if (a instanceof DistanceWithAltimetry)  {
-                    altimetry += ((DistanceWithAltimetry) a).getElevationGain()-((DistanceWithAltimetry) a).getElevationLoss();
+                    altimetry += ((DistanceWithAltimetry) a).getElevationGain()+((DistanceWithAltimetry) a).getElevationLoss();
                 }
             }
             return altimetry;
@@ -48,7 +48,7 @@ public class HowManyAltimetryDone {
             for (Activity a : user.getListActivities()) {
 
                 if (a instanceof DistanceWithAltimetry  && a.getRealizationDate().isAfter(date1) && a.getRealizationDate().isBefore(date2)){
-                    altimetry += ((DistanceWithAltimetry) a).getElevationGain()-((DistanceWithAltimetry) a).getElevationLoss();
+                    altimetry += ((DistanceWithAltimetry) a).getElevationGain()+((DistanceWithAltimetry) a).getElevationLoss();
                 }
             }
             return altimetry;

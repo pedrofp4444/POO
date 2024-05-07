@@ -35,9 +35,9 @@ public class MostDoneActivity {
                     count[0]++;
                 } else if (a instanceof Distance) {
                     count[1]++;
-                } else if (a instanceof Repetitions) {
-                    count[2]++;
                 } else if (a instanceof RepetitionsWithWeights) {
+                    count[2]++;
+                } else if (a instanceof Repetitions) {
                     count[3]++;
                 }
             }

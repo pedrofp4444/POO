@@ -29,7 +29,7 @@ public class UserManagerTest {
     @Test
     public void testCreateUserValidInputs() {
         UserManager userManager = new UserManager();
-        User user = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com");
+        User user = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 7, "Professional");
         assertNotNull(user);
         assertEquals("José Fernandes", user.getName());
         assertEquals(45, user.getAge());
@@ -50,22 +50,22 @@ public class UserManagerTest {
     public void testCreateUserInvalidInputs() {
         UserManager userManager = new UserManager();
         assertThrows(IllegalArgumentException.class, () -> {
-            userManager.createUser(null, 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com");
+            userManager.createUser(null, 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 7, "Professional");
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            userManager.createUser("José Fernandes", -1, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com");
+            userManager.createUser("José Fernandes", -1, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 7, "Professional");
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            userManager.createUser("José Fernandes", 45, Gender.Male, -75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com");
+            userManager.createUser("José Fernandes", 45, Gender.Male, -75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 7, "Professional");
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            userManager.createUser("José Fernandes", 45, Gender.Male, 75, -175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com");
+            userManager.createUser("José Fernandes", 45, Gender.Male, 75, -175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 7, "Professional");
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, -67, 6, "Braga", "990 000 000", "josefernandes@mail.com");
+            userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, -67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 7, "Professional");
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, -6, "Braga", "990 000 000", "josefernandes@mail.com");
+            userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, -6, "Braga", "990 000 000", "josefernandes@mail.com", 7, "Professional");
         });
     }
 
@@ -75,7 +75,7 @@ public class UserManagerTest {
     @Test
     public void testInsertUserValid() {
         UserManager userManager = new UserManager();
-        User user = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com");
+        User user = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 7, "Professional");
         userManager.insertUser(user);
         assertNotNull(userManager.getUserByCode(user.getCode()));
     }
@@ -86,9 +86,9 @@ public class UserManagerTest {
     @Test
     public void testInsertUserDuplicateEmail() {
         UserManager userManager = new UserManager();
-        User user1 = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com");
+        User user1 = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 7, "Professional");
         userManager.insertUser(user1);
-        User user2 = userManager.createUser("António Silva", 25, Gender.Male, 95, 198, 72, 9, "Lisboa", "990 000 000", "josefernandes@mail.com");
+        User user2 = userManager.createUser("António Silva", 25, Gender.Male, 95, 198, 72, 9, "Lisboa", "990 000 000", "josefernandes@mail.com", 7, "Professional");
         assertThrows(ExistingEntityConflictException.class, () -> {
             userManager.insertUser(user2);
         });
@@ -100,7 +100,7 @@ public class UserManagerTest {
     @Test
     public void testRemoveUser() {
         UserManager userManager = new UserManager();
-        User user = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com");
+        User user = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 7, "Professional");
         userManager.insertUser(user);
         userManager.removeUserByCode(user.getCode());
         assertThrows(EntityDoesNotExistException.class, () -> {
@@ -126,7 +126,7 @@ public class UserManagerTest {
     @Test
     public void testExistsUserWithEmail() {
         UserManager userManager = new UserManager();
-        User user = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com");
+        User user = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 7, "Professional");
         userManager.insertUser(user);
         assertTrue(userManager.existsUserWithEmail("josefernandes@mail.com"));
         assertFalse(userManager.existsUserWithEmail("antoniosilva@mail.com"));
@@ -138,7 +138,7 @@ public class UserManagerTest {
     @Test
     public void testGetUserByCode() {
         UserManager userManager = new UserManager();
-        User user = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com");
+        User user = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 7, "Professional");
         userManager.insertUser(user);
         assertNotNull(userManager.getUserByCode(user.getCode()));
     }
@@ -149,7 +149,7 @@ public class UserManagerTest {
     @Test
     public void testGetUserByEmail() {
         UserManager userManager = new UserManager();
-        User user = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com");
+        User user = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 7, "Professional");
         userManager.insertUser(user);
         assertNotNull(userManager.getUserByEmail(user.getEmail()));
     }
@@ -160,7 +160,7 @@ public class UserManagerTest {
     @Test
     public void testUpdateUser() {
         UserManager userManager = new UserManager();
-        User user = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com");
+        User user = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 7, "Professional");
         userManager.insertUser(user);
         user.setAge(34);
         user.setLevel(5);
@@ -177,7 +177,7 @@ public class UserManagerTest {
     @Test
     public void testUpdateNonExistingUser() {
         UserManager userManager = new UserManager();
-        User user = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com");
+        User user = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 7, "Professional");
         assertThrows(EntityDoesNotExistException.class, () -> {
             userManager.updateUser(user);
         });
@@ -189,8 +189,8 @@ public class UserManagerTest {
     @Test
     public void testGetAllUsers() {
         UserManager userManager = new UserManager();
-        User user1 = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com");
-        User user2 = userManager.createUser("António Silva", 25, Gender.Male, 95, 198, 72, 9, "Lisboa", "990 000 000", "antoniosilva@mail.com");
+        User user1 = userManager.createUser("José Fernandes", 45, Gender.Male, 75, 175, 67, 6, "Braga", "990 000 000", "josefernandes@mail.com", 7, "Professional");
+        User user2 = userManager.createUser("António Silva", 25, Gender.Male, 95, 198, 72, 9, "Lisboa", "990 000 000", "antoniosilva@mail.com", 7, "Professional");
         userManager.insertUser(user1);
         userManager.insertUser(user2);
         List<User> allUsers = userManager.getAllUsers();

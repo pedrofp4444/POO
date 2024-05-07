@@ -1,6 +1,9 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import MakeItFit.activities.implementation.Running;
+import MakeItFit.users.Gender;
+import MakeItFit.users.User;
+import MakeItFit.users.types.Amateur;
 import MakeItFit.utils.MakeItFitDate;
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +23,8 @@ public class RunningTest {
      */
     @Test
     public void testConstructors() {
-        UUID UUID = java.util.UUID.randomUUID();
-        Running run1 = new Running(UUID, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
+        User user = new Amateur("John", 20, Gender.Male, 70, 180, 65, 3, "Wallstreet N16", "974632836", "jonh@mail.com");
+        Running run1 = new Running(user.getCode(), MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", "Running", 2300, 14.5);
         assertNotNull(run1);
         assertEquals(14.5, run1.getSpeed());
         Running run3 = new Running(run1);
@@ -34,8 +37,8 @@ public class RunningTest {
      */
     @Test
     public void testGetSpeed() {
-        UUID UUID = java.util.UUID.randomUUID();
-        Running run1 = new Running(UUID, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
+        User user = new Amateur("John", 20, Gender.Male, 70, 180, 65, 3, "Wallstreet N16", "974632836", "jonh@mail.com");
+        Running run1 = new Running(user.getCode(), MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", "Running", 2300, 14.5);
         assertEquals(14.5, run1.getSpeed());
     }
 
@@ -44,8 +47,8 @@ public class RunningTest {
      */
     @Test
     public void testSetSpeed() {
-        UUID UUID = java.util.UUID.randomUUID();
-        Running run1 = new Running(UUID, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
+        User user = new Amateur("John", 20, Gender.Male, 70, 180, 65, 3, "Wallstreet N16", "974632836", "jonh@mail.com");
+        Running run1 = new Running(user.getCode(), MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", "Running", 2300, 14.5);
         run1.setSpeed(12.0);
         assertEquals(12.0, run1.getSpeed());
     }
@@ -55,10 +58,10 @@ public class RunningTest {
      */
     @Test
     public void testCalculateCaloricWaste() {
-        UUID UUID = java.util.UUID.randomUUID();
-        Running run1 = new Running(UUID, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
-        int expectedCaloricWaste = 16675;
-        run1.calculateCaloricWaste();
+        User user = new Amateur("John", 20, Gender.Male, 70, 180, 65, 3, "Wallstreet N16", "974632836", "jonh@mail.com");
+        Running run1 = new Running(user.getCode(), MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", "Runnign", 2300, 14.5);
+        int expectedCaloricWaste = 3873;
+        run1.calculateCaloricWaste(user.getIndex());
         assertEquals(expectedCaloricWaste, run1.getCaloricWaste());
     }
 
@@ -67,11 +70,12 @@ public class RunningTest {
      */
     @Test
     public void testEquals() {
-        UUID UUID = java.util.UUID.randomUUID();
-        UUID UUID2 = java.util.UUID.randomUUID();
-        Running run1 = new Running(UUID, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
-        Running run2 = new Running(UUID2, MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", 2300, 14.5);
-        assertFalse(run1.equals(null));
-        assertTrue(run1.equals(run2));
+        User user1 = new Amateur("John", 20, Gender.Male, 70, 180, 65, 3, "Wallstreet N16", "974632836", "jonh@mail.com");
+        User user2 = new Amateur("Erica", 25, Gender.Female, 56, 164, 75, 2, "Wallstreet N18", "972233536", "erica@mail.com");
+
+        Running run1 = new Running(user1.getCode(), MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", "Running", 2300, 14.5);
+        Running run2 = new Running(user2.getCode(), MakeItFitDate.of(2024, 4, 4), 45, "Braga em Movimento", "Running", 2300, 14.5);
+        assertNotEquals(null, run1);
+        assertEquals(run1, run2);
     }
 }

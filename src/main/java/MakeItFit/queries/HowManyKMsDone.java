@@ -37,7 +37,7 @@ public class HowManyKMsDone {
                 }
             }
 
-            return distance;
+            return distance/1000;
         }else if ( date1 != null && date2 != null && date2.isAfter(date1) ) {
             User user = userManager.getUserByEmail(email);
             double distance = 0;
@@ -48,7 +48,7 @@ public class HowManyKMsDone {
                 }
             }
 
-            return distance;
+            return distance/1000;
 
         }else{
              throw  new IllegalArgumentException("Invalid input: date1 and date2 must be non-null and date2 must be after date1.");

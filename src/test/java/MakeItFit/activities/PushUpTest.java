@@ -1,6 +1,9 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import MakeItFit.activities.implementation.PushUp;
+import MakeItFit.users.Gender;
+import MakeItFit.users.User;
+import MakeItFit.users.types.Amateur;
 import MakeItFit.utils.MakeItFitDate;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +22,7 @@ public class PushUpTest {
     @Test
         public void testConstructors() {
             UUID UUID = java.util.UUID.randomUUID();
-            PushUp pushUp1 = new PushUp(UUID, MakeItFitDate.of(2024, 4, 4), 30, "Daily try", 10, 10);
+            PushUp pushUp1 = new PushUp(UUID, MakeItFitDate.of(2024, 4, 4), 40, "Daily try", "PushUp", 10, 4);
             assertNotNull(pushUp1);
             PushUp pushUp2 = new PushUp(pushUp1);
             assertNotNull(pushUp2);
@@ -31,7 +34,7 @@ public class PushUpTest {
     @Test
     public void testPushUpConstructors() {
         UUID UUID = java.util.UUID.randomUUID();
-        PushUp pushUp1 = new PushUp(UUID, MakeItFitDate.of(2024, 4, 4), 30, "Daily try", 10, 10);
+        PushUp pushUp1 = new PushUp(UUID, MakeItFitDate.of(2024, 4, 4), 30, "Daily try", "PushUp", 10, 10);
         assertNotNull(pushUp1, "PushUp instance should be created successfully.");
 
         PushUp pushUp2 = new PushUp(pushUp1);
@@ -44,16 +47,15 @@ public class PushUpTest {
      */
     @Test
     public void testCalculateCaloricWaste() {
-        UUID UUID = java.util.UUID.randomUUID();
-        PushUp pushUp1 = new PushUp(UUID, MakeItFitDate.of(2024, 4, 4), 30, "Daily try", 10, 10);
-        int expectedWaste1 = 50;
-        pushUp1.calculateCaloricWaste();
+        User user = new Amateur("John", 20, Gender.Male, 70, 180, 65, 3, "Wallstreet N16", "974632836", "jonh@mail.com");
+        PushUp pushUp1 = new PushUp(user.getCode(), MakeItFitDate.of(2024, 4, 4), 30, "Daily try", "PushUp", 10, 10);
+        int expectedWaste1 = 232;
+        pushUp1.calculateCaloricWaste(user.getIndex());
         assertEquals(expectedWaste1, pushUp1.getCaloricWaste(), "Caloric waste should match the expected value.");
 
-        UUID UUID2 = java.util.UUID.randomUUID();
-        PushUp pushUp2 = new PushUp(UUID2, MakeItFitDate.of(2024, 4, 4), 30, "Daily try", 5, 25);
-        int expectedWaste2 = 62;
-        pushUp2.calculateCaloricWaste();
+        PushUp pushUp2 = new PushUp(user.getCode(), MakeItFitDate.of(2024, 4, 4), 30, "Daily try", "PushUp", 5, 25);
+        int expectedWaste2 = 290;
+        pushUp2.calculateCaloricWaste(user.getIndex());
         assertEquals(expectedWaste2, pushUp2.getCaloricWaste(), "Caloric waste should match the expected value.");
     }
 
@@ -62,12 +64,11 @@ public class PushUpTest {
      */
     @Test
     public void testPushUpEquals() {
-        UUID UUID = java.util.UUID.randomUUID();
-        PushUp pushUp1 = new PushUp(UUID, MakeItFitDate.of(2024, 4, 4), 30, "Daily try", 10, 10);
-        assertFalse(pushUp1.equals(null), "PushUp instance should not be equal to null.");
+        User user = new Amateur("John", 20, Gender.Male, 70, 180, 65, 3, "Wallstreet N16", "974632836", "jonh@mail.com");
+        PushUp pushUp1 = new PushUp(user.getCode(), MakeItFitDate.of(2024, 4, 4), 30, "Daily try", "PushUp", 6, 4);
+        assertNotEquals(null, pushUp1, "PushUp instance should not be equal to null.");
 
-        UUID UUID2 = java.util.UUID.randomUUID();
-        PushUp pushUp2 = new PushUp(UUID, MakeItFitDate.of(2024, 4, 4), 30, "Daily try", 10, 10);
-        assertTrue(pushUp1.equals(pushUp2), "PushUp instances with the same properties should be equal.");
+        PushUp pushUp2 = new PushUp(user.getCode(), MakeItFitDate.of(2024, 4, 4), 30, "Daily try", "PushUp", 6, 4);
+        assertEquals(pushUp1, pushUp2, "PushUp instances with the same properties should be equal.");
     }
 }

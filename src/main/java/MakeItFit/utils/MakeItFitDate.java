@@ -157,11 +157,13 @@ public class MakeItFitDate implements Comparable<MakeItFitDate>, Serializable {
     /**
      * Checks if two dates are equal.
      *
-     * @param other the other date
+     * @param o the other date
      * @return true if the dates are equal; otherwise, false
      */
-    public boolean isEqual(MakeItFitDate other) {
-        return this.date.isEqual(other.date);
+    @Override
+    public boolean equals(Object o) {
+        MakeItFitDate date = (MakeItFitDate) o;
+        return this.date.isEqual(date.getDate());
     }
 
     /**

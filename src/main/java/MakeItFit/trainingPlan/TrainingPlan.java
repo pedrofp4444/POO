@@ -138,7 +138,7 @@ public class TrainingPlan implements Serializable {
             return false;
         }
         TrainingPlan trainingPlan = (TrainingPlan) o;
-        return this.userCode.equals(trainingPlan.getUserCode()) && this.code.equals(trainingPlan.getCode()) && this.startDate.equals(trainingPlan.getStartDate()) && this.activities.equals(trainingPlan.getActivities());
+        return this.userCode.equals(trainingPlan.getUserCode()) && this.startDate.equals(trainingPlan.getStartDate()) && this.activities.equals(trainingPlan.getActivities());
     }
 
     /**
