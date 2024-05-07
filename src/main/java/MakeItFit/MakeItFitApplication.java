@@ -1,6 +1,7 @@
 package MakeItFit;
 
 import MakeItFit.menu.*;
+import MakeItFit.views.AdminView;
 import MakeItFit.views.UserView;
 
 import java.util.*;
@@ -13,15 +14,15 @@ import java.util.*;
  */
 public class MakeItFitApplication {
     private UserView userView;
+    private AdminView adminView;
     private Menu mainMenu;
 
     /**
-     * Initializes the application components.
-     * Creates instances of `UserManager`, `UserController`, and `AdminView`.
-     * Also creates the main menu of the application.
+     * Constructor for objects of class MakeItFitApplication.
      */
     public void init() {
         this.userView = new UserView();
+        this.adminView = new AdminView();
         this.mainMenu = createMainMenu();
     }
 
@@ -52,7 +53,16 @@ public class MakeItFitApplication {
      */
     private void initApplication() {
         System.out.println("[APP] Application is running ...");
-        this.userView.login();
+
+        System.out.print("[APP] Do you want to login as an admin? (y/n): ");
+        Scanner scanner = new Scanner(System.in);
+        String answer = scanner.nextLine();
+
+        if (answer.equals("y") || answer.equals("Y")) {
+            this.adminView.login();
+        } else {
+            this.userView.login();
+        }
     }
 
     /**

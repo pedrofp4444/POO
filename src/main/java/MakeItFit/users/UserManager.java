@@ -211,6 +211,16 @@ public class UserManager implements Serializable {
     }
 
     /**
+     * Removes an activity from a user.
+     *
+     * @param email the user's email
+     * @param activityCode the activity code
+     */
+    public void removeActivityFromUser(String email, UUID activityCode) {
+        usersByEmail.get(email).removeActivity(activityCode);
+    }
+
+    /**
      * Adds a list of activities to a user.
      *
      * @param userCode the user's code

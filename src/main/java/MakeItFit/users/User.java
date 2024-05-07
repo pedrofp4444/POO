@@ -312,10 +312,10 @@ public abstract class User implements UserInterface, Serializable {
     /**
      * Removes an activity from the user's list of activities.
      *
-     * @param activity The activity to remove.
+     * @param activityCode The code of the activity to remove.
      */
-    public void removeActivity(Activity activity) {
-        this.activities.remove(activity);
+    public void removeActivity(UUID activityCode) {
+        this.activities.removeIf(activity -> activity.getCode().equals(activityCode));
     }
 
     /**

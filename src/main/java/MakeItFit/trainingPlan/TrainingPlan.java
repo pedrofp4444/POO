@@ -102,11 +102,11 @@ public class TrainingPlan implements Serializable {
     /**
      * Removes an activity from the training plan.
      *
-     * @param activity the activity to remove
+     * @param code the code of the activity to remove
      */
-    public void removeActivity(Activity activity) {
+    public void removeActivity(UUID code) {
         for (MyTuple<Integer, Activity> tuple : this.activities) {
-            if (tuple.getItem2().equals(activity)) {
+            if (tuple.getItem2().getCode().equals(code)) {
                 this.activities.remove(tuple);
                 break;
             }
@@ -171,5 +171,3 @@ public class TrainingPlan implements Serializable {
         return activities;
     }
 }
-
-

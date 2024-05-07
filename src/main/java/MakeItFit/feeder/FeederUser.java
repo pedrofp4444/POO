@@ -12,16 +12,16 @@ import java.util.Random;
  */
 public class FeederUser {
 
-    private final UserController userController;
+    private final UserManager userManager;
     private final Random random = new Random();
 
     /**
-     * Constructs a new user feeder with the provided user controller.
+     * Constructs a new user feeder with the provided user Manager.
      *
-     * @param userController The user controller to be used for adding random users.
+     * @param userManager The user Manager to be used for adding random users.
      */
-    public FeederUser(UserController userController) {
-        this.userController = userController;
+    public FeederUser(UserManager userManager) {
+        this.userManager = userManager;
     }
 
     /**
@@ -45,7 +45,7 @@ public class FeederUser {
             String phone = "90000000" + i;
             String email = "user" + i + "@example.com";
 
-            userController.createUser(name, age, gender, weight, height, bpm, level, address, phone, email);
+            userManager.createUser(name, age, gender, weight, height, bpm, level, address, phone, email, 0, "Amateur");
         }
     }
 }

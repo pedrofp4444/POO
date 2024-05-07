@@ -236,9 +236,19 @@ public class TrainingPlanManager implements Serializable {
 
     /**
      * Removes an activity from a specific training plan.
+     * 
+     * @param code the code of the training plan
+     * @param activity the code of the activity to remove
+     */
+    public void removeActivity(UUID code, UUID activity) {
+        this.trainingPlans.get(code).removeActivity(activity);
+    }
+
+    /**
+     * Retrieves a list of all training plans from a user.
      *
-     * @param repetitions the number of repetitions
-     * @param activity the activity to remove
+     * @param userCode the code of the user
+     * @return a list of all training plans from the user
      */
     public List<TrainingPlan> getTrainingPlansFromUser(UUID userCode){
         List<TrainingPlan> trainingPlans = new ArrayList<>();

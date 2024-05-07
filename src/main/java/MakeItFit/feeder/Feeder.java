@@ -1,6 +1,6 @@
 package MakeItFit.feeder;
 
-import MakeItFit.users.UserController;
+import MakeItFit.users.UserManager;
 
 /**
  * The class Feeder represents way of populate the different facilities of the application.
@@ -14,10 +14,10 @@ public class Feeder {
     /**
      * Constructs a new feeder with the provided user controller.
      *
-     * @param userController The user controller to be used by the feeder.
+     * @param userManager The user controller to be used by the feeder.
      */
-    public Feeder(UserController userController) {
-        this.feederUser = new FeederUser(userController);
+    public Feeder(UserManager userManager) {
+        this.feederUser = new FeederUser(userManager);
     }
 
     /**
@@ -25,7 +25,7 @@ public class Feeder {
      *
      * @param numberOfUsers The number of random users to be added.
      */
-    public void feedData(int numberOfUsers) {
+    public void feedUserData(int numberOfUsers) {
         feederUser.feedRandomUsers(numberOfUsers);
     }
 }

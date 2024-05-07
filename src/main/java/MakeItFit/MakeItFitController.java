@@ -12,7 +12,7 @@ import java.util.*;
 public class MakeItFitController {
 
     private MakeItFit makeItFit;
-    private String email;
+    public String email;
     private String name;
     private UUID trainingPlan;
     private TimeManager timeManager;
@@ -22,6 +22,24 @@ public class MakeItFitController {
         this.email = "NO EMAIL";
         this.name = "NO NAME";
         this.timeManager = new TimeManager();
+    }
+
+    /**
+     * Sets the email of the currently working user.
+     *
+     * @param email The email of the currently logged in user.
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * Sets the code of the training plan.
+     * 
+     * @param trainingPlan The code of the training plan.
+     */
+    public void setTrainingPlan(UUID trainingPlan) {
+        this.trainingPlan = trainingPlan;
     }
 
     /**
@@ -75,6 +93,13 @@ public class MakeItFitController {
     public void createUser(String name, int age, Gender gender, float weight, int height, int bpm, int level, String address, String phone, int frequency, String type) throws IllegalArgumentException, ExistingEntityConflictException, InvalidTypeException {
         makeItFit.createUser(name, age, gender, weight, height, bpm, level, address, phone, this.email, frequency, type);
         this.name = name;
+    }
+
+    /**
+     * Removes the currently working user.
+     */
+    public void removeUser() {
+        this.makeItFit.removeUser(this.email);
     }
 
     /**
@@ -178,17 +203,22 @@ public class MakeItFitController {
         this.email = email;
     }
 
-    public void addActivity(MakeItFitDate date, int duration, String designation) {
-
+    /**
+     * Gets all the users in the system.
+     * 
+     * @return A list of all users in the system.
+     */
+    public String getAllUsers() {
+        return this.makeItFit.getAllUsers().toString();
     }
 
     /**
      * Retrieves a list of all activities from the currently logged in user.
      *
-     * @return A list of all activities from the user.
+     * @return A String of all activities from the user.
      */
-    public List<Activity> getActivities() {
-        return this.makeItFit.getActivitiesFromUser(this.email);
+    public String getActivities() {
+        return this.makeItFit.getActivitiesFromUser(this.email).toString();
     }
 
     /**
@@ -263,6 +293,13 @@ public class MakeItFitController {
     }
 
     /**
+     * Removes the currently working activity.
+     */
+    public void removeActivityFromUser(UUID activity) {
+        this.makeItFit.removeActivityFromUser(this.email, activity);
+    }
+
+    /**
      * Updates the system current date.
      *
      * @param days The number of days to advance the system date.
@@ -279,6 +316,13 @@ public class MakeItFitController {
      */
     public void createTrainingPlan(MakeItFitDate startDate) {
        this.trainingPlan = this.makeItFit.createTrainingPlan(makeItFit.getUser(this.email).getCode(), startDate);
+    }
+
+    /**
+     * Removes the currently working training plan.
+     */
+    public void removeTrainingPlan() {
+        this.makeItFit.removeTrainingPlan(this.trainingPlan);
     }
 
     /**
@@ -358,12 +402,28 @@ public class MakeItFitController {
     }
 
     /**
+     * Removes the currently working activity from the training plan.
+     */
+    public void removeActivityFromTrainingPlan(UUID activity) {
+        this.makeItFit.removeActivityFromTrainingPlan(this.trainingPlan, activity);
+    }
+
+    /**
      * Retrieves a list of all training plans from the currently logged in user.
      *
      * @return A String of all training plans from the user.
      */
     public String getTrainingPlansFromUser() {
         return this.makeItFit.getTrainingPlansFromUser(this.makeItFit.getUser(this.email).getCode()).toString();
+    }
+
+    /**
+     * Retrieves a list of all activities from a training plan of the currently logged in user.
+     *
+     * @return A String of all activities from the training plan.
+     */
+    public String getTrainingPlans() {
+        return this.makeItFit.getAllTrainingPlans().toString();
     }
 
     /**
@@ -382,5 +442,71 @@ public class MakeItFitController {
      */
     public void loadSystem(String fileName) throws FileNotFoundException {
         this.makeItFit.loadSystem(fileName);
+    }
+
+    /**
+     * Feeds the system with a given number of users.
+     *
+     * @param numberOfUsers The number of users to feed the system with.
+     */
+    public void feedUserData(int numberOfUsers) {
+        this.makeItFit.feedUserData(numberOfUsers);
+    }
+
+    /**
+     * Executes a query and returns the result.
+     * @param date1 If wanted, the start date of the period.
+     * @param date2 If wanted, the end date of the period.
+     * @return number of km the user did in a given period of time or in total
+     */
+    public double executeQueryHowManyKMsDone(MakeItFitDate date1, MakeItFitDate date2) {
+        return this.makeItFit.executeQueryHowManyKMsDone(this.email, date1, date2);
+    }
+
+    /**
+     * Executes a query and returns the result.
+     * @param date1 If wanted, the start date of the period.
+     * @param date2 If wanted, the end date of the period.
+     * @return number of altimetry the user did in a given period of time or in total
+     */
+    public double executeQueryHowManyAltimetryDone(MakeItFitDate date1, MakeItFitDate date2) {
+        return this.makeItFit.executeQueryHowManyAltimetryDone(this.email, date1, date2);
+    }
+
+    /**
+     *  Executes a query and returns the result.
+     * 
+     * @return The most demanding training plan.
+     */
+    public String executeQueryMostDemandingTrainingPlan(){
+        return this.makeItFit.executeQueryMostDemandingTrainingPlan().toString();
+    }
+
+    /**
+     * Executes a query and returns the result.
+     * @return The most done activity.
+     */
+    public String executeQueryMostDoneActivity() {
+        return this.makeItFit.executeQueryMostDoneActivity();
+    }
+
+    /**
+     * Executes a query and returns the result.
+     * @param date1 If wanted, the start date of the period.
+     * @param date2 If wanted, the end date of the period.
+     * @return the user who burns more calories between two dates or in total
+     */
+    public String executeQuerywhoBurnsMoreCalories(MakeItFitDate date1, MakeItFitDate date2) {
+        return this.makeItFit.executeQuerywhoBurnsMoreCalories(date1, date2).toString();
+    }
+
+    /**
+     *  Executes a query and returns the result.
+     * @param date1 If wanted, the start date of the period.
+     * @param date2 If wanted, the end date of the period.
+     * @return the user who did the most activities between two dates or in total
+     */
+    public String executeQueryWhoDidTheMostActivities(MakeItFitDate date1, MakeItFitDate date2) {
+        return this.makeItFit.executeQueryWhoDidTheMostActivities(date1, date2).toString();
     }
 }

@@ -216,6 +216,7 @@ public abstract class Activity implements ActivityInterface, Serializable {
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("Activity: ").append(this.name).append(", ");
+        sb.append("Code: ").append(this.code).append(", ");
         sb.append("Designation: ").append(this.designation).append(", ");
         sb.append("Expected Duration: ").append(this.expectedDuration).append(" minutes, ");
         sb.append("Realization Date: ").append(this.realizationDate).append(", ");

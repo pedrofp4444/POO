@@ -79,8 +79,8 @@ public class UserView {
     }
 
     /**
-     * Prompts the administrator to create a new user.
-     * Requests user details from the console and creates the user using the user controller.
+     * Creates a new user.
+     * Requests the user's information from the console and creates a new user using the controller.
      */
     public void createUser() throws InvalidTypeException {
         System.out.println("[APP] Creating user ...");
@@ -158,8 +158,18 @@ public class UserView {
         appMenuItems.add(new MenuItem("Update user info", updateUserMenu::run));
 
         appMenuItems.add(new MenuItem("Add activity", () -> addActivityToUser()));
+        appMenuItems.add(new MenuItem("Remove activity", () -> removeActivityFromUser()));
         appMenuItems.add(new MenuItem("List activities", () -> listActivities()));
         appMenuItems.add(new MenuItem("Create training plan", () -> createTrainingPlan()));
+        appMenuItems.add(new MenuItem("Remove training plan", () -> removeTrainingPlan()));
+        appMenuItems.add(new MenuItem("Add activity to a training plan", () -> {
+            selectTrainingPlan();
+            addActivityToTrainingPlan();
+        }));
+        appMenuItems.add(new MenuItem("Remove activity from a training plan", () -> {
+            selectTrainingPlan();
+            removeActivityFromTrainingPlan();
+        }));
         appMenuItems.add(new MenuItem("List all training plans", () -> listAllTrainingPlans()));
         appMenuItems.add(new MenuItem("Advance time", () -> advanceTimeManager()));
         appMenuItems.add(new MenuItem("Save system state", () -> saveSystem()));
@@ -173,8 +183,13 @@ public class UserView {
     public void getUserDetails() {
         System.out.println("[" + this.makeItFitController.getName() + "] Getting user details ...");
 
-        System.out.println(this.makeItFitController.getUserDetails());
+        try {
+            System.out.println(this.makeItFitController.getUserDetails());
+        } catch (Exception e) {
+            System.out.println("[APP] Something went wrong.");
+        }
     }
+
 
     /**
      * Creates the update user menu of the application.
@@ -491,16 +506,31 @@ public class UserView {
     }
 
     /**
+     * Removes an activity from the currently logged in user.
+     */
+    public void removeActivityFromUser() {
+        System.out.println("[" + this.makeItFitController.getName() + "] Removing activity from user ...");
+
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            System.out.print("[" + this.makeItFitController.getName() + "] Please insert the code of the activity: ");
+            UUID code = UUID.fromString(scanner.nextLine());
+
+            this.makeItFitController.removeActivityFromUser(code);
+            System.out.println("[" + this.makeItFitController.getName() + "] Activity removed successfully.");
+        } catch (Exception e) {
+            System.out.println("[" + this.makeItFitController.getName() + "] Invalid input.");
+        }
+    }
+
+    /**
      * Lists the activities from the currently logged in user.
      */
     public void listActivities() {
         System.out.println("[" + this.makeItFitController.getName() + "] Listing activities ...");
 
-        List<Activity> activities = this.makeItFitController.getActivities();
-
-        for (Activity activity : activities) {
-            System.out.println(activity);
-        }
+        System.out.println(this.makeItFitController.getActivities());
     }
 
     /**
@@ -689,6 +719,68 @@ public class UserView {
         }
     }
 
+    /**
+     * Removes an activity from the training plan of the currently logged in user.
+     */
+    public void removeActivityFromTrainingPlan() {
+        System.out.println("[" + this.makeItFitController.getName() + "] Removing activity from training plan ...");
+
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            System.out.print("[" + this.makeItFitController.getName() + "] Please insert the code of the activity: ");
+            UUID code = UUID.fromString(scanner.nextLine());
+
+            this.makeItFitController.removeActivityFromTrainingPlan(code);
+            System.out.println("[" + this.makeItFitController.getName() + "] Activity removed successfully.");
+        } catch (Exception e) {
+            System.out.println("[" + this.makeItFitController.getName() + "] Invalid input.");
+        }
+    }
+
+    /**
+     * Removes a training plan from the currently logged in user.
+     */
+    public void removeTrainingPlan() {
+        System.out.println("[" + this.makeItFitController.getName() + "] Removing training plan ...");
+
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            System.out.print("[" + this.makeItFitController.getName() + "] Please insert the code of the training plan: ");
+            UUID code = UUID.fromString(scanner.nextLine());
+
+            this.makeItFitController.setTrainingPlan(code);
+
+            this.makeItFitController.removeTrainingPlan();
+            System.out.println("[" + this.makeItFitController.getName() + "] Training plan removed successfully.");
+        } catch (Exception e) {
+            System.out.println("[" + this.makeItFitController.getName() + "] Invalid input.");
+        }
+    }
+
+    /**
+     * Selects a training plan from the currently logged in user.
+     */
+    public void selectTrainingPlan() {
+        System.out.println("[" + this.makeItFitController.getName() + "] Selecting training plan ...");
+
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            System.out.print("[" + this.makeItFitController.getName() + "] Please insert the code of the training plan: ");
+            UUID code = UUID.fromString(scanner.nextLine());
+
+            this.makeItFitController.setTrainingPlan(code);
+            System.out.println("[" + this.makeItFitController.getName() + "] Training plan selected successfully.");
+        } catch (Exception e) {
+            System.out.println("[" + this.makeItFitController.getName() + "] Invalid input.");
+        }
+    }
+
+    /**
+     * Lists all training plans from the currently logged in user.
+     */
     public void listAllTrainingPlans() {
         System.out.println("[" + this.makeItFitController.getName() + "] Listing all training plans ...");
 

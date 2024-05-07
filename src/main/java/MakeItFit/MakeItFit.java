@@ -3,6 +3,7 @@ package MakeItFit;
 import MakeItFit.activities.Activity;
 import MakeItFit.activities.implementation.*;
 import MakeItFit.exceptions.*;
+import MakeItFit.feeder.Feeder;
 import MakeItFit.trainingPlan.*;
 import MakeItFit.users.*;
 import MakeItFit.utils.MakeItFitDate;
@@ -159,7 +160,6 @@ public class MakeItFit implements Serializable {
      * @param bpm The new BPM for the user.
      * @param email The user's email.
      */
-
     public void updateUserBpm(int bpm, String email) {
         User user = getUser(email);
         user.setBpm(bpm);
@@ -234,16 +234,6 @@ public class MakeItFit implements Serializable {
     }
 
     /**
-     * Adds an activity to a user.
-     *
-     * @param email The user's email.
-     * @param activity The activity to be added.
-     */
-    public void addActivityToUser(String email, Activity activity) {
-        this.userManager.addActivityToUser(email, activity);
-    }
-
-    /**
      * Adds a push-up activity to a user.
      *
      * @param email The user's email.
@@ -308,6 +298,16 @@ public class MakeItFit implements Serializable {
     public void addActivityWeightSquatToUser(String email, MakeItFitDate date, int duration, String designation, String name, int repetitions, int series, double weight) {
         WeightSquat activity = new WeightSquat(this.userManager.getUserByEmail(email).getCode(), date, duration, designation, name, repetitions, series, weight);
         this.userManager.addActivityToUser(email, activity);
+    }
+
+    /**
+     * Removes an activity from a user.
+     *
+     * @param email The user's email.
+     * @param code The activity's code.
+     */
+    public void removeActivityFromUser(String email, UUID code) {
+        this.userManager.removeActivityFromUser(email, code);
     }
 
 
@@ -458,6 +458,16 @@ public class MakeItFit implements Serializable {
     }
 
     /**
+     * Removes an activity from a training plan.
+     *
+     * @param code The code of the training plan.
+     * @param activityCode The code of the activity.
+     */
+    public void removeActivityFromTrainingPlan(UUID code, UUID activityCode) {
+        this.trainingPlanManager.removeActivity(code, activityCode);
+    }
+
+    /**
      * Retrieves a list of all training plans from a user.
      *
      * @param userCode The code of the user.
@@ -511,74 +521,72 @@ public class MakeItFit implements Serializable {
         }
     }
 
+    /**
+     * Feeds the system with user data.
+     *
+     * @param numberOfUsers The number of users to feed the system with.
+     */
+    public void feedUserData(int numberOfUsers) {
+        Feeder feeder = new Feeder(this.userManager);
+        feeder.feedUserData(numberOfUsers);
+    }
 
     /**
      * Executes a query and returns the result.
-     * @param userManager
-     * @param email
-     * @param date1
-     * @param date2
+     * @param email The email of the user.
+     * @param date1 If wanted, the start date of the period.
+     * @param date2 If wanted, the end date of the period.
      * @return number of km the user did in a given period of time or in total
      */
-    public double executeQueryHowManyKMsDone(UserManager userManager  ,String email , MakeItFitDate date1 , MakeItFitDate date2) {
-        return this.queriesManager.executeQueryHowManyKMsDone(userManager,email, date1, date2);
+    public double executeQueryHowManyKMsDone(String email, MakeItFitDate date1, MakeItFitDate date2) {
+        return this.queriesManager.executeQueryHowManyKMsDone(this.userManager, email, date1, date2);
     }
 
     /**
      * Executes a query and returns the result.
-     * @param userManager
-     * @param email
-     * @param date1
-     * @param date2
+     * @param email The email of the user.
+     * @param date1 If wanted, the start date of the period.
+     * @param date2 If wanted, the end date of the period.
      * @return number of altimetry the user did in a given period of time or in total
      */
-    public double executeQueryHowManyAltimetryDone(UserManager userManager, String email, MakeItFitDate date1 , MakeItFitDate date2) {
-        return this.queriesManager.executeQueryHowManyAltimetryDone(userManager, email, date1, date2);
+    public double executeQueryHowManyAltimetryDone(String email, MakeItFitDate date1, MakeItFitDate date2) {
+        return this.queriesManager.executeQueryHowManyAltimetryDone(this.userManager, email, date1, date2);
     }
 
     /**
      *  Executes a query and returns the result.
-     * @param trainingPlanManager
-     * @param userManager
-     *
-     * @return the most demanding training plan
+     * 
+     * @return The most demanding training plan.
      */
-    public TrainingPlan executeQueryMostDemandingTrainingPlan(TrainingPlanManager trainingPlanManager, UserManager userManager){
-        return this.queriesManager.executeQueryMostDemandingTrainingPlan(trainingPlanManager, userManager);
+    public TrainingPlan executeQueryMostDemandingTrainingPlan(){
+        return this.queriesManager.executeQueryMostDemandingTrainingPlan(this.trainingPlanManager, this.userManager);
     }
-
 
     /**
      * Executes a query and returns the result.
-     * @param userManager
-     * @return the most done activity
+     * @return The most done activity.
      */
-    public String executeQueryMostDoneActivity(UserManager userManager) {
-        return this.queriesManager.executeQueryMostDoneActivity(userManager);
+    public String executeQueryMostDoneActivity() {
+        return this.queriesManager.executeQueryMostDoneActivity(this.userManager);
     }
-
 
     /**
      * Executes a query and returns the result.
-     * @param userManager
-     * @param date1
-     * @param date2
+     * @param date1 If wanted, the start date of the period.
+     * @param date2 If wanted, the end date of the period.
      * @return the user who burns more calories between two dates or in total
      */
-    public User executeQuerywhoBurnsMoreCalories(UserManager userManager, MakeItFitDate date1, MakeItFitDate date2) {
-        return this.queriesManager.executeQuerywhoBurnsMoreCalories(userManager, date1, date2);
+    public User executeQuerywhoBurnsMoreCalories(MakeItFitDate date1, MakeItFitDate date2) {
+        return this.queriesManager.executeQuerywhoBurnsMoreCalories(this.userManager, date1, date2);
     }
 
     /**
      *  Executes a query and returns the result.
-     * @param userManager
-     * @param date1
-     * @param date2
+     * @param date1 If wanted, the start date of the period.
+     * @param date2 If wanted, the end date of the period.
      * @return the user who did the most activities between two dates or in total
      */
-    public User executeQueryWhoDidTheMostActivities(UserManager userManager, MakeItFitDate date1, MakeItFitDate date2) {
-        return this.queriesManager.executeQueryWhoDidTheMostActivities(userManager, date1, date2);
+    public User executeQueryWhoDidTheMostActivities(MakeItFitDate date1, MakeItFitDate date2) {
+        return this.queriesManager.executeQueryWhoDidTheMostActivities(this.userManager, date1, date2);
     }
-
-
 }
