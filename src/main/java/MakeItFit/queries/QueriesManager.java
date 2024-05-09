@@ -17,7 +17,7 @@ import MakeItFit.utils.MakeItFitDate;
 
 public class QueriesManager {
     private HowManyAltimetryDone howManyAltimetryDone;
-    private HowManyKMsDone howManyMetersDone;
+    private HowManyKMsDone howManyKMsDone;
     private MostDoneActivity mostDoneActivity;
     private MostDemandingTrainingPlan mostDemandingTrainingPlan;
     private WhoBurnsMoreCalories whoBurnsMoreCalories;
@@ -30,7 +30,7 @@ public class QueriesManager {
      */
     public QueriesManager(UserManager userManager, TrainingPlanManager trainingPlanManager) {
         this.howManyAltimetryDone = new HowManyAltimetryDone();
-        this.howManyMetersDone = new HowManyKMsDone();
+        this.howManyKMsDone = new HowManyKMsDone();
         this.mostDoneActivity = new MostDoneActivity();
         this.mostDemandingTrainingPlan = new MostDemandingTrainingPlan();
         this.whoBurnsMoreCalories = new WhoBurnsMoreCalories();
@@ -54,6 +54,17 @@ public class QueriesManager {
     }
 
     /**
+     * Executes a query.
+     * @param userManager
+     * @param email
+     *
+     * @return number of altimetry the user done
+     */
+    public double executeQueryHowManyAltimetryDone(UserManager userManager, String email) {
+        return this.howManyAltimetryDone.executeQuery(userManager, email);
+    }
+
+    /**
      * Executes a query and returns the result.
      * @param userManager
      * @param email
@@ -63,7 +74,18 @@ public class QueriesManager {
      * @return number of km the user did in a given period of time or in total
      */
     public double executeQueryHowManyKMsDone(UserManager userManager, String email , MakeItFitDate date1 , MakeItFitDate date2) {
-        return this.howManyMetersDone.executeQuery(userManager, email, date1, date2);
+        return this.howManyKMsDone.executeQuery(userManager, email, date1, date2);
+    }
+
+    /**
+     * Executes a query and returns the result.
+     * @param userManager
+     * @param email
+     *
+     * @return number of km the user did in a given period of time or in total
+     */
+    public double executeQueryHowManyKMsDone(UserManager userManager, String email) {
+        return this.howManyKMsDone.executeQuery(userManager, email);
     }
 
     /**
@@ -94,7 +116,17 @@ public class QueriesManager {
      * @return the user who burns more calories
      */
     public User executeQuerywhoBurnsMoreCalories(UserManager userManager, MakeItFitDate date1, MakeItFitDate date2) {
-        return this.whoBurnsMoreCalories.executeQuery( userManager, date1, date2);
+        return this.whoBurnsMoreCalories.executeQuery(userManager, date1, date2);
+    }
+
+    /**
+     * Executes a query.
+     * @param userManager
+     *
+     * @return the user who burns more calories
+     */
+    public User executeQuerywhoBurnsMoreCalories(UserManager userManager) {
+        return this.whoBurnsMoreCalories.executeQuery(userManager);
     }
 
     /**
@@ -109,4 +141,13 @@ public class QueriesManager {
         return this.whoDidTheMostActivities.executeQuery(userManager, date1, date2);
     }
 
+    /**
+     * Executes a query.
+     * @param userManager
+     *
+     * @return the user who did the most activities
+     */
+    public User executeQueryWhoDidTheMostActivities (UserManager userManager) {
+        return this.whoDidTheMostActivities.executeQuery(userManager);
+    }
 }

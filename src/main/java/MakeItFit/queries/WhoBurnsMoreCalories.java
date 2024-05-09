@@ -27,32 +27,7 @@ public class WhoBurnsMoreCalories {
      */
     public User executeQuery(UserManager userManager, MakeItFitDate date1, MakeItFitDate date2) {
 
-
-
-        if(date1 == null && date2 == null){
-
-            List<User> list_users = userManager.getAllUsers();
-
-            User user = null;
-            int maxCalories = 0;
-
-            for (User u : list_users) {
-                float index = u.getIndex();
-                int calories = 0;
-                for (Activity a : u.getListActivities()) {
-                    calories += a.caloricWaste(index);
-
-                }
-                if (calories > maxCalories) {
-                    maxCalories = calories;
-                    user = u;
-                }
-            }
-            return user;
-
-
-
-        }else if ( (date1 != null && date2 != null )&& date2.isAfter(date1) ) {
+        if ((date1 != null && date2 != null )&& date2.isAfter(date1) ) {
 
             List<User> list_users = userManager.getAllUsers();
 
@@ -75,8 +50,35 @@ public class WhoBurnsMoreCalories {
             return user;
 
         }else{
-            throw  new IllegalArgumentException("Invalid input: date1 and date2 must be non-null and date2 must be after date1.");
+            throw  new IllegalArgumentException("Invalid dates.");
         }
+    }
 
+    /**
+     * Executes a query and returns the result.
+     * @param userManager
+     *
+     * @return the user who burns more calories
+     */
+    public User executeQuery(UserManager userManager) {
+
+        List<User> list_users = userManager.getAllUsers();
+
+        User user = null;
+        int maxCalories = 0;
+
+        for (User u : list_users) {
+            float index = u.getIndex();
+            int calories = 0;
+            for (Activity a : u.getListActivities()) {
+                calories += a.caloricWaste(index);
+
+            }
+            if (calories > maxCalories) {
+                maxCalories = calories;
+                user = u;
+            }
+        }
+        return user;
     }
 }

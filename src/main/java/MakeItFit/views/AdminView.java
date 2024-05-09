@@ -936,7 +936,7 @@ public class AdminView {
     public Menu createQueryMenu() {
         List<MenuItem> queryMenuItems = new ArrayList<>();
 
-        queryMenuItems.add(new MenuItem("How many kms has a user driven in a period or ever since?", () -> executeQueryHowManyKMsDone()));
+        queryMenuItems.add(new MenuItem("How many kms has a user has run in a period or ever since?", () -> executeQueryHowManyKMsDone()));
         queryMenuItems.add(new MenuItem("How many meters of altimetry has a user totaled in a period or ever since?", () -> executeQueryHowManyAltimetryDone()));
         queryMenuItems.add(new MenuItem("What is the most demanding training plan depending on the proposed calorie expenditure?", () -> executeQueryMostDemandingTrainingPlan()));
         queryMenuItems.add(new MenuItem("what type of activity is most carried out?", () -> executeQueryMostDoneActivity()));
@@ -972,7 +972,7 @@ public class AdminView {
                 System.out.println("Result: " + this.makeItFitController.executeQueryHowManyKMsDone(startDate, endDate) + " kilometers");
             }
             else {
-                System.out.println("Result: " + this.makeItFitController.executeQueryHowManyKMsDone(null, null) + " kilometers");
+                System.out.println("Result: " + this.makeItFitController.executeQueryHowManyKMsDone() + " kilometers");
             }
         } catch (Exception e) {
             System.out.println("[" + this.makeItFitController.getName() + "] Invalid input.");
@@ -1004,7 +1004,7 @@ public class AdminView {
                 System.out.println("Result: " + this.makeItFitController.executeQueryHowManyAltimetryDone(startDate, endDate) + " meters");
             }
             else {
-                System.out.println("Result: " + this.makeItFitController.executeQueryHowManyAltimetryDone(null, null) + " meters");
+                System.out.println("Result: " + this.makeItFitController.executeQueryHowManyAltimetryDone() + " meters");
             }
         } catch (Exception e) {
             System.out.println("[" + this.makeItFitController.getName() + "] Invalid input.");
@@ -1061,7 +1061,7 @@ public class AdminView {
                 System.out.println("Result: \n" + this.makeItFitController.executeQuerywhoBurnsMoreCalories(startDate, endDate));
             }
             else {
-                System.out.println("Result: \n" + this.makeItFitController.executeQuerywhoBurnsMoreCalories(null, null));
+                System.out.println("Result: \n" + this.makeItFitController.executeQuerywhoBurnsMoreCalories());
             }
         } catch (Exception e) {
             System.out.println("[" + this.makeItFitController.getName() + "] Invalid input.");
@@ -1088,7 +1088,7 @@ public class AdminView {
                 System.out.println("Result: \n" + this.makeItFitController.executeQueryWhoDidTheMostActivities(startDate, endDate));
             }
             else {
-                System.out.println("Result: \n" + this.makeItFitController.executeQueryWhoDidTheMostActivities(null, null));
+                System.out.println("Result: \n" + this.makeItFitController.executeQueryWhoDidTheMostActivities());
             }
         } catch (Exception e) {
             System.out.println("[" + this.makeItFitController.getName() + "] Invalid input.");

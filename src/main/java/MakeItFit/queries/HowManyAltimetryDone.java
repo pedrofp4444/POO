@@ -18,6 +18,7 @@ public class HowManyAltimetryDone {
 
     /**
      * Executes a query to find the total altimetry done by a user in a given period of time.
+     *
      * @param userManager
      * @param email
      * @param date1
@@ -25,9 +26,9 @@ public class HowManyAltimetryDone {
      * @return the total altimetry done by a user in a given period of time
      */
 
-    public double executeQuery(UserManager userManager, String email, MakeItFitDate date1 , MakeItFitDate date2) {
+    public double executeQuery(UserManager userManager, String email, MakeItFitDate date1, MakeItFitDate date2) {
 
-        if(date1 == null && date2 == null){
+        if ((date1 != null && date2 != null) && date2.isAfter(date1)) {
 
             User user = userManager.getUserByEmail(email);
             double altimetry = 0;
@@ -39,25 +40,28 @@ public class HowManyAltimetryDone {
             }
             return altimetry;
 
-
-
-        }else if ( (date1 != null && date2 != null )&& date2.isAfter(date1) ) {
-
-            User user = userManager.getUserByEmail(email);
-            double altimetry = 0;
-            for (Activity a : user.getListActivities()) {
-
-                if (a instanceof DistanceWithAltimetry  && a.getRealizationDate().isAfter(date1) && a.getRealizationDate().isBefore(date2)){
-                    altimetry += ((DistanceWithAltimetry) a).getElevationGain()+((DistanceWithAltimetry) a).getElevationLoss();
-                }
-            }
-            return altimetry;
-
-        }else{
-            throw  new IllegalArgumentException("Invalid input: date1 and date2 must be non-null and date2 must be after date1.");
+        } else {
+            throw new IllegalArgumentException("Invalid date.");
         }
 
     }
 
-}
+    /**
+     * Executes a query to find the total altimetry done by a user.
+     *
+     * @param userManager
+     * @param email
+     * @return the total altimetry done by a user
+     */
+    public double executeQuery(UserManager userManager, String email) {
 
+        User user = userManager.getUserByEmail(email);
+        double altimetry = 0;
+        for (Activity a : user.getListActivities()) {
+            if (a instanceof DistanceWithAltimetry) {
+                altimetry += ((DistanceWithAltimetry) a).getElevationGain() - ((DistanceWithAltimetry) a).getElevationLoss();
+            }
+        }
+        return altimetry;
+    }
+}

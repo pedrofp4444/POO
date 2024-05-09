@@ -465,12 +465,28 @@ public class MakeItFitController {
 
     /**
      * Executes a query and returns the result.
+     * @return number of km the user did in a given period of time or in total
+     */
+    public double executeQueryHowManyKMsDone() {
+        return this.makeItFit.executeQueryHowManyKMsDone(this.email);
+    }
+
+    /**
+     * Executes a query and returns the result.
      * @param date1 If wanted, the start date of the period.
      * @param date2 If wanted, the end date of the period.
      * @return number of altimetry the user did in a given period of time or in total
      */
     public double executeQueryHowManyAltimetryDone(MakeItFitDate date1, MakeItFitDate date2) {
         return this.makeItFit.executeQueryHowManyAltimetryDone(this.email, date1, date2);
+    }
+
+    /**
+     * Executes a query and returns the result.
+     * @return number of altimetry the user did in a given period of time or in total
+     */
+    public double executeQueryHowManyAltimetryDone() {
+        return this.makeItFit.executeQueryHowManyAltimetryDone(this.email);
     }
 
     /**
@@ -501,6 +517,14 @@ public class MakeItFitController {
     }
 
     /**
+     * Executes a query and returns the result.
+     * @return the user who burns more calories between two dates or in total
+     */
+    public String executeQuerywhoBurnsMoreCalories() {
+        return this.makeItFit.executeQuerywhoBurnsMoreCalories().toString();
+    }
+
+    /**
      *  Executes a query and returns the result.
      * @param date1 If wanted, the start date of the period.
      * @param date2 If wanted, the end date of the period.
@@ -508,5 +532,13 @@ public class MakeItFitController {
      */
     public String executeQueryWhoDidTheMostActivities(MakeItFitDate date1, MakeItFitDate date2) {
         return this.makeItFit.executeQueryWhoDidTheMostActivities(date1, date2).toString();
+    }
+
+    /**
+     *  Executes a query and returns the result.
+     * @return the user who did the most activities between two dates or in total
+     */
+    public String executeQueryWhoDidTheMostActivities() {
+        return this.makeItFit.executeQueryWhoDidTheMostActivities().toString();
     }
 }

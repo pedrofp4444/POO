@@ -25,20 +25,7 @@ public class HowManyKMsDone {
      */
     public double executeQuery(UserManager userManager, String email, MakeItFitDate date1 , MakeItFitDate date2) {
 
-
-
-        if(date1 == null && date2 == null){
-            User user = userManager.getUserByEmail(email);
-            double distance = 0;
-
-            for( Activity a : user.getListActivities() ){
-                if(a instanceof Distance ) {
-                    distance += ((Distance) a).getDistance();
-                }
-            }
-
-            return distance/1000;
-        }else if ( date1 != null && date2 != null && date2.isAfter(date1) ) {
+        if ( date1 != null && date2 != null && date2.isAfter(date1) ) {
             User user = userManager.getUserByEmail(email);
             double distance = 0;
 
@@ -51,8 +38,28 @@ public class HowManyKMsDone {
             return distance/1000;
 
         }else{
-             throw  new IllegalArgumentException("Invalid input: date1 and date2 must be non-null and date2 must be after date1.");
+             throw  new IllegalArgumentException("Invalid dates.");
         }
 
+    }
+
+    /**
+     * Executes a query to find the total distance done by a user.
+     * @param userManager
+     * @param email
+     * @return the total distance done by a user
+     */
+    public double executeQuery(UserManager userManager, String email) {
+
+        User user = userManager.getUserByEmail(email);
+        double distance = 0;
+
+        for( Activity a : user.getListActivities() ){
+            if(a instanceof Distance ) {
+                distance += ((Distance) a).getDistance();
+            }
+        }
+
+        return distance;
     }
 }

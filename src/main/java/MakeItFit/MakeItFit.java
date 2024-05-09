@@ -545,12 +545,30 @@ public class MakeItFit implements Serializable {
     /**
      * Executes a query and returns the result.
      * @param email The email of the user.
+     * @return number of altimetry the user did in a given period of time or in total
+     */
+    public double executeQueryHowManyKMsDone(String email) {
+        return this.queriesManager.executeQueryHowManyKMsDone(this.userManager, email);
+    }
+
+    /**
+     * Executes a query and returns the result.
+     * @param email The email of the user.
      * @param date1 If wanted, the start date of the period.
      * @param date2 If wanted, the end date of the period.
      * @return number of altimetry the user did in a given period of time or in total
      */
     public double executeQueryHowManyAltimetryDone(String email, MakeItFitDate date1, MakeItFitDate date2) {
         return this.queriesManager.executeQueryHowManyAltimetryDone(this.userManager, email, date1, date2);
+    }
+
+    /**
+     * Executes a query and returns the result.
+     * @param email The email of the user.
+     * @return number of altimetry the user did in a given period of time or in total
+     */
+    public double executeQueryHowManyAltimetryDone(String email) {
+        return this.queriesManager.executeQueryHowManyAltimetryDone(this.userManager, email);
     }
 
     /**
@@ -581,6 +599,14 @@ public class MakeItFit implements Serializable {
     }
 
     /**
+     * Executes a query and returns the result.
+     * @return the user who burns more calories
+     */
+    public User executeQuerywhoBurnsMoreCalories() {
+        return this.queriesManager.executeQuerywhoBurnsMoreCalories(this.userManager);
+    }
+
+    /**
      *  Executes a query and returns the result.
      * @param date1 If wanted, the start date of the period.
      * @param date2 If wanted, the end date of the period.
@@ -588,5 +614,13 @@ public class MakeItFit implements Serializable {
      */
     public User executeQueryWhoDidTheMostActivities(MakeItFitDate date1, MakeItFitDate date2) {
         return this.queriesManager.executeQueryWhoDidTheMostActivities(this.userManager, date1, date2);
+    }
+
+    /**
+     *  Executes a query and returns the result.
+     * @return the user who did the most activities
+     */
+    public User executeQueryWhoDidTheMostActivities() {
+        return this.queriesManager.executeQueryWhoDidTheMostActivities(this.userManager);
     }
 }

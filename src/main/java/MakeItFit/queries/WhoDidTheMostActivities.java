@@ -20,27 +20,7 @@ public class WhoDidTheMostActivities {
      */
     public User executeQuery(UserManager userManager, MakeItFitDate date1, MakeItFitDate date2) {
 
-        if(date1 == null && date2 == null){
-
-            List<User> list_users = userManager.getAllUsers();
-
-            User user = null;
-            int maxActivities = 0;
-
-            for (User u : list_users) {
-
-                List<Activity> activitiesList = u.getListActivities();
-                int activities = activitiesList.size();
-
-                if (activities > maxActivities) {
-                    maxActivities = activities;
-                    user = u;
-                }
-            }
-            return user;
-
-
-        }else if ( (date1 != null && date2 != null )&& date2.isAfter(date1) ) {
+        if ((date1 != null && date2 != null )&& date2.isAfter(date1)) {
 
             List<User> list_users = userManager.getAllUsers();
 
@@ -61,8 +41,33 @@ public class WhoDidTheMostActivities {
             }
             return user;
         }else{
-            throw  new IllegalArgumentException("Invalid input: date1 and date2 must be non-null and date2 must be after date1.");
+            throw  new IllegalArgumentException("Invalid dates.");
         }
+    }
 
+    /**
+     * Executes a query and returns the result.
+     * @param userManager
+     *
+     * @return the user who did the most activities
+     */
+    public User executeQuery(UserManager userManager) {
+
+        List<User> list_users = userManager.getAllUsers();
+
+        User user = null;
+        int maxActivities = 0;
+
+        for (User u : list_users) {
+
+            List<Activity> activitiesList = u.getListActivities();
+            int activities = activitiesList.size();
+
+            if (activities > maxActivities) {
+                maxActivities = activities;
+                user = u;
+            }
+        }
+        return user;
     }
 }
