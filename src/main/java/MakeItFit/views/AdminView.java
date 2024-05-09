@@ -534,7 +534,7 @@ public class AdminView {
                         int series = scanner.nextInt();
                         scanner.nextLine(); // Consume the remaining newline
 
-                        this.makeItFitController.addActivityPushUpToUser(date, duration, designation, this.activityType, repetitions, series);
+                        this.makeItFitController.addActivityToUser(date, duration, designation, this.activityType, repetitions, series);
                     }
                     case "Running" -> {
                         System.out.print("[APP] Distance (meters): ");
@@ -544,7 +544,7 @@ public class AdminView {
                         double speed = scanner.nextDouble();
                         scanner.nextLine(); // Consume the remaining newline
 
-                        this.makeItFitController.addActivityRunningToUser(date, duration, designation, this.activityType, distance, speed);
+                        this.makeItFitController.addActivityToUser(date, duration, designation, this.activityType, distance, speed);
                     }
                     case "Trail" -> {
                         System.out.print("[APP] Distance (meters): ");
@@ -560,7 +560,7 @@ public class AdminView {
                         int trailType = scanner.nextInt();
                         scanner.nextLine(); // Consume the remaining newline
 
-                        this.makeItFitController.addActivityTrailToUser(date, duration, designation, this.activityType, distance, elevationGain, elevationLoss, trailType);
+                        this.makeItFitController.addActivityToUser(date, duration, designation, this.activityType, distance, elevationGain, elevationLoss, trailType);
                     }
                     case "WeightSquat" -> {
                         System.out.print("[APP] Repetitions: ");
@@ -572,7 +572,7 @@ public class AdminView {
                         double weight = scanner.nextDouble();
                         scanner.nextLine(); // Consume the remaining newline
 
-                        this.makeItFitController.addActivityWeightSquatToUser(date, duration, designation, this.activityType, repetitions, series, weight);
+                        this.makeItFitController.addActivityToUser(date, duration, designation, this.activityType, repetitions, series, weight);
                     }
                     default -> System.out.println("[APP] Invalid type.");
                 }

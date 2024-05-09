@@ -1,6 +1,10 @@
 package MakeItFit;
 
 import MakeItFit.activities.Activity;
+import MakeItFit.activities.implementation.PushUp;
+import MakeItFit.activities.implementation.Running;
+import MakeItFit.activities.implementation.Trail;
+import MakeItFit.activities.implementation.WeightSquat;
 import MakeItFit.exceptions.*;
 import MakeItFit.time.TimeManager;
 import MakeItFit.users.Gender;
@@ -222,7 +226,7 @@ public class MakeItFitController {
     }
 
     /**
-     * Adds a new activity to the currently logged in user.
+     * Adds a new push-up activity to the currently logged in user.
      *
      * @param date The date of the activity.
      * @param duration The duration of the activity.
@@ -231,15 +235,16 @@ public class MakeItFitController {
      * @param repetitions The repetitions of the activity.
      * @param series The series of the activity.
      */
-    public void addActivityPushUpToUser(MakeItFitDate date, int duration, String designation, String name, int repetitions, int series) {
-        this.makeItFit.addActivityPushUpToUser(this.email, date, duration, designation, name, repetitions, series);
+    public void addActivityToUser(MakeItFitDate date, int duration, String designation, String name, int repetitions, int series) {
+        PushUp activity = new PushUp(this.makeItFit.getUser(this.email).getCode() , date, duration, designation, name, repetitions, series);
+        this.makeItFit.addActivityToUser(this.email, activity);
         if (this.timeManager.getCurrentDate().isAfter(date)){
             this.makeItFit.updateSystem(this.timeManager.getCurrentDate(), this.makeItFit.getUser(this.email).getCode());
         }
     }
 
     /**
-     * Adds a new activity to the currently logged in user.
+     * Adds a new running activity to the currently logged in user.
      *
      * @param date The date of the activity.
      * @param duration The duration of the activity.
@@ -248,15 +253,16 @@ public class MakeItFitController {
      * @param distance The distance of the activity.
      * @param speed The speed of the activity.
      */
-    public void addActivityRunningToUser(MakeItFitDate date, int duration, String designation, String name, double distance, double speed) {
-        this.makeItFit.addActivityRunningToUser(this.email, date, duration, designation, name, distance, speed);
+    public void addActivityToUser(MakeItFitDate date, int duration, String designation, String name, double distance, double speed) {
+        Running activity = new Running(this.makeItFit.getUser(email).getCode(), date, duration, designation, name, distance, speed);
+        this.makeItFit.addActivityToUser(this.email, activity);
         if (this.timeManager.getCurrentDate().isAfter(date)){
             this.makeItFit.updateSystem(this.timeManager.getCurrentDate(), this.makeItFit.getUser(this.email).getCode());
         }
     }
 
     /**
-     * Adds a new activity to the currently logged in user.
+     * Adds a new trail activity to the currently logged in user.
      *
      * @param date The date of the activity.
      * @param duration The duration of the activity.
@@ -267,15 +273,16 @@ public class MakeItFitController {
      * @param elevationLoss The elevation loss of the activity.
      * @param trailType The trail type of the activity.
      */
-    public void addActivityTrailToUser(MakeItFitDate date, int duration, String designation, String name, double distance, double elevationGain, double elevationLoss, int trailType) {
-        this.makeItFit.addActivityTrailToUser(this.email, date, duration, designation, name, distance, elevationGain, elevationLoss, trailType);
+    public void addActivityToUser(MakeItFitDate date, int duration, String designation, String name, double distance, double elevationGain, double elevationLoss, int trailType) {
+        Trail activity = new Trail(this.makeItFit.getUser(email).getCode(), date, duration, designation, name, distance, elevationGain, elevationLoss, trailType);
+        this.makeItFit.addActivityToUser(this.email, activity);
         if (this.timeManager.getCurrentDate().isAfter(date)){
             this.makeItFit.updateSystem(this.timeManager.getCurrentDate(), this.makeItFit.getUser(this.email).getCode());
         }
     }
 
     /**
-     * Adds a new activity to the currently logged in user.
+     * Adds a new  weight squat activity to the currently logged in user.
      *
      * @param date The date of the activity.
      * @param duration The duration of the activity.
@@ -285,8 +292,9 @@ public class MakeItFitController {
      * @param series The series of the activity.
      * @param weight The weight of the activity.
      */
-    public void addActivityWeightSquatToUser(MakeItFitDate date, int duration, String designation, String name, int repetitions, int series, double weight) {
-        this.makeItFit.addActivityWeightSquatToUser(this.email, date, duration, designation, name, repetitions, series, weight);
+    public void addActivityToUser(MakeItFitDate date, int duration, String designation, String name, int repetitions, int series, double weight) {
+        WeightSquat activity = new WeightSquat(this.makeItFit.getUser(email).getCode(), date, duration, designation, name, repetitions, series, weight);
+        this.makeItFit.addActivityToUser(this.email, activity);
         if (this.timeManager.getCurrentDate().isAfter(date)){
             this.makeItFit.updateSystem(this.timeManager.getCurrentDate(), this.makeItFit.getUser(this.email).getCode());
         }

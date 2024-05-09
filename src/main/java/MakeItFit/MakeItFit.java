@@ -234,69 +234,11 @@ public class MakeItFit implements Serializable {
     }
 
     /**
-     * Adds a push-up activity to a user.
+     * Adds an activity to a user.
      *
      * @param email The user's email.
-     * @param date The date of the activity.
-     * @param duration The duration of the activity.
-     * @param designation The designation of the activity.
-     * @param name The name of the activity.
-     * @param repetitions The repetitions of the activity.
-     * @param series The series of the activity.
      */
-    public void addActivityPushUpToUser(String email, MakeItFitDate date, int duration, String designation, String name, int repetitions, int series) {
-        PushUp activity = new PushUp(this.userManager.getUserByEmail(email).getCode() , date, duration, designation, name, repetitions, series);
-        this.userManager.addActivityToUser(email, activity);
-    }
-
-    /**
-     * Adds a running activity to a user.
-     *
-     * @param email The user's email.
-     * @param date The date of the activity.
-     * @param duration The duration of the activity.
-     * @param designation The designation of the activity.
-     * @param name The name of the activity.
-     * @param distance The distance of the activity.
-     * @param speed The speed of the activity.
-     */
-    public void addActivityRunningToUser(String email, MakeItFitDate date, int duration, String designation, String name, double distance, double speed) {
-        Running activity = new Running(this.userManager.getUserByEmail(email).getCode(), date, duration, designation, name, distance, speed);
-        this.userManager.addActivityToUser(email, activity);
-    }
-
-    /**
-     * Adds a trail activity to a user.
-     *
-     * @param email The user's email.
-     * @param date The date of the activity.
-     * @param duration The duration of the activity.
-     * @param designation The designation of the activity.
-     * @param name The name of the activity.
-     * @param distance The distance of the activity.
-     * @param elevationGain The elevation gain of the activity.
-     * @param elevationLoss The elevation loss of the activity.
-     * @param trailType The type of the trail.
-     */
-    public void addActivityTrailToUser(String email, MakeItFitDate date, int duration, String designation, String name, double distance, double elevationGain, double elevationLoss, int trailType) {
-        Trail activity = new Trail(this.userManager.getUserByEmail(email).getCode(), date, duration, designation, name, distance, elevationGain, elevationLoss, trailType);
-        this.userManager.addActivityToUser(email, activity);
-    }
-
-    /**
-     * Adds a weight squat activity to a user.
-     *
-     * @param email The user's email.
-     * @param date The date of the activity.
-     * @param duration The duration of the activity.
-     * @param designation The designation of the activity.
-     * @param name The name of the activity.
-     * @param repetitions The repetitions of the activity.
-     * @param series The series of the activity.
-     * @param weight The weight of the activity.
-     */
-    public void addActivityWeightSquatToUser(String email, MakeItFitDate date, int duration, String designation, String name, int repetitions, int series, double weight) {
-        WeightSquat activity = new WeightSquat(this.userManager.getUserByEmail(email).getCode(), date, duration, designation, name, repetitions, series, weight);
+    public void addActivityToUser(String email, Activity activity) {
         this.userManager.addActivityToUser(email, activity);
     }
 
