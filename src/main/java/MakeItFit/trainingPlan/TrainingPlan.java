@@ -195,4 +195,14 @@ public class TrainingPlan implements Serializable, Comparable<TrainingPlan> {
         }
         return compareDate;
     }
+
+    /**
+     * Creates a copy of the current TrainingPlan instance.
+     *
+     * @return A new TrainingPlan instance that is a copy of the current instance.
+     */
+    @Override
+    public TrainingPlan clone() {
+        return new TrainingPlan(this);
+    }
 }

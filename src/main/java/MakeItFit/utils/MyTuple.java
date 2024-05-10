@@ -84,4 +84,14 @@ public class MyTuple<T1, T2> implements Serializable, Comparable<MyTuple> {
         }
         return compareItem1;
     }
+
+    /**
+     * Creates a copy of the current MyTuple instance.
+     *
+     * @return A new MyTuple instance that is a copy of the current instance.
+     */
+    @Override
+    public MyTuple clone() {
+        return new MyTuple(this.item1, this.item2);
+    }
 }

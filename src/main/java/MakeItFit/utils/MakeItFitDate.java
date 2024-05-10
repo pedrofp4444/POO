@@ -196,4 +196,14 @@ public class MakeItFitDate implements Comparable<MakeItFitDate>, Serializable {
     public int compareTo(MakeItFitDate object) {
         return this.date.compareTo(object.date);
     }
+
+    /**
+     * Creates a copy of the current MakeItFitDate instance.
+     *
+     * @return A new MakeItFitDate instance that is a copy of the current instance.
+     */
+    @Override
+    public MakeItFitDate clone() {
+        return new MakeItFitDate(this.date);
+    }
 }
