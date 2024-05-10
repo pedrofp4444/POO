@@ -40,11 +40,6 @@ To run our application:
 $ ./gradlew run --console=plain
 ```
 
-To run our tests: 
-```bash
-$ ./gradlew runTest --console=plain
-```
-
 ## Contributing
 
 As a university group project, we cannot allow external contributors.
