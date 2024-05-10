@@ -38,17 +38,17 @@ public abstract class MakeItFitView {
 
         Scanner scanner = new Scanner(System.in);
 
-        String userType = "";
-        do{
-            System.out.print("[APP] Please enter the type of user (Amateur | Occasional | Professional): ");
-            userType = scanner.nextLine();
-        } while (!userType.equals("Amateur") && !userType.equals("Occasional") && !userType.equals("Professional"));
-
-        this.userType = userType;
-
-        System.out.println("[APP] Please enter the following information:");
-
         try {
+            String userType = "";
+            do{
+                System.out.print("[APP] Please enter the type of user (Amateur | Occasional | Professional): ");
+                userType = scanner.nextLine();
+            } while (!userType.equals("Amateur") && !userType.equals("Occasional") && !userType.equals("Professional"));
+
+            this.userType = userType;
+
+            System.out.println("[APP] Please enter the following information:");
+
             System.out.print("[APP] Name: ");
             String name = scanner.nextLine();
             System.out.print("[APP] Age: ");
@@ -79,12 +79,11 @@ public abstract class MakeItFitView {
 
                     this.makeItFitController.createUser(name, age, gender, weight, height, bpm, level, address, phone, frequency, this.userType);
                 }
-                default -> System.out.println("[APP] Invalid type.");
+                default -> {System.out.println("[APP] Invalid type.");}
             }
             System.out.println("[" + this.makeItFitController.getName() + "] User created successfully.");
         } catch (Exception e) {
             System.out.println("[APP] Invalid input.");
-            throw new InvalidTypeException();
         }
     }
 

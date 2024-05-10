@@ -76,7 +76,7 @@ public class AdminView extends MakeItFitView {
     private Menu createAppMenu() {
         List<MenuItem> appMenuItems = new ArrayList<>();
 
-        appMenuItems.add(new MenuItem("Create user", () -> createUser()));
+        appMenuItems.add(new MenuItem("Create user", () -> {setEmail();createUser();}));
 
         Menu updateUserMenu = createUpdateUserMenu();
         appMenuItems.add(new MenuItem("Update user info", () -> {
@@ -93,6 +93,8 @@ public class AdminView extends MakeItFitView {
             } catch (Exception e) {
                 System.out.println("[APP] Invalid input.");
             }
+
+            updateUserMenu.run();
         }));
 
         appMenuItems.add(new MenuItem("Remove user", () -> removeUser()));
