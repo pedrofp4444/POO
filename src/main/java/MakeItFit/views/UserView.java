@@ -3,6 +3,8 @@ package MakeItFit.views;
 import MakeItFit.menu.*;
 import java.util.*;
 
+import static MakeItFit.utils.EmailValidator.*;
+
 public class UserView extends MakeItFitView {
 
     /*
@@ -37,9 +39,11 @@ public class UserView extends MakeItFitView {
         Menu appMenu = createAppMenu();
 
         try {
-            System.out.print("[APP] Please enter your email: ");
-            String email = scanner.nextLine();
-
+            String email = "";
+            do {
+                System.out.print("[APP] Please enter your email: ");
+                email = scanner.nextLine();
+            } while (!isValidEmail(email));
             this.makeItFitController.login(email);
             System.out.println("[" + this.makeItFitController.getName() + "] Logged in successfully.");
 

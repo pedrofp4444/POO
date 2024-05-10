@@ -4,6 +4,7 @@ import MakeItFit.MakeItFitController;
 import MakeItFit.exceptions.InvalidTypeException;
 import MakeItFit.menu.*;
 import MakeItFit.users.Gender;
+import MakeItFit.utils.EmailValidator;
 import MakeItFit.utils.MakeItFitDate;
 
 import java.util.*;
@@ -35,14 +36,17 @@ public abstract class MakeItFitView {
     public void createUser() throws InvalidTypeException {
         System.out.println("[APP] Creating user ...");
 
-        System.out.println("[APP] Please enter the type of user:");
+        Scanner scanner = new Scanner(System.in);
 
-        Menu createUserChoiceMenu = createUserChoiceMenu();
-        createUserChoiceMenu.run();
+        String userType = "";
+        do{
+            System.out.print("[APP] Please enter the type of user (Amateur | Occasional | Professional): ");
+            userType = scanner.nextLine();
+        } while (!userType.equals("Amateur") && !userType.equals("Occasional") && !userType.equals("Professional"));
+
+        this.userType = userType;
 
         System.out.println("[APP] Please enter the following information:");
-
-        Scanner scanner = new Scanner(System.in);
 
         try {
             System.out.print("[APP] Name: ");
@@ -82,19 +86,6 @@ public abstract class MakeItFitView {
             System.out.println("[APP] Invalid input.");
             throw new InvalidTypeException();
         }
-    }
-
-    /**
-     * Creates the user choice menu of the application.
-     */
-    public Menu createUserChoiceMenu() {
-        List<MenuItem> createUserChoiceMenuItems = new ArrayList<>();
-
-        createUserChoiceMenuItems.add(new MenuItem("Amateur", () -> {this.userType = "Amateur"; System.out.println("[APP] Selected Amateur, please Exit.");}));
-        createUserChoiceMenuItems.add(new MenuItem("Occasional", () -> {this.userType = "Occasional"; System.out.println("[APP] Selected Occasional, please Exit.");}));
-        createUserChoiceMenuItems.add(new MenuItem("Professional", () -> {this.userType = "Professional"; System.out.println("[APP] Selected Professional, please Exit.");}));
-
-        return new Menu(createUserChoiceMenuItems);
     }
 
     /**
@@ -324,22 +315,6 @@ public abstract class MakeItFitView {
     }
 
     /**
-     * Creates the activity chooser menu of the application.
-     *
-     * @return The created activity chooser menu.
-     */
-    public Menu createActivityChooserMenu() {
-        List<MenuItem> activityMenuItems = new ArrayList<>();
-
-        activityMenuItems.add(new MenuItem("PushUp", () -> {this.activityType = "PushUp"; System.out.println("[" + this.makeItFitController.getName() + "] Selected PushUp, please Exit.");}));
-        activityMenuItems.add(new MenuItem("Running", () -> {this.activityType = "Running"; System.out.println("[" + this.makeItFitController.getName() + "] Selected Running, please Exit.");}));
-        activityMenuItems.add(new MenuItem("Trail", () -> {this.activityType = "Trail"; System.out.println("[" + this.makeItFitController.getName() + "] Selected Trail, please Exit.");}));
-        activityMenuItems.add(new MenuItem("WeightSquat", () -> {this.activityType = "WeightSquat"; System.out.println("[" + this.makeItFitController.getName() + "] Selected WeightSquat, please Exit.");}));
-
-        return new Menu(activityMenuItems);
-    }
-
-    /**
      * Adds an activity to the currently logged in user.
      */
     public void addActivityToUser() {
@@ -348,10 +323,14 @@ public abstract class MakeItFitView {
         Scanner scanner = new Scanner(System.in);
 
         try {
-            System.out.println("[" + this.makeItFitController.getName() + "] Please select the activity:");
 
-            Menu activityMenu = createActivityChooserMenu();
-            activityMenu.run();
+            String activityType = "";
+            do{
+                System.out.print("[" + this.makeItFitController.getName() + "] Please select the activity (PushUp | WeightSquat | Running | Trail): ");
+                activityType = scanner.nextLine();
+            } while (!activityType.equals("PushUp") && !activityType.equals("WeightSquat") && !activityType.equals("Running") && !activityType.equals("Trail"));
+
+            this.activityType = activityType;
 
             System.out.println("[APP] Please enter the following information:");
 
@@ -516,10 +495,14 @@ public abstract class MakeItFitView {
             System.out.print("[" + this.makeItFitController.getName() + "] Please enter the number of iterations for the activity: ");
             int iterations = scanner.nextInt();
 
-            System.out.println("[" + this.makeItFitController.getName() + "] Please select the activity:");
+            String activityType = "";
 
-            Menu activityMenu = createActivityChooserMenu();
-            activityMenu.run();
+            do{
+                System.out.print("[" + this.makeItFitController.getName() + "] Please select the activity (PushUp | WeightSquat | Running | Trail): ");
+                activityType = scanner.nextLine();
+            } while (!activityType.equals("PushUp") && !activityType.equals("WeightSquat") && !activityType.equals("Running") && !activityType.equals("Trail"));
+
+            this.activityType = activityType;
 
             System.out.println("[APP] Please enter the following information:");
 
@@ -541,7 +524,7 @@ public abstract class MakeItFitView {
                         int series = scanner.nextInt();
                         scanner.nextLine(); // Consume the remaining newline
 
-                        this.makeItFitController.addActivityPushUpToTrainingPlan(date, duration, designation, this.activityType, repetitions, series, iterations);
+                        this.makeItFitController.addActivityToTrainingPlan(date, duration, designation, this.activityType, repetitions, series, iterations);
                     }
                     case "Running" -> {
                         System.out.print("[APP] Distance (meters): ");
@@ -551,7 +534,7 @@ public abstract class MakeItFitView {
                         double speed = scanner.nextDouble();
                         scanner.nextLine(); // Consume the remaining newline
 
-                        this.makeItFitController.addActivityRunningToTrainingPlan(date, duration, designation, this.activityType, distance, speed, iterations);
+                        this.makeItFitController.addActivityToTrainingPlan(date, duration, designation, this.activityType, distance, speed, iterations);
                     }
                     case "Trail" -> {
                         System.out.print("[APP] Distance (meters): ");
@@ -567,7 +550,7 @@ public abstract class MakeItFitView {
                         int trailType = scanner.nextInt();
                         scanner.nextLine(); // Consume the remaining newline
 
-                        this.makeItFitController.addActivityTrailToTrainingPlan(date, duration, designation, this.activityType, distance, elevationGain, elevationLoss, trailType, iterations);
+                        this.makeItFitController.addActivityToTrainingPlan(date, duration, designation, this.activityType, distance, elevationGain, elevationLoss, trailType, iterations);
                     }
                     case "WeightSquat" -> {
                         System.out.print("[APP] Repetitions: ");
@@ -579,7 +562,7 @@ public abstract class MakeItFitView {
                         double weight = scanner.nextDouble();
                         scanner.nextLine(); // Consume the remaining newline
 
-                        this.makeItFitController.addActivityWeightSquatToTrainingPlan(date, duration, designation, this.activityType, repetitions, series, weight, iterations);
+                        this.makeItFitController.addActivityToTrainingPlan(date, duration, designation, this.activityType, repetitions, series, weight, iterations);
                     }
                     default -> System.out.println("[APP] Invalid type.");
                 }

@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
-public class EmailValidator implements Serializable {
+public class EmailValidator {
 
     private static final String EMAIL_PATTERN = "^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 

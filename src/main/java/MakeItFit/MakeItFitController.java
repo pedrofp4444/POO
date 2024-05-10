@@ -357,8 +357,12 @@ public class MakeItFitController {
      * @param series The series of the activity.
      * @param iterations The iterations of the activity.
      */
-    public void addActivityPushUpToTrainingPlan(MakeItFitDate date, int duration, String designation, String name, int repetitions, int series, int iterations) {
-        this.makeItFit.addActivityPushUpToTrainingPlan(this.trainingPlan, this.email, date, duration, designation, name, repetitions, series, iterations);
+    public void addActivityToTrainingPlan(MakeItFitDate date, int duration, String designation, String name, int repetitions, int series, int iterations) {
+        PushUp activity = new PushUp(this.makeItFit.getUser(this.email).getCode() , date, duration, designation, name, repetitions, series);
+        this.makeItFit.addActivityToTrainingPlan(this.trainingPlan, activity, iterations);
+        if (this.timeManager.getCurrentDate().isAfter(date)){
+            this.makeItFit.updateSystem(this.timeManager.getCurrentDate(), this.makeItFit.getUser(this.email).getCode());
+        }
     }
 
     /**
@@ -372,8 +376,12 @@ public class MakeItFitController {
      * @param speed The speed of the activity.
      * @param iterations The iterations of the activity.
      */
-    public void addActivityRunningToTrainingPlan(MakeItFitDate date, int duration, String designation, String name, double distance, double speed, int iterations) {
-        this.makeItFit.addActivityRunningToTrainingPlan(this.trainingPlan, this.email, date, duration, designation, name, distance, speed, iterations);
+    public void addActivityToTrainingPlan(MakeItFitDate date, int duration, String designation, String name, double distance, double speed, int iterations) {
+        Running activity = new Running(this.makeItFit.getUser(this.email).getCode() , date, duration, designation, name, distance, speed);
+        this.makeItFit.addActivityToTrainingPlan(this.trainingPlan, activity, iterations);
+        if (this.timeManager.getCurrentDate().isAfter(date)){
+            this.makeItFit.updateSystem(this.timeManager.getCurrentDate(), this.makeItFit.getUser(this.email).getCode());
+        }
     }
 
     /**
@@ -389,8 +397,12 @@ public class MakeItFitController {
      * @param trailType The trail type of the activity.
      * @param iterations The iterations of the activity.
      */
-    public void addActivityTrailToTrainingPlan(MakeItFitDate date, int duration, String designation, String name, double distance, double elevationGain, double elevationLoss, int trailType, int iterations) {
-        this.makeItFit.addActivityTrailToTrainingPlan(this.trainingPlan, this.email, date, duration, designation, name, distance, elevationGain, elevationLoss, trailType, iterations);
+    public void addActivityToTrainingPlan(MakeItFitDate date, int duration, String designation, String name, double distance, double elevationGain, double elevationLoss, int trailType, int iterations) {
+        Trail activity = new Trail(this.makeItFit.getUser(this.email).getCode() , date, duration, designation, name, distance, elevationGain, elevationLoss, trailType);
+        this.makeItFit.addActivityToTrainingPlan(this.trainingPlan, activity, iterations);
+        if (this.timeManager.getCurrentDate().isAfter(date)){
+            this.makeItFit.updateSystem(this.timeManager.getCurrentDate(), this.makeItFit.getUser(this.email).getCode());
+        }
     }
 
     /**
@@ -405,8 +417,12 @@ public class MakeItFitController {
      * @param weight The weight of the activity.
      * @param iterations The iterations of the activity.
      */
-    public void addActivityWeightSquatToTrainingPlan(MakeItFitDate date, int duration, String designation, String name, int repetitions, int series, double weight, int iterations) {
-        this.makeItFit.addActivityWeightSquatToTrainingPlan(this.trainingPlan, this.email, date, duration, designation, name, repetitions, series, weight, iterations);
+    public void addActivityToTrainingPlan(MakeItFitDate date, int duration, String designation, String name, int repetitions, int series, double weight, int iterations) {
+        WeightSquat activity = new WeightSquat(this.makeItFit.getUser(this.email).getCode(), date, duration, designation, name, repetitions, series, weight);
+        this.makeItFit.addActivityToTrainingPlan(this.trainingPlan, activity, iterations);
+        if (this.timeManager.getCurrentDate().isAfter(date)){
+            this.makeItFit.updateSystem(this.timeManager.getCurrentDate(), this.makeItFit.getUser(this.email).getCode());
+        }
     }
 
     /**
@@ -450,15 +466,6 @@ public class MakeItFitController {
      */
     public void loadSystem(String fileName) throws FileNotFoundException {
         this.makeItFit.loadSystem(fileName);
-    }
-
-    /**
-     * Feeds the system with a given number of users.
-     *
-     * @param numberOfUsers The number of users to feed the system with.
-     */
-    public void feedUserData(int numberOfUsers) {
-        this.makeItFit.feedUserData(numberOfUsers);
     }
 
     /**

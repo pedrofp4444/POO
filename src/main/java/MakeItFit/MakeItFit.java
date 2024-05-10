@@ -1,9 +1,7 @@
 package MakeItFit;
 
 import MakeItFit.activities.Activity;
-import MakeItFit.activities.implementation.*;
 import MakeItFit.exceptions.*;
-import MakeItFit.feeder.Feeder;
 import MakeItFit.trainingPlan.*;
 import MakeItFit.users.*;
 import MakeItFit.utils.MakeItFitDate;
@@ -325,77 +323,13 @@ public class MakeItFit implements Serializable {
     }
 
     /**
-     * Adds a push-up activity to a training plan from a user.
+     * Adds an activity to a training plan from a user.
      *
-     * @param code The code of the training plan.
-     * @param email The user's email.
-     * @param date The date of the activity.
-     * @param duration The duration of the activity.
-     * @param designation The designation of the activity.
-     * @param name The name of the activity.
-     * @param repetitions The repetitions of the activity.
-     * @param series The series of the activity.
+     * @param code The user's code.
+     * @param activity The activity to be added.
      * @param iterations The iterations of the activity.
      */
-    public void addActivityPushUpToTrainingPlan(UUID code, String email, MakeItFitDate date, int duration, String designation, String name, int repetitions, int series, int iterations) {
-        PushUp activity = new PushUp(this.userManager.getUserByEmail(email).getCode() , date, duration, designation, name, repetitions, series);
-        this.trainingPlanManager.addActivity(code, iterations, activity);
-    }
-
-    /**
-     * Adds a running activity to a training plan from a user.
-     *
-     * @param code The code of the training plan.
-     * @param email The user's email.
-     * @param date The date of the activity.
-     * @param duration The duration of the activity.
-     * @param designation The designation of the activity.
-     * @param name The name of the activity.
-     * @param distance The distance of the activity.
-     * @param speed The speed of the activity.
-     * @param iterations The iterations of the activity.
-     */
-    public void addActivityRunningToTrainingPlan(UUID code, String email, MakeItFitDate date, int duration, String designation, String name, double distance, double speed, int iterations) {
-        Running activity = new Running(this.userManager.getUserByEmail(email).getCode(), date, duration, designation, name, distance, speed);
-        this.trainingPlanManager.addActivity(code, iterations, activity);
-    }
-
-    /**
-     * Adds a trail activity to a training plan from a user.
-     *
-     * @param code The code of the training plan.
-     * @param email The user's email.
-     * @param date The date of the activity.
-     * @param duration The duration of the activity.
-     * @param designation The designation of the activity.
-     * @param name The name of the activity.
-     * @param distance The distance of the activity.
-     * @param elevationGain The elevation gain of the activity.
-     * @param elevationLoss The elevation loss of the activity.
-     * @param trailType The type of the trail.
-     * @param iterations The iterations of the activity.
-     */
-    public void addActivityTrailToTrainingPlan(UUID code, String email, MakeItFitDate date, int duration, String designation, String name, double distance, double elevationGain, double elevationLoss, int trailType, int iterations) {
-        Trail activity = new Trail(this.userManager.getUserByEmail(email).getCode(), date, duration, designation, name, distance, elevationGain, elevationLoss, trailType);
-        this.trainingPlanManager.addActivity(code, iterations, activity);
-    }
-
-    /**
-     * Adds a weight squat activity to a training plan from a user.
-     *
-     * @param email The user's email.
-     * @param email The user's email.
-     * @param date The date of the activity.
-     * @param duration The duration of the activity.
-     * @param designation The designation of the activity.
-     * @param name The name of the activity.
-     * @param repetitions The repetitions of the activity.
-     * @param series The series of the activity.
-     * @param weight The weight of the activity.
-     * @param iterations The iterations of the activity.
-     */
-    public void addActivityWeightSquatToTrainingPlan(UUID code, String email, MakeItFitDate date, int duration, String designation, String name, int repetitions, int series, double weight, int iterations) {
-        WeightSquat activity = new WeightSquat(this.userManager.getUserByEmail(email).getCode(), date, duration, designation, name, repetitions, series, weight);
+    public void addActivityToTrainingPlan(UUID code, Activity activity, int iterations) {
         this.trainingPlanManager.addActivity(code, iterations, activity);
     }
 
@@ -461,16 +395,6 @@ public class MakeItFit implements Serializable {
         } catch (IOException | ClassNotFoundException e) {
             throw new FileNotFoundException();
         }
-    }
-
-    /**
-     * Feeds the system with user data.
-     *
-     * @param numberOfUsers The number of users to feed the system with.
-     */
-    public void feedUserData(int numberOfUsers) {
-        Feeder feeder = new Feeder(this.userManager);
-        feeder.feedUserData(numberOfUsers);
     }
 
     /**

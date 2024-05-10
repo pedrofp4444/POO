@@ -6,6 +6,8 @@ import MakeItFit.utils.MakeItFitDate;
 
 import java.util.*;
 
+import static MakeItFit.utils.EmailValidator.isValidEmail;
+
 /**
  * The class AdminView represents a view of an admin user.
  *
@@ -26,9 +28,13 @@ public class AdminView extends MakeItFitView {
      */
     public void setEmail() {
         try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("[APP] Please enter the user email: ");
-            String email = scanner.nextLine();
+            String email = "";
+            do{
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("[APP] Please enter the user email: ");
+                email = scanner.nextLine();
+            } while (!isValidEmail(email));
+            this.makeItFitController.setEmail(email);
         } catch (InvalidTypeException e) {
             System.out.println("[APP] Invalid email.");
         }
@@ -77,9 +83,12 @@ public class AdminView extends MakeItFitView {
             System.out.println("[APP] Updating user ...");
 
             try {
-                System.out.print("[APP] Enter the user's email: ");
-                Scanner scanner = new Scanner(System.in);
-                String email = scanner.nextLine();
+                String email = "";
+                do {
+                    System.out.print("[APP] Enter the user's email: ");
+                    Scanner scanner = new Scanner(System.in);
+                    email = scanner.nextLine();
+                } while (!isValidEmail(email));
                 this.makeItFitController.setEmail(email);
             } catch (Exception e) {
                 System.out.println("[APP] Invalid input.");
@@ -88,7 +97,6 @@ public class AdminView extends MakeItFitView {
 
         appMenuItems.add(new MenuItem("Remove user", () -> removeUser()));
         appMenuItems.add(new MenuItem("User Details", () -> {setEmail();getUserDetails();}));
-        appMenuItems.add(new MenuItem("Populate users", () -> feedUsers()));
         appMenuItems.add(new MenuItem("List all users", () -> printAllUsersDetails()));
         appMenuItems.add(new MenuItem("Add activity to user", () -> {setEmail();addActivityToUser();}));
         appMenuItems.add(new MenuItem("Remove activity from user", () -> {setEmail();removeActivityFromUser();}));
@@ -133,26 +141,6 @@ public class AdminView extends MakeItFitView {
             System.out.println("[APP] User removed successfully.");
         } catch (EntityDoesNotExistException e) {
             System.out.println("[APP] User does not exist.");
-        }
-    }
-
-    /**
-     * Populates a specified number of users in the system.
-     * Requests the number of users to be populated from the console and populates them using the feeder.
-     */
-    public void feedUsers() {
-        System.out.println("[APP] Populating users ...");
-
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("[APP] Enter the number of users to be populated: ");
-        int numberOfUsers = scanner.nextInt();
-
-        try {
-             this.makeItFitController.feedUserData(numberOfUsers);
-            System.out.println("[APP] Users populated successfully.");
-        } catch (Exception e) {
-            System.out.println("[APP] Invalid input.");
         }
     }
 
