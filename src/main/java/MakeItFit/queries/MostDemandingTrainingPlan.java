@@ -8,6 +8,7 @@ import MakeItFit.users.User;
 import MakeItFit.users.UserManager;
 import MakeItFit.utils.MyTuple;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ import java.util.List;
  * @version (a version number or a date)
  */
 
-public class MostDemandingTrainingPlan {
+public class MostDemandingTrainingPlan implements Serializable {
     /**
      * Executes a query and returns the mostdemanding training plan.
      * @param trainingPlanManager

@@ -378,6 +378,7 @@ public class MakeItFit implements Serializable {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
             oos.writeObject(this);
         } catch (IOException e) {
+            System.out.println("MakeItFit.saveSystem: " + e.getMessage());
             throw new FileNotFoundException();
         }
     }

@@ -1,29 +1,26 @@
 package MakeItFit.queries;
 
-
 import MakeItFit.trainingPlan.TrainingPlan;
 import MakeItFit.trainingPlan.TrainingPlanManager;
 import MakeItFit.users.User;
 import MakeItFit.users.UserManager;
 import MakeItFit.utils.MakeItFitDate;
 
-    /**
+import java.io.Serializable;
+
+/**
      * The class QueriesManager represents a manager of queries.
      *
      * @author Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
      * @version (a version number or a date)
      */
-    
-
-public class QueriesManager {
+public class QueriesManager implements Serializable {
     private HowManyAltimetryDone howManyAltimetryDone;
     private HowManyKMsDone howManyKMsDone;
     private MostDoneActivity mostDoneActivity;
     private MostDemandingTrainingPlan mostDemandingTrainingPlan;
     private WhoBurnsMoreCalories whoBurnsMoreCalories;
     private WhoDidTheMostActivities whoDidTheMostActivities;
-    private UserManager userManager;
-    private TrainingPlanManager trainingPlanManager;
 
     /**
      * Constructs a new queries manager.
@@ -36,7 +33,6 @@ public class QueriesManager {
         this.whoBurnsMoreCalories = new WhoBurnsMoreCalories();
         this.whoDidTheMostActivities = new WhoDidTheMostActivities();
 
-        this.userManager = new UserManager();
         this.mostDemandingTrainingPlan =  new MostDemandingTrainingPlan();
     }
 

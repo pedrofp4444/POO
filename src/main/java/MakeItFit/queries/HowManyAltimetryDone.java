@@ -7,6 +7,8 @@ import MakeItFit.users.User;
 import MakeItFit.users.UserManager;
 import MakeItFit.utils.MakeItFitDate;
 
+import java.io.Serializable;
+
 /**
  * This class is responsible for the query that calculates the total altimetry done by a user in a given period of time.
  *
@@ -14,7 +16,7 @@ import MakeItFit.utils.MakeItFitDate;
  * @version (a version number or a date)
  */
 
-public class HowManyAltimetryDone {
+public class HowManyAltimetryDone implements Serializable {
 
     /**
      * Executes a query to find the total altimetry done by a user in a given period of time.

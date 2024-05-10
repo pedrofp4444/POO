@@ -6,6 +6,7 @@ import MakeItFit.users.User;
 import MakeItFit.users.UserManager;
 import MakeItFit.utils.MakeItFitDate;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ import java.util.List;
  * @version (a version number or a date)
  */
 
-public class WhoBurnsMoreCalories {
+public class WhoBurnsMoreCalories implements Serializable {
 
     /**
      * Executes a query and returns the result.

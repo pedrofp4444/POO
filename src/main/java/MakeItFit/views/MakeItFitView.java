@@ -729,6 +729,7 @@ public abstract class MakeItFitView {
             this.makeItFitController.saveSystem(fileName);
             System.out.println("[" + this.makeItFitController.getName() + "] System state saved successfully.");
         } catch (Exception e) {
+            System.out.println("View: " + e.getMessage());
             System.out.println("[" + this.makeItFitController.getName() + "] Could not save the file.");
         }
     }

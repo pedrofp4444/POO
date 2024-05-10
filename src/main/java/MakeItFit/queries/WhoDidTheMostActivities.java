@@ -6,9 +6,10 @@ import MakeItFit.users.User;
 import MakeItFit.users.UserManager;
 import MakeItFit.utils.MakeItFitDate;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class WhoDidTheMostActivities {
+public class WhoDidTheMostActivities implements Serializable {
 
     /**
      * Executes a query and returns the result.
