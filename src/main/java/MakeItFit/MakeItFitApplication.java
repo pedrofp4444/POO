@@ -70,7 +70,49 @@ public class MakeItFitApplication {
      * Currently, this method displays a placeholder message.
      */
     private static void showHelpMessage() {
-        System.out.println("This is a help message that I should write.");
+        System.out.println("Welcome to the MakeItFit Application!\n" +
+                "This application allows you to manage activities, users, and training plans for physical fitness enthusiasts. Here's an overview of the main features:\n" +
+                "\n" +
+                "Activities:\n" +
+                "\n" +
+                "Register various types of activities (running, trail, push-up, etc.)\n" +
+                "Track distance, elevation gain, repetitions, weights, and duration for each activity\n" +
+                "Calculate calorie expenditure based on activity type and user profile\n" +
+                "\n" +
+                "Users:\n" +
+                "\n" +
+                "Create different user types (professionals, amateurs and occasionals)\n" +
+                "Store user information (code, name, address, email, average heart rate, height, weight, level)\n" +
+                "Each user type has a specific calculation formula for his representative index\n" +
+                "\n" +
+                "Training Plans:\n" +
+                "\n" +
+                "Create training plans consisting of multiple activities\n" +
+                "Specify activity recurrence (daily, specific weekdays, etc.)\n" +
+                "Execute training plans and track their completion using the time manager\n" +
+                "\n" +
+                "Time Simulation:\n" +
+                "\n" +
+                "Advance the application's date to simulate future scenarios\n" +
+                "Pending activities are automatically executed based on the new date\n" +
+                "\n" +
+                "Statistics and Records:\n" +
+                "\n" +
+                "View statistics on calorie expenditure, activity counts, distances, and elevation gains\n" +
+                "Track individual and overall activity records for each user\n" +
+                "Experiment different queries on the preserved information\n" +
+                "\n" +
+                "Plan Generation:\n" +
+                "\n" +
+                "Generate customized training plans based on user goals\n" +
+                "Specify desired activity types, recurrence, calorie targets, and difficulty levels\n" +
+                "\n" +
+                "Help:\n" +
+                "\n" +
+                "Access this help text at any time for guidance on using the application\n" +
+                "\n" +
+                "To get started, explore the main menu options. Don't hesitate to refer to this help text whenever you need assistance with the application's features.\n" +
+                "Enjoy your fitness journey!");
     }
 
     /**
@@ -78,6 +120,8 @@ public class MakeItFitApplication {
      * Currently, this method displays a list of authors' names.
      */
     private static void showAuthors() {
-        System.out.println("Afonso Santos, Hélder Gomes e Pedro Pereira");
+        System.out.println("Afonso Santos (a104276)\n" +
+                "Hélder Gomes (a104100)\n" +
+                "Pedro Pereira (a104082)");
     }
 }
