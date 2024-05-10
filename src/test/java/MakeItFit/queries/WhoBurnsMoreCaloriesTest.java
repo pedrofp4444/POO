@@ -33,7 +33,7 @@ public class WhoBurnsMoreCaloriesTest {
     void testExecuteQueryValidUsers() {
         WhoBurnsMoreCalories calorieAnalyzer = new WhoBurnsMoreCalories();
 
-        String result = calorieAnalyzer.executeQuery(userManager, null, null).toString();
+        String result = calorieAnalyzer.executeQuery(userManager).toString();
 
         assertEquals(testUser1.toString(), result);
     }
@@ -42,7 +42,7 @@ public class WhoBurnsMoreCaloriesTest {
     void testExecuteQueryNoUsers() {
         WhoBurnsMoreCalories calorieAnalyzer = new WhoBurnsMoreCalories();
 
-        assertThrows(NullPointerException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             calorieAnalyzer.executeQuery(null, null, null);
         });
     }

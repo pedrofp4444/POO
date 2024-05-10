@@ -43,12 +43,12 @@ public class HowManyAltimetryDoneTest {
      * Tests the HowManyAltimetryDone class method executeQuery.
      */
     @Test
-    void testExecuteQueryNullDates() {
+    void testExecuteQueryWithoutDates() {
         HowManyAltimetryDone altimetryAnalyzer = new HowManyAltimetryDone();
 
-        double result = altimetryAnalyzer.executeQuery(userManager, "test@example.com", null, null);
+        double result = altimetryAnalyzer.executeQuery(userManager, "test@example.com");
 
-        assertEquals(1500, result);
+        assertEquals(500, round(result));
     }
 
     /**
@@ -62,7 +62,7 @@ public class HowManyAltimetryDoneTest {
 
         double result = altimetryAnalyzer.executeQuery(userManager, "test@example.com", date1, date2);
 
-        assertEquals((double) 901, round(result));
+        assertEquals((double) 1500, round(result));
     }
 
     /**

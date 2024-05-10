@@ -33,7 +33,7 @@ public class WhoDidTheMostActivitiesTest {
     void testExecuteQueryValidUsers() {
         WhoDidTheMostActivities activityAnalyzer = new WhoDidTheMostActivities();
 
-        String result = activityAnalyzer.executeQuery(userManager, null, null).toString();
+        String result = activityAnalyzer.executeQuery(userManager).toString();
 
         assertEquals(testUser1.toString(), result);
     }
@@ -42,7 +42,7 @@ public class WhoDidTheMostActivitiesTest {
     void testExecuteQueryNoUsers() {
         WhoDidTheMostActivities activityAnalyzer = new WhoDidTheMostActivities();
 
-        assertThrows(NullPointerException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             activityAnalyzer.executeQuery(null, null, null);
         });
     }

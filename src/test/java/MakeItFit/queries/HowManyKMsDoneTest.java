@@ -45,10 +45,10 @@ public class HowManyKMsDoneTest {
      * Tests the HowManyMetersDone class method executeQuery.
      */
     @Test
-    void testExecuteQueryNullDates() {
+    void testExecuteQueryWithoutDates() {
         HowManyKMsDone metersAnalyzer = new HowManyKMsDone();
 
-        double result = metersAnalyzer.executeQuery(userManager, "test@example.com", null, null);
+        double result = metersAnalyzer.executeQuery(userManager, "test@example.com");
 
         assertEquals(57, round(result));
     }

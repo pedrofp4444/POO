@@ -60,6 +60,6 @@ public class HowManyKMsDone {
             }
         }
 
-        return distance;
+        return distance/1000;
     }
 }
