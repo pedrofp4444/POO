@@ -26,6 +26,14 @@ public abstract class RepetitionsWithWeights extends Repetitions implements Seri
     }
 
     /**
+     * Constructs a new RepetitionsWithWeights instance with the default parameters.
+     */
+    public RepetitionsWithWeights() {
+        super();
+        this.weight = 0;
+    }
+
+    /**
      * Constructs a new RepetitionsWithWeights instance as a copy of another RepetitionsWithWeights instance.
      *
      * @param r the RepetitionsWithWeights instance to copy

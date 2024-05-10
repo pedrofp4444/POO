@@ -33,6 +33,14 @@ public class WeightSquat extends RepetitionsWithWeights implements Serializable 
     }
 
     /**
+     * Constructs a new WeightSquat activity with the default parameters.
+     */
+    public WeightSquat() {
+        super();
+        setSpecialization(this.getClass().getSimpleName());
+    }
+
+    /**
      * Copy constructor to create a new instance as a copy of an existing WeightSquat instance.
      *
      * @param w The existing WeightSquat instance to copy.

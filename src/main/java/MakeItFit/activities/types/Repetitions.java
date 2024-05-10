@@ -28,6 +28,15 @@ public abstract class Repetitions extends Activity implements Serializable {
     }
 
     /**
+     * Constructs a new Repetitions instance with the default parameters.
+     */
+    public Repetitions() {
+        super();
+        this.repetitions = 0;
+        this.series = 0;
+    }
+
+    /**
      * Constructs a new Repetitions instance as a copy of another Repetitions instance.
      *
      * @param r the Repetitions instance to copy

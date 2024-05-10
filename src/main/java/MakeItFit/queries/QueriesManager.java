@@ -22,9 +22,9 @@ public class QueriesManager {
     private MostDemandingTrainingPlan mostDemandingTrainingPlan;
     private WhoBurnsMoreCalories whoBurnsMoreCalories;
     private WhoDidTheMostActivities whoDidTheMostActivities;
-
     private UserManager userManager;
     private TrainingPlanManager trainingPlanManager;
+
     /**
      * Constructs a new queries manager.
      */

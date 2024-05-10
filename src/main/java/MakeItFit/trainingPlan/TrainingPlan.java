@@ -13,7 +13,7 @@ import java.util.*;
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
-public class TrainingPlan implements Serializable {
+public class TrainingPlan implements Serializable, Comparable<TrainingPlan> {
     private final UUID userCode;
     private final UUID code;
     private List<MyTuple<Integer, Activity>> activities; /* Tuple<Repetitions, Activity> */
@@ -29,6 +29,16 @@ public class TrainingPlan implements Serializable {
         this.userCode = userCode;
         this.code = UUID.randomUUID();
         this.startDate = startDate;
+        this.activities = new ArrayList<MyTuple<Integer, Activity>>();
+    }
+
+    /**
+     * Constructs a new TrainingPlan instance with the default parameters.
+     */
+    public TrainingPlan(){
+        this.userCode = new UUID(0L, 0L);
+        this.code = UUID.randomUUID();
+        this.startDate = new MakeItFitDate();
         this.activities = new ArrayList<MyTuple<Integer, Activity>>();
     }
 
@@ -114,34 +124,6 @@ public class TrainingPlan implements Serializable {
     }
 
     /**
-     * Returns a string representation of the training plan.
-     *
-     * @return a string representation of the training plan
-     */
-    @Override
-    public String toString() {
-        return "        == (Training plan details) ==" + "        \nTraining Plan: " + this.code + "\n        User Code: " + this.userCode + "\n        Start Date: " + this.startDate + "\n        Activities(Iterations / Activity): " + this.activities;
-    }
-
-    /**
-     * The equals method compares two training plans for equality.
-     * 
-     * @param o the object to compare
-     * @return true if the training plans are equal, false otherwise
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (!(o instanceof TrainingPlan)) {
-            return false;
-        }
-        TrainingPlan trainingPlan = (TrainingPlan) o;
-        return this.userCode.equals(trainingPlan.getUserCode()) && this.startDate.equals(trainingPlan.getStartDate()) && this.activities.equals(trainingPlan.getActivities());
-    }
-
-    /**
      * Updates the activities of the training plan.
      *
      * @param currentDate the current date
@@ -169,5 +151,48 @@ public class TrainingPlan implements Serializable {
             }
         }
         return activities;
+    }
+
+    /**
+     * Returns a string representation of the training plan.
+     *
+     * @return a string representation of the training plan
+     */
+    @Override
+    public String toString() {
+        return "        == (Training plan details) ==" + "        \nTraining Plan: " + this.code + "\n        User Code: " + this.userCode + "\n        Start Date: " + this.startDate + "\n        Activities(Iterations / Activity): " + this.activities;
+    }
+
+    /**
+     * The equals method compares two training plans for equality.
+     *
+     * @param o the object to compare
+     * @return true if the training plans are equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof TrainingPlan)) {
+            return false;
+        }
+        TrainingPlan trainingPlan = (TrainingPlan) o;
+        return this.userCode.equals(trainingPlan.getUserCode()) && this.startDate.equals(trainingPlan.getStartDate()) && this.activities.equals(trainingPlan.getActivities());
+    }
+
+    /**
+     * Compares the training plan to another training plan based on the start date and activities.
+     *
+     * @param other the other training plan to compare
+     * @return a negative integer, zero, or a positive integer as this training plan is less than, equal to, or greater than the other training plan
+     */
+    @Override
+    public int compareTo(TrainingPlan other) {
+        int compareDate = this.startDate.compareTo(other.getStartDate());
+        if (compareDate == 0) {
+            return this.activities.size() - other.getActivities().size();
+        }
+        return compareDate;
     }
 }

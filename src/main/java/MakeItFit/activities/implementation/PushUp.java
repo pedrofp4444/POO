@@ -31,6 +31,14 @@ public class PushUp extends Repetitions implements Serializable {
     }
 
     /**
+     * Constructs a PushUp instance with the default parameters.
+     */
+    public PushUp() {
+        super();
+        setSpecialization(this.getClass().getSimpleName());
+    }
+
+    /**
      * Constructs a PushUp instance as a copy of another PushUp instance.
      *
      * @param p The PushUp instance to copy.

@@ -161,7 +161,7 @@ public class TrainingPlanManager implements Serializable {
      *
      * @param trainingPlan the training plan to be inserted
      */
-    public void insertTrainingPlan(TrainingPlan trainingPlan) throws IllegalArgumentException{
+    public void insertTrainingPlan(TrainingPlan trainingPlan) throws IllegalArgumentException {
 
         if (trainingPlan == null) {
             throw new IllegalArgumentException("Invalid input: trainingPlan cannot be null.");
@@ -190,7 +190,7 @@ public class TrainingPlanManager implements Serializable {
      * @return the training plan by the user code
      * @throws IllegalArgumentException if the training plan does not exist
      */
-    public TrainingPlan getTrainingPlan(UUID code){
+    public TrainingPlan getTrainingPlan(UUID code) throws IllegalArgumentException {
         TrainingPlan trainingPlan = this.trainingPlans.get(code);
 
         if(trainingPlan == null){
@@ -206,7 +206,7 @@ public class TrainingPlanManager implements Serializable {
      * @param trainingPlan the training plan to be updated
      * @throws EntityDoesNotExistException if the training plan does not exist
      */
-    public void updateTrainingPlan(TrainingPlan trainingPlan){
+    public void updateTrainingPlan(TrainingPlan trainingPlan) throws EntityDoesNotExistException{
         UUID code = trainingPlan.getCode();
         if (!this.trainingPlans.containsKey(code)) {
             throw new EntityDoesNotExistException("Training Plan with code " + code + " does not exist.");

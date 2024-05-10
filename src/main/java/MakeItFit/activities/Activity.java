@@ -5,14 +5,19 @@ import MakeItFit.utils.MakeItFitDate;
 import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class Activity implements ActivityInterface, Serializable {
+/**
+ * The Activity class represents an activity that includes common activity information.
+ *
+ * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
+ * @version (a version number or a date)
+ */
+public abstract class Activity implements ActivityInterface, Serializable, Comparable<Activity> {
     private UUID userCode;
     private UUID code;
     private MakeItFitDate realizationDate;
     private int expectedDuration;
     private String designation;
     private String name;
-
     private String specialization;
     private int duration;
     private int caloricWaste;
@@ -35,6 +40,20 @@ public abstract class Activity implements ActivityInterface, Serializable {
         this.duration = 0;
         this.caloricWaste = 0;
         this.name = name;
+    }
+
+    /**
+     * Constructs a new Activity instance with the default parameters.
+     */
+    public Activity() {
+        this.userCode = new UUID(0L, 0L);
+        this.code = UUID.randomUUID();
+        this.realizationDate = new MakeItFitDate();
+        this.expectedDuration = 0;
+        this.designation = "";
+        this.duration = 0;
+        this.caloricWaste = 0;
+        this.name = "";
     }
 
     /**
@@ -193,6 +212,7 @@ public abstract class Activity implements ActivityInterface, Serializable {
      *
      * @return the specialization of the activity
      */
+    @Override
     public boolean equals(Object o){
         if (o == this) return true;
         if (!(o instanceof Activity)) return false;
@@ -205,6 +225,7 @@ public abstract class Activity implements ActivityInterface, Serializable {
      *
      * @return A clone of the activity.
      */
+    @Override
     public abstract Activity clone();
 
     /**
@@ -223,5 +244,20 @@ public abstract class Activity implements ActivityInterface, Serializable {
         sb.append("Duration: ").append(this.duration).append(" minutes, ");
         sb.append("Caloric Waste: ").append(this.caloricWaste).append(" calories, ");
         return sb.toString();
+    }
+
+    /**
+     * Compares the activity to another activity based on the realization date and expected duration.
+     *
+     * @param other the other activity to compare
+     * @return a negative integer, zero, or a positive integer as this activity is less than, equal to, or greater than the other activity
+     */
+    @Override
+    public int compareTo(Activity other) {
+        int compareDate = this.realizationDate.compareTo(other.realizationDate);
+        if (compareDate != 0) {
+            return compareDate;
+        }
+        return this.expectedDuration-(other.expectedDuration);
     }
 }

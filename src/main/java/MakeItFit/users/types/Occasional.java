@@ -75,6 +75,11 @@ public class Occasional extends User implements Serializable {
         return new Occasional(this);
     }
 
+    /**
+     * Returns a string representation of the Occasional user.
+     *
+     * @return a string containing the details of the Occasional user
+     */
     public String toString() {
         return super.toString() + "        Frequency: " + frequency + "\n" + "        ====================\n";
     }

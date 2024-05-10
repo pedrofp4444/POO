@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
-public abstract class User implements UserInterface, Serializable {
+public abstract class User implements UserInterface, Serializable, Comparable<User> {
 
     private final UUID code;
     private String name;
@@ -22,7 +22,7 @@ public abstract class User implements UserInterface, Serializable {
     private float weight;
     private int height;
     private int bpm;
-    private int level; // Experience level (usage in context to be verified)
+    private int level;
     private String address;
     private String phone;
     private String email;
@@ -32,16 +32,16 @@ public abstract class User implements UserInterface, Serializable {
     /**
      * Constructs a new user with the specified details.
      *
-     * @param name The user's name.
-     * @param age The user's age.
-     * @param gender The user's gender.
-     * @param weight The user's weight.
-     * @param height The user's height.
-     * @param bpm The user's beats per minute (heart rate).
-     * @param level The user's experience level (usage in context to be verified).
+     * @param name    The user's name.
+     * @param age     The user's age.
+     * @param gender  The user's gender.
+     * @param weight  The user's weight.
+     * @param height  The user's height.
+     * @param bpm     The user's beats per minute (heart rate).
+     * @param level   The user's experience level (usage in context to be verified).
      * @param address The user's address.
-     * @param phone The user's phone number.
-     * @param email The user's email address.
+     * @param phone   The user's phone number.
+     * @param email   The user's email address.
      */
     public User(String name, int age, Gender gender, float weight, int height, int bpm, int level, String address, String phone, String email) {
         this.code = UUID.randomUUID();
@@ -56,6 +56,25 @@ public abstract class User implements UserInterface, Serializable {
         this.phone = phone;
         this.email = email;
         this.index = calculateIndex(weight, height, bpm);
+        this.activities = new ArrayList<>();
+    }
+
+    /**
+     * Constructs a new user with the default details.
+     */
+    public User() {
+        this.code = UUID.randomUUID();
+        this.name = "";
+        this.age = 0;
+        this.gender = Gender.Other;
+        this.weight = 0;
+        this.height = 0;
+        this.bpm = 0;
+        this.level = 0;
+        this.address = "";
+        this.phone = "";
+        this.email = "";
+        this.index = 0;
         this.activities = new ArrayList<>();
     }
 
@@ -319,6 +338,34 @@ public abstract class User implements UserInterface, Serializable {
     }
 
     /**
+     * Updates the activities of the user based on the current date.
+     */
+    public void updateActivities() {
+        for (Activity activity : this.activities) {
+            activity.updateActivity(this.index);
+        }
+    }
+
+    /**
+     * Calculates the index of the user based on the weight, height, and bpm.
+     *
+     * @param weight The weight of the user.
+     * @param height The height of the user.
+     * @param bpm    The beats per minute (heart rate) of the user.
+     * @return The index of the user.
+     */
+    public float calculateIndex(float weight, int height, int bpm) {
+        return (weight / (((float) height / 100) * ((float) height / 100)) + (float) bpm / 40);
+    }
+
+    /**
+     * Abstract method for cloning a user. Must be implemented by subclasses.
+     *
+     * @return A clone of the user.
+     */
+    public abstract User clone();
+    
+    /**
      * Returns a string representation of the user.
      *
      * @return A string containing the details of the user.
@@ -327,20 +374,20 @@ public abstract class User implements UserInterface, Serializable {
     public String toString() {
         return String.format(
                 """
-                        == (User details) ==
-                        Code: %s
-                        Name: %s
-                        Age: %d
-                        Gender: %s
-                        Weight: %.2f kg
-                        Height: %d cm
-                        Bpm: %d
-                        Level: %s
-                        Address: %s
-                        Phone: %s
-                        Email: %s
-                        Activities: %s
-                """,
+                                == (User details) ==
+                                Code: %s
+                                Name: %s
+                                Age: %d
+                                Gender: %s
+                                Weight: %.2f kg
+                                Height: %d cm
+                                Bpm: %d
+                                Level: %s
+                                Address: %s
+                                Phone: %s
+                                Email: %s
+                                Activities: %s
+                        """,
                 this.code,
                 this.name,
                 this.age,
@@ -357,30 +404,33 @@ public abstract class User implements UserInterface, Serializable {
     }
 
     /**
-     * Abstract method for cloning a user. Must be implemented by subclasses.
+     * Checks if the user is equal to another object.
      *
-     * @return A clone of the user.
+     * @param o The object to compare.
+     * @return True if the user is equal to the object, false otherwise.
      */
-    public abstract User clone();
-
-    /**
-     * Updates the activities of the user based on the current date.
-     */
-    public void updateActivities(){
-        for(Activity activity : this.activities){
-            activity.updateActivity(this.index);
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof User)) return false;
+        User u = (User) o;
+        return (this.index == u.index && this.name.equals(u.name) && this.age == u.age && this.height == u.height &&
+                this.weight == u.weight && this.bpm == u.bpm && this.level == u.level && this.address.equals(u.address) &&
+                this.phone.equals(u.phone) && this.email.equals(u.email) && this.activities.equals(u.activities));
     }
 
     /**
-     * Calculates the index of the user based on the weight, height, and bpm.
+     * Compares the user to another user.
      *
-     * @param weight The weight of the user.
-     * @param height The height of the user.
-     * @param bpm The beats per minute (heart rate) of the user.
-     * @return The index of the user.
+     * @param u The user to compare.
+     * @return A negative integer, zero, or a positive integer as this user is less than, equal to, or greater than the specified user.
      */
-    public float calculateIndex(float weight, int height, int bpm){
-        return (weight / (( (float) height /100) * ((float) height /100)) + (float) bpm /40);
+    @Override
+    public int compareTo(User u) {
+        int compareName = this.name.compareTo(u.getName());
+        if (compareName == 0) {
+            return this.age - u.getAge();
+        }
+        return compareName;
     }
 }

@@ -15,7 +15,7 @@ import java.util.List;
  * It is a query that returns the training plan that burns more calories.
  *
  * @author Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
- * @version 1.0
+ * @version (a version number or a date)
  */
 
 public class MostDemandingTrainingPlan {

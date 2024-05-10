@@ -44,6 +44,15 @@ public class Trail extends DistanceWithAltimetry implements HardInterface, Seria
     }
 
     /**
+     * Constructs a new Trail instance with the default parameters.
+     */
+    public Trail() {
+        super();
+        setSpecialization(this.getClass().getSimpleName());
+        this.trailType = TRAIL_TYPE_EASY;
+    }
+
+    /**
      * Constructs a new Trail instance as a copy of the specified Trail instance.
      *
      * @param trail The Trail instance to copy.

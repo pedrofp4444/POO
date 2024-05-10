@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
  * @version (a version number or a date)
  */
-public class MyTuple<T1, T2> implements Serializable {
+public class MyTuple<T1, T2> implements Serializable, Comparable<MyTuple> {
 
     private final T1 item1;
     private final T2 item2;
@@ -68,5 +68,20 @@ public class MyTuple<T1, T2> implements Serializable {
         MyTuple<?, ?> tuple = (MyTuple<?, ?>) o;
         if (!item1.equals(tuple.item1)) return false;
         return item2.equals(tuple.item2);
+    }
+
+    /**
+     * Compares the tuple to another tuple based on each item.
+     *
+     * @param other the other tuple to compare
+     * @return a negative integer, zero, or a positive integer as this tuple is less than, equal to, or greater than the other tuple
+     */
+    @Override
+    public int compareTo(MyTuple other) {
+        int compareItem1 = this.item1.toString().compareTo(other.item1.toString());
+        if(compareItem1 == 0){
+            return this.item2.toString().compareTo(other.item2.toString());
+        }
+        return compareItem1;
     }
 }

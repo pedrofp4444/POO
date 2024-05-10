@@ -34,6 +34,15 @@ public class Running extends Distance implements Serializable {
     }
 
     /**
+     * Constructs a new Running activity with the default parameters.
+     */
+    public Running() {
+        super();
+        setSpecialization(this.getClass().getSimpleName());
+        this.averageSpeed = 0;
+    }
+
+    /**
      * Copy constructor for the Running class.
      *
      * @param r the Running object to be copied

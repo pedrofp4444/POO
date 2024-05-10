@@ -25,6 +25,14 @@ public abstract class Distance extends Activity implements Serializable {
     }
 
     /**
+     * Constructs a new Distance instance with the default parameters.
+     */
+    public Distance() {
+        super();
+        this.distance = 0;
+    }
+
+    /**
      * Constructs a new Distance instance as a copy of another Distance instance.
      *
      * @param d the Distance instance to copy

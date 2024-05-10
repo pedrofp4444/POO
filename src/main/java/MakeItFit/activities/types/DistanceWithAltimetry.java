@@ -28,6 +28,15 @@ public abstract class DistanceWithAltimetry extends Distance implements Serializ
     }
 
     /**
+     * Constructs a new DistanceWithAltimetry instance with the default parameters.
+     */
+    public DistanceWithAltimetry() {
+        super();
+        this.elevationGain = 0;
+        this.elevationLoss = 0;
+    }
+
+    /**
      * Constructs a new DistanceWithAltimetry instance as a copy of another DistanceWithAltimetry instance.
      *
      * @param a the DistanceWithAltimetry instance to copy
