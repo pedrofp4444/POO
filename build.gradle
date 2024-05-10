@@ -14,6 +14,12 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
+task run(type: JavaExec, dependsOn: 'classes') {
+	standardInput = System.in
+	main = 'src/main/java/MakeItFit/Main.java' 
+	classpath = sourceSets.main.runtimeClasspath
+}
+
 test {
     useJUnitPlatform()
 }
