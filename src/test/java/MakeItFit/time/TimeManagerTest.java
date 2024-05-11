@@ -8,7 +8,7 @@ import MakeItFit.time.TimeManager;
  * The tests for the TimeManager class.
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
- * @version (a version number or a date)
+ * @version (11052024)
  */
 public class TimeManagerTest {
     /**

@@ -14,7 +14,7 @@ import java.util.*;
  * The UserManager class to manage all the users.
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
- * @version (a version number or a date)
+ * @version (11052024)
  */
 public class UserManager implements Serializable {
 
@@ -196,7 +196,10 @@ public class UserManager implements Serializable {
      * @param email the user's email address
      * @return a list of all activities from the user
      */
-    public List<Activity> getActivitiesFromUser(String email) {
+    public List<Activity> getActivitiesFromUser(String email) throws EntityDoesNotExistException{
+        if(!this.usersByEmail.containsKey(email)){
+            throw new EntityDoesNotExistException(email);
+        }
         return this.usersByEmail.get(email).getListActivities();
     }
 

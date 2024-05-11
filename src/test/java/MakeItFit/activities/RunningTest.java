@@ -15,7 +15,7 @@ import java.util.UUID;
  * These tests verify the functionality of the Running class, which represents a running activity in the application.
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
- * @version (a version number or a date)
+ * @version (11052024)
  */
 public class RunningTest {
     /**

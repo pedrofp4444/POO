@@ -5,6 +5,12 @@ import java.util.*;
 
 import static MakeItFit.utils.EmailValidator.*;
 
+/**
+ * The class UserView represents a view for a normal user.
+ *
+ * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
+ * @version (11052024)
+ */
 public class UserView extends MakeItFitView {
 
     /*

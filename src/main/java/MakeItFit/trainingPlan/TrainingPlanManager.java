@@ -15,7 +15,7 @@ import java.util.*;
  * The class TrainingPlanManager represents a manager of training plans.
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
- * @version (a version number or a date)
+ * @version (11052024)
  */
 public class TrainingPlanManager implements Serializable {
 

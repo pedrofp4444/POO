@@ -12,7 +12,7 @@ import java.util.UUID;
  * The tests for the TrainingPlanManager class.
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
- * @version (a version number or a date)
+ * @version (11052024)
  */
 public class TrainingPlanManagerTest {
 

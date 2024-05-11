@@ -11,7 +11,7 @@ import java.util.*;
  * The Professional class defines a subclass of the User class representing a professional athlete.
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
- * @version (a version number or a date)
+ * @version (11052024)
  */
 public class Professional extends User implements Serializable {
     /**

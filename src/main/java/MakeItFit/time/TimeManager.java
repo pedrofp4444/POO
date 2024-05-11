@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Represents the time manager of the system, with the current date and the ability to advance time.
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
- * @version (a version number or a date)
+ * @version (11052024)
  */
 public class TimeManager implements Serializable {
     private MakeItFitDate currentDate;

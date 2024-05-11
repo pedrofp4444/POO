@@ -1,6 +1,5 @@
 package MakeItFit;
 
-import MakeItFit.activities.Activity;
 import MakeItFit.activities.implementation.PushUp;
 import MakeItFit.activities.implementation.Running;
 import MakeItFit.activities.implementation.Trail;
@@ -13,6 +12,12 @@ import MakeItFit.utils.MakeItFitDate;
 import java.io.FileNotFoundException;
 import java.util.*;
 
+/**
+ * The class MakeItFitController represents the connection between the views and the MakeItFit.
+ *
+ * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
+ * @version (11052024)
+ */
 public class MakeItFitController {
 
     private MakeItFit makeItFit;
@@ -32,8 +37,24 @@ public class MakeItFitController {
      * Sets the email of the currently working user.
      *
      * @param email The email of the currently logged in user.
+     * @throws EntityDoesNotExistException The exception that can happen.
      */
-    public void setEmail(String email) {
+    public void setEmail(String email) throws EntityDoesNotExistException {
+        this.email = email;
+        try {
+            this.name = this.makeItFit.getUser(email).getName();
+        } catch (Exception e) {
+            throw new EntityDoesNotExistException(email);
+        }
+    }
+
+    /**
+     * Sets the email of the currently working user.
+     *
+     * @param email The email of the currently logged in user.
+     * @throws EntityDoesNotExistException The exception that can happen.
+     */
+    public void setNewEmail(String email) throws EntityDoesNotExistException {
         this.email = email;
     }
 

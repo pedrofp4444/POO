@@ -4,11 +4,16 @@ import MakeItFit.MakeItFitController;
 import MakeItFit.exceptions.InvalidTypeException;
 import MakeItFit.menu.*;
 import MakeItFit.users.Gender;
-import MakeItFit.utils.EmailValidator;
 import MakeItFit.utils.MakeItFitDate;
 
 import java.util.*;
 
+/**
+ * The class MakeItFitView represents a base for the views.
+ *
+ * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
+ * @version (11052024)
+ */
 public abstract class MakeItFitView {
 
     public final MakeItFitController makeItFitController;
@@ -428,7 +433,11 @@ public abstract class MakeItFitView {
     public void listActivities() {
         System.out.println("[" + this.makeItFitController.getName() + "] Listing activities ...");
 
+        try{
         System.out.println(this.makeItFitController.getActivities());
+        } catch(Exception e) {
+            System.out.println("[APP] invalid input.");
+        }
     }
 
     /**
@@ -471,8 +480,6 @@ public abstract class MakeItFitView {
     public void constructTrainingPlan() {
         System.out.println("[" + this.makeItFitController.getName() + "] Constructing training plan ...");
 
-        Scanner scanner = new Scanner(System.in);
-
         try {
             addActivityToTrainingPlan();
 
@@ -493,6 +500,7 @@ public abstract class MakeItFitView {
         try {
             System.out.print("[" + this.makeItFitController.getName() + "] Please enter the number of iterations for the activity: ");
             int iterations = scanner.nextInt();
+            scanner.nextLine(); // Consume the remaining line
 
             String activityType = "";
 
@@ -506,7 +514,6 @@ public abstract class MakeItFitView {
             System.out.println("[APP] Please enter the following information:");
 
             try {
-                scanner.nextLine(); // Consume the remaining newline
                 System.out.print("[APP] Date (dd/mm/aaaa): ");
                 MakeItFitDate date = MakeItFitDate.fromString(scanner.nextLine());
                 System.out.print("[APP] Duration (minutes): ");
@@ -664,7 +671,7 @@ public abstract class MakeItFitView {
     /**
      * Selects a training plan from the currently logged in user.
      */
-    public void selectTrainingPlan() {
+    public void selectTrainingPlan() throws RuntimeException {
         System.out.println("[" + this.makeItFitController.getName() + "] Selecting training plan ...");
 
         Scanner scanner = new Scanner(System.in);
@@ -677,6 +684,7 @@ public abstract class MakeItFitView {
             System.out.println("[" + this.makeItFitController.getName() + "] Training plan selected successfully.");
         } catch (Exception e) {
             System.out.println("[" + this.makeItFitController.getName() + "] Invalid input.");
+            throw new RuntimeException();
         }
     }
 

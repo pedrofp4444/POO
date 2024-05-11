@@ -13,7 +13,7 @@ import java.io.Serializable;
  * This class is responsible for the query that calculates the total altimetry done by a user in a given period of time.
  *
  * @author Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
- * @version (a version number or a date)
+ * @version (11052024)
  */
 
 public class HowManyAltimetryDone implements Serializable {

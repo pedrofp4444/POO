@@ -17,7 +17,7 @@ import java.util.UUID;
  * including tests for construction, object equality, and getters.
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104100)
- * @version (a version number or a date)
+ * @version (11052024)
  */
 public class TrainingPlanTest {
 

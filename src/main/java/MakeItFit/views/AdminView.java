@@ -12,7 +12,7 @@ import static MakeItFit.utils.EmailValidator.isValidEmail;
  * The class AdminView represents a view of an admin user.
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
- * @version (a version number or a date)
+ * @version (11052024)
  */
 public class AdminView extends MakeItFitView {
 
@@ -26,7 +26,7 @@ public class AdminView extends MakeItFitView {
     /**
      * Sets the user's email.
      */
-    public void setEmail() {
+    public void setEmail() throws RuntimeException {
         try {
             String email = "";
             do{
@@ -35,8 +35,27 @@ public class AdminView extends MakeItFitView {
                 email = scanner.nextLine();
             } while (!isValidEmail(email));
             this.makeItFitController.setEmail(email);
-        } catch (InvalidTypeException e) {
+        } catch (Exception e) {
             System.out.println("[APP] Invalid email.");
+            throw new RuntimeException();
+        }
+    }
+
+    /**
+     * Sets the new user's email.
+     */
+    public void setNewEmail() throws RuntimeException {
+        try {
+            String email = "";
+            do{
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("[APP] Please enter the user email: ");
+                email = scanner.nextLine();
+            } while (!isValidEmail(email));
+            this.makeItFitController.setNewEmail(email);
+        } catch (Exception e) {
+            System.out.println("[APP] Invalid email.");
+            throw new RuntimeException();
         }
     }
 
@@ -76,46 +95,43 @@ public class AdminView extends MakeItFitView {
     private Menu createAppMenu() {
         List<MenuItem> appMenuItems = new ArrayList<>();
 
-        appMenuItems.add(new MenuItem("Create user", () -> {setEmail();createUser();}));
+        appMenuItems.add(new MenuItem("Create user", () -> {try{setNewEmail();createUser();}catch(Exception e){}}));
 
         Menu updateUserMenu = createUpdateUserMenu();
         appMenuItems.add(new MenuItem("Update user info", () -> {
             System.out.println("[APP] Updating user ...");
 
             try {
-                String email = "";
-                do {
-                    System.out.print("[APP] Enter the user's email: ");
-                    Scanner scanner = new Scanner(System.in);
-                    email = scanner.nextLine();
-                } while (!isValidEmail(email));
-                this.makeItFitController.setEmail(email);
+                setEmail();
+                updateUserMenu.run();
             } catch (Exception e) {
                 System.out.println("[APP] Invalid input.");
             }
-
-            updateUserMenu.run();
         }));
 
         appMenuItems.add(new MenuItem("Remove user", () -> removeUser()));
-        appMenuItems.add(new MenuItem("User Details", () -> {setEmail();getUserDetails();}));
+        appMenuItems.add(new MenuItem("User Details", () -> {try{setEmail();getUserDetails();}catch(Exception e){}}));
         appMenuItems.add(new MenuItem("List all users", () -> printAllUsersDetails()));
-        appMenuItems.add(new MenuItem("Add activity to user", () -> {setEmail();addActivityToUser();}));
-        appMenuItems.add(new MenuItem("Remove activity from user", () -> {setEmail();removeActivityFromUser();}));
-        appMenuItems.add(new MenuItem("List activities from user", () -> {setEmail();listActivities();}));
-        appMenuItems.add(new MenuItem("Add training plan to user", () -> {setEmail();createTrainingPlan();}));
-        appMenuItems.add(new MenuItem("Remove training plan", () -> {setEmail();removeTrainingPlan();}));
+        appMenuItems.add(new MenuItem("Add activity to user", () -> {try{setEmail();addActivityToUser();}catch(Exception e){}}));
+        appMenuItems.add(new MenuItem("Remove activity from user", () -> {try{setEmail();removeActivityFromUser();}catch(Exception e){}}));
+        appMenuItems.add(new MenuItem("List activities from user", () -> {try{setEmail();listActivities();}catch(Exception e){}}));
+        appMenuItems.add(new MenuItem("Add training plan to user", () -> {try{setEmail();createTrainingPlan();}catch(Exception e){}}));
+        appMenuItems.add(new MenuItem("Remove training plan", () -> {try{setEmail();removeTrainingPlan();}catch(Exception e){}}));
         appMenuItems.add(new MenuItem("Add activity to a training plan", () -> {
-            setEmail();
-            selectTrainingPlan();
-            addActivityToTrainingPlan();
+            try {
+                setEmail();
+                selectTrainingPlan();
+                addActivityToTrainingPlan();
+            } catch (Exception e){}
         }));
         appMenuItems.add(new MenuItem("Remove activity from a training plan", () -> {
-            setEmail();
-            selectTrainingPlan();
-            removeActivityFromTrainingPlan();
+            try {
+                setEmail();
+                selectTrainingPlan();
+                removeActivityFromTrainingPlan();
+            } catch (Exception e){}
         }));
-        appMenuItems.add(new MenuItem("List training plans from user", () -> {setEmail();listAllTrainingPlansFromUser();}));
+        appMenuItems.add(new MenuItem("List training plans from user", () -> {try{setEmail();listAllTrainingPlansFromUser();}catch(Exception e){}}));
         appMenuItems.add(new MenuItem("List all training plans", () -> listAllTrainingPlans()));
         appMenuItems.add(new MenuItem("Execute queries", () -> executeQueries()));
         appMenuItems.add(new MenuItem("Advance time", () -> advanceTimeManager()));

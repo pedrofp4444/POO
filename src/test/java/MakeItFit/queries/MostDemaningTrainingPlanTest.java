@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * This class contains tests for the constructors, methods, and operations of the MostDemaningTrainingPlan class,
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
- * @version (a version number or a date)
+ * @version (11052024)
  */
 public class MostDemaningTrainingPlanTest {
 

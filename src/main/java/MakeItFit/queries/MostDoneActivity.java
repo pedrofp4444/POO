@@ -13,7 +13,7 @@ import java.util.List;
  * The class MostDoneActivity represents the query that returns the most done activity.
  *
  * @author Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
- * @version (a version number or a date)
+ * @version (11052024)
  */
 
 public class MostDoneActivity implements Serializable {

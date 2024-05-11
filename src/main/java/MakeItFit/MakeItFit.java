@@ -12,6 +12,12 @@ import java.io.*;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * The class MakeItFit represents the model of the application.
+ *
+ * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
+ * @version (11052024)
+ */
 public class MakeItFit implements Serializable {
 
     private UserManager userManager;
@@ -250,10 +256,6 @@ public class MakeItFit implements Serializable {
         this.userManager.removeActivityFromUser(email, code);
     }
 
-
-    // TODO: SEPARATION BETWEEN USER AND TRAINING PLAN
-
-
     /**
      * Creates a new training plan based on the provided specifications.
      *
@@ -352,10 +354,6 @@ public class MakeItFit implements Serializable {
     public List<TrainingPlan> getTrainingPlansFromUser(UUID userCode) {
         return this.trainingPlanManager.getTrainingPlansFromUser(userCode);
     }
-
-
-    // TODO: SEPARATION BETWEEN USER AND TRAINING PLAN
-
 
     /**
      * Updates the system current date.

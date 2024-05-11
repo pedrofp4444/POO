@@ -11,7 +11,7 @@ import java.util.UUID;
  * It extends the Repetitions class, providing additional context specific to the push-up exercise.
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
- * @version (a version number or a date)
+ * @version (11052024)
  */
 public class PushUp extends Repetitions implements Serializable {
     /**

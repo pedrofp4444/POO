@@ -9,7 +9,7 @@ import java.util.UUID;
  * The Activity class represents an activity that includes common activity information.
  *
  * @author  Afonso Santos (a104276), Hélder Gomes (a104100) and Pedro Pereira (a104082)
- * @version (a version number or a date)
+ * @version (11052024)
  */
 public abstract class Activity implements ActivityInterface, Serializable, Comparable<Activity> {
     private UUID userCode;
@@ -241,7 +241,6 @@ public abstract class Activity implements ActivityInterface, Serializable, Compa
         sb.append("Designation: ").append(this.designation).append(", ");
         sb.append("Expected Duration: ").append(this.expectedDuration).append(" minutes, ");
         sb.append("Realization Date: ").append(this.realizationDate).append(", ");
-        sb.append("Duration: ").append(this.duration).append(" minutes, ");
         sb.append("Caloric Waste: ").append(this.caloricWaste).append(" calories, ");
         return sb.toString();
     }
