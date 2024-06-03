@@ -1,6 +1,6 @@
 # MakeItFit
 
-## Grade: --/20 ⭐️
+## Grade: 20/20 ⭐️
 
 An management Fitness App, made for our [POO](https://www.di.uminho.pt/~jno/sitedi/uc_8504P4.html) class.
 
