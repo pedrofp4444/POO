@@ -2,7 +2,7 @@
 
 ## Grade: 20/20 ⭐️
 
-An management Fitness App, made for our [POO](https://www.di.uminho.pt/~jno/sitedi/uc_8504P4.html) class.
+A management Fitness App, made for our [POO](https://www.di.uminho.pt/~jno/sitedi/uc_8504P4.html) class.
 
 Project requirements (set by the professors) are in `Requirements.pdf` (🇵🇹).
 
